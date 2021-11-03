@@ -40,7 +40,7 @@ end function
 sub startApp(ready = true)
 	if (ready)
 		' show initial screen to user
-		? "device is ready to start"
+		m.top.getScene().findNode("LandingScreen").visible = true
 	else
 		? "unable to start app - check requirements"
 	end if

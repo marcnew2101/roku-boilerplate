@@ -154,16 +154,16 @@ sub main()
 		end if
 
 		' check if the message type is logging event and if developer variables are true
-		if (msgType = "roSystemLogEvent" AND (httpErrors OR bandwidth))
+		if (msgType = "roSystemLogEvent" AND (showHttpErrors OR showBandwidth))
 			' Handle the roSystemLogEvents:
 			i = msg.GetInfo()
-			if (i.LogType = "http.error" AND httpErrors)
+			if (i.LogType = "http.error" AND showHttpErrors)
 				? "HTTP error: "; i.HttpCode
 				? "Status error: "; i.Status
 				? "URL error: "; i.origUrl
 				? "IP: "; i.TargetIp
 				? ""
-			else if (i.LogType = "bandwidth.minute" AND bandwidth)
+			else if (i.LogType = "bandwidth.minute" AND showBandwidth)
 				bandwidth = i.Bandwidth / 1000
 				? "Bandwidth: "; bandwidth.toStr() + " Mbps"
 				? ""

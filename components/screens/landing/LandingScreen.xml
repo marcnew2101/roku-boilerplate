@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="LandingScreen" extends="Group">
+	<script type="text/brightscript" uri="LandingScreen.brs" />
+	<children>
+        <Label
+            id="landingLabel"
+            translation="[0, 70]"
+            width="1920"
+            horizAlign="center"
+            vertAlign="center"
+            text="Welcome To The Landing Page"
+            font="font:LargeBoldSystemFont"/>
+	</children>
+</component>
