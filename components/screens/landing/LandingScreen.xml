@@ -10,5 +10,12 @@
             vertAlign="center"
             text="Welcome To The Landing Page"
             font="font:LargeBoldSystemFont"/>
+
+        <LabelList
+            id="landingLabelList"
+            translation="[0, 0]"
+            font="font:MediumSystemFont"
+            focusedFont="font:MediumBoldSystemFont"
+            vertFocusAnimationStyle="floatingFocus"/>
 	</children>
 </component>
