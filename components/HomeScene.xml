@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HomeScene" extends="Scene">
+	<script type="text/brightscript" uri="HomeScene.brs" />
+	<interface>
+		<field id="exitApp" type="boolean" value="false"/>
+	</interface>
+	<children>
+		<Rectangle
+			id="backdrop"
+			color="0x0A0A0BFF"
+			translation="[0, 0]"
+			width="1920"
+			height="1080"/>
+	</children>
+</component>
