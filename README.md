@@ -2,9 +2,9 @@
 A basic starting point for creating new Roku/Brightscript projects. This project is in no way affiliated with Roku Inc. or its subsidaries.
 
 ## requirements
-A Roku device with developer mode enabled (https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md).
+ - A Roku device with developer mode enabled (https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md).
 The Roku must share the same network/subnet as the computer you are using to develop the app.
-A web browser.
+ - A web browser.
 
 ## not required
 An understanding of the Roku language and framework. Docs are here for reference - https://developer.roku.com/docs/references/references-overview.md
