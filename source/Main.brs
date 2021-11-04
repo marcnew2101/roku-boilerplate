@@ -1,7 +1,7 @@
 sub main()
 
 '######################### DEVELOPER VARIABLES ##########################
-	showDeviceInfo = false		' show device and app info in the console
+	showDeviceInfo = true		' show device and app info in the console
 	showBandwidth = false		' show info about bandwidth utilization
 	showHttpErrors = false		' show http and url errors
 '########################################################################
@@ -41,7 +41,6 @@ sub main()
 		end if
 		? "Display Name:  "; deviceInfo.getModelDisplayName()
 		? "Display Type:  "; deviceInfo.GetDisplayType()
-		? "Friendly Name: "; deviceInfo.getFriendlyName()
 		display_size = deviceInfo.getDisplaySize()
 		? "Display Size: "; display_size.w; " x"; display_size.h
 		? "UI Resolution: "; deviceInfo.getUIResolution().name

@@ -18,7 +18,8 @@
                 "images/*.*",
                 "locale/**/*.*"
             ],
-            "stopOnEntry": false
+            "stopOnEntry": false,
+            "stopDebuggerOnAppExit": true
         }
     ]
   }

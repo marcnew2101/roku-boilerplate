@@ -14,6 +14,8 @@
         <LabelList
             id="landingLabelList"
             translation="[0, 0]"
+            itemSize="[250, 70]"
+            textHorizAlign="center"
             font="font:MediumSystemFont"
             focusedFont="font:MediumBoldSystemFont"
             vertFocusAnimationStyle="floatingFocus"/>
