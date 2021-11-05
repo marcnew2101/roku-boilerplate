@@ -21,30 +21,44 @@ sub setRequirements(arg)
 end sub
 
 function checkRequirements(requirements)
-	' will be set to true only after requirements are met
-	deviceReady = false
+	' deviceReady will be Invalid when a global variable does not exist
+	' deviceReady will be false when a requirement is not met
+	deviceReady = true
 	
-	if (requirements.internet <> Invalid AND requirements.internet)
-		' get the link/internet status from the global object
-		deviceReady = showLinkStatus(m.global.linkStatus)
-	end if
-
-	if (requirements.minOS <> Invalid AND requirements.minOS)
-		' get the OS version from the global object
-		deviceReady = showVersion(m.global.osVersion)
+	' ensure that none of the global variables returns as Invalid
+	if (deviceReady <> Invalid)
+		' ensure that each of the requirements is met
+		if (deviceReady)
+			' check that the requirement exists and is set to true
+			if (requirements.internet <> Invalid AND requirements.internet)
+				' get the link/internet status from the global object
+				deviceReady = showLinkStatus(m.global.linkStatus)
+				? "Internet PASS = " + deviceReady.toStr()
+			end if
+			' check that the requirement exists and is set to true
+			if (requirements.minOS <> Invalid AND requirements.minOS)
+				' get the OS version from the global object
+				deviceReady = showVersion(m.global.osVersion)
+				? "Version PASS = " + deviceReady.toStr()
+			end if
+		else
+			? "One or more requirements was not met. Check console for PASS status."
+		end if
+	else
+		? "One or more global variables is invalid. Check Main.brs to ensure that the data is valid."
 	end if
 
 	return deviceReady
 end function
 
 sub startApp(ready = true)
-	if (ready)
+	if (ready <> Invalid AND ready)
 		' certification requires the following to indicate the app is finished loading
 		m.top.getScene().signalBeacon("AppLaunchComplete")
 		' show initial landing screen
 		m.top.getScene().findNode("LandingScreen").visible = true
 	else
-		? "unable to start app - check requirements"
+		? "Unable to start app - check requirements"
 	end if
 end sub
 

@@ -34,5 +34,7 @@ The ".vscode/launch.json" file at the root of the project contains definitions f
 ## screens
 The /components/screens/LandingScreen is a sample file and is not necessary for deployment. This is added only as a visual representation that the app has successfully been deployed.
 
+## globals
+The /source/Main.brs file uses 5 examples of global variables that can be accessed anywhere in the app (m.global.*). The osVersion and linkStatus global variables are used in /components/HomeScene to represent conditional requirements for opening the app (minimum RokuOS version, internet connectivity).
 ## translations
 The /locale folder contains sample folders and files for translating English to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses the "tr(<string>)" format from anywhere in the app. Additional languages can be added using the same folder(language) and file(translations.xml) structure.
