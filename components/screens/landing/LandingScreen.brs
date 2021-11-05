@@ -2,6 +2,7 @@ sub init()
     ' ### node identifiers ###
     ' identify the label list
     m.labelList = m.top.findNode("landingLabelList")
+    ' identify the title label
     m.landingTitle = m.top.findNode("landingTitle")
 
     ' ### node observers ###
@@ -14,7 +15,6 @@ end sub
 sub screenVisible(obj)
     visible = obj.getData()
     if (visible)
-        ? "LandingScreen is now visible"
         ' populate the title label
         populateLandingTitle()
         ' populate the label list with content
@@ -27,7 +27,7 @@ sub screenVisible(obj)
 end sub
 
 sub populateLandingTitle()
-    ' set the text strring for the title label - tr() is optional for translating the string to another language
+    ' set the text string for the title label - tr() is optional for translating the string to another language
     m.landingTitle.text = tr("Welcome To The Landing Screen")
     ' set the font size for the title label
     m.landingTitle.font.size = 62

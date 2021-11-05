@@ -39,6 +39,8 @@ end function
 
 sub startApp(ready = true)
 	if (ready)
+		' certification requires the following to indicate the app is finished loading
+		m.top.getScene().signalBeacon("AppLaunchComplete")
 		' show initial landing screen
 		m.top.getScene().findNode("LandingScreen").visible = true
 	else
