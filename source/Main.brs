@@ -27,57 +27,57 @@ sub main()
 	' print device info to console
 	if (showDeviceInfo)
 		' show information about device
-		? "- - - - - - - - - - - - -"
-		? "Model:         "; deviceInfo.getModel()
-		? "Type:          "; deviceInfo.getModelType()
+		? "- - - - - - - - - - - - - - - - - - -"
+		? "Model:            "; deviceInfo.getModel()
+		? "Type:             "; deviceInfo.getModelType()
 		if (osVersionStatus <> Invalid)
 			' required minimum OS version 9.2
-			? "OS Version:    "; deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
+			? "OS Version:       "; deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
 		else
 			osVersion = deviceInfo.getVersion()
 			major = mid(osVersion, 3, 1)
 			minor = mid(osVersion, 5, 2)
-			? "OS Version:    "; major + "." + minor
+			? "OS Version:       "; major + "." + minor
 		end if
-		? "Display Name:  "; deviceInfo.getModelDisplayName()
-		? "Display Type:  "; deviceInfo.GetDisplayType()
+		? "Display Name:     "; deviceInfo.getModelDisplayName()
+		? "Display Type:     "; deviceInfo.GetDisplayType()
 		display_size = deviceInfo.getDisplaySize()
-		? "Display Size: "; display_size.w; " x"; display_size.h
-		? "UI Resolution: "; deviceInfo.getUIResolution().name
-		? "Video Mode:    "; deviceInfo.getVideoMode()
-		? "Graphics:      "; deviceInfo.getGraphicsPlatform()
+		? "Display Size:    "; display_size.w; " x"; display_size.h
+		? "UI Resolution:    "; deviceInfo.getUIResolution().name
+		? "Video Mode:       "; deviceInfo.getVideoMode()
+		? "Graphics:         "; deviceInfo.getGraphicsPlatform()
 		if (internetStatus <> Invalid)
 			' required minimum OS version 10.0
-			? "Link Status:   "; deviceInfo.getInternetStatus()
+			? "Internet Status:  "; deviceInfo.getInternetStatus()
 		else
-			? "Link Status:   "; deviceInfo.getLinkStatus()
+			? "Internet Status:  "; deviceInfo.getLinkStatus()
 		end if
 		if (deviceInfo.getConnectionType() <> "")
-			? "Connection:    "; deviceInfo.getConnectionType()
+			? "Connection:       "; deviceInfo.getConnectionType()
 		else
-			? "Connection:    None"
+			? "Connection:       None"
 		end if
-		? "Language:      "; deviceInfo.getCurrentLocale()
-		? "External IP:   "; deviceInfo.getExternalIp()
+		? "Language:         "; deviceInfo.getCurrentLocale()
+		? "External IP:      "; deviceInfo.getExternalIp()
 		if (hdmiInfo.isConnected())
-			? "HDMI Status:   HDMI is connected"
+			? "HDMI Status:      HDMI is connected"
 		else
-			? "HDMI Status:   HDMI is not connected"
+			? "HDMI Status:      HDMI is not connected"
 		end if
-		? "HDCP Version:  "; hdmiInfo.getHdcpVersion()
+		? "HDCP Version:     "; hdmiInfo.getHdcpVersion()
 		if (hdmiInfo.isHdcpActive("1.4"))
-			? "HDCP Status:   valid"
+			? "HDCP Status:      valid"
 		else
-			? "HDCP Status:   invalid"
+			? "HDCP Status:      invalid"
 		end if
 		' show information about app
 		? ""
-		? "App ID:   "; appInfo.getID()
-		? "Is Dev:   "; appInfo.isDev()
-		? "Dev ID:   "; appInfo.getDevID()
-		? "Title:    "; appInfo.getTitle()
-		? "Version:  "; appInfo.getVersion()
-		? "- - - - - - - - - - - - -"
+		? "App ID:           "; appInfo.getID()
+		? "Is Dev:           "; appInfo.isDev()
+		? "Dev ID:           "; appInfo.getDevID()
+		? "Title:            "; appInfo.getTitle()
+		? "Version:          "; appInfo.getVersion()
+		? "- - - - - - - - - - - - - - - - - - -"
 		? ""
 	end if
 
@@ -88,21 +88,21 @@ sub main()
 	' roku firmware version
 	if (osVersionStatus <> Invalid)
 		' required minimum OS version 9.2
-		osVersion = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
-		osVersion = osVersion.toFloat()
+		os = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
+		os = os.toFloat()
 	else
 		version = deviceInfo.getVersion()
 		major = mid(version, 3, 1)
 		minor = mid(version, 5, 2)
 		mm = major + "." + minor
-		osVersion = mm.toFloat()
+		os = mm.toFloat()
 	end if
 	' roku network connection status
 	if (internetStatus <> Invalid)
 		' required minimum OS version 10.0
-		linkStatus = deviceInfo.getInternetStatus()
+		internet = deviceInfo.getInternetStatus()
 	else
-		linkStatus = deviceInfo.getLinkStatus()
+		internet = deviceInfo.getLinkStatus()
 	end if
 	' roku language from settings
 	language = deviceInfo.getCurrentLocale()
@@ -114,8 +114,8 @@ sub main()
 	' assign variables to global object
 	m.global.addFields({ 
 		"deviceId": deviceId, 
-		"osVersion": osVersion,
-		"linkStatus": linkStatus, 
+		"os": os,
+		"internet": internet, 
 		"language": language, 
 		"graphics": graphics
 	})
