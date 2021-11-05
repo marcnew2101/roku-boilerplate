@@ -4,56 +4,67 @@ sub init()
 	setRequirements(false)
 end sub
 
-sub setRequirements(arg)
-	if (arg)
-		' add any number of requirements to the object tree (AA) below
-		' each requirement is obtained from a global value set in Main.brs
-		' each value must match the name given in m.global
-		requirements = {
-			"internet": true, 
-			"os": true
-		}
-		' check the requirements before starting the app
-		startApp(checkRequirements(requirements))
+' setting requirements is true unless set otherwise in init()
+sub setRequirements(args = true)
+	' check that args is not invalid and has a value of type boolean
+	if (args <> Invalid AND type(args) = "Boolean")
+		' check if args is true
+		if (args)
+			' add any number of requirements to the object tree (AA) below
+			' each requirement is obtained from a global value set in Main.brs
+			' each value must match the name given in m.global
+			requirements = {
+				"internet": true, 
+				"os": true
+			}
+			' check the requirements before starting the app
+			startApp(checkRequirements(requirements))
+		else
+			' start app without any requirements
+			startApp()
+		end if
 	else
-		' start app without any requirements
-		startApp()
+		? "ERROR: setRequirements() in HomeScene.brs requires a value of true or false"
 	end if
 end sub
 
 function checkRequirements(requirements)
-	' loop over each item in the array of requirements
-	for each requirement in requirements.items()
-		' check that the requirement value is valid and set to true
-		if (requirement.value <> Invalid AND requirement.value)
-			' get the global value based on the requirement key
-			deviceReady = getRequirement(requirement.key)
-			' check that the value retrieved is valid
-			if (deviceReady <> Invalid)
-				' check that the value retrieved is true
-				if (deviceReady)
-					' user an uppercase form of the requirement key to show the condition has passed
-					? uCase(requirement.key) + " = PASS"
+	' check that requirements is not invalid and has a value of AA
+	if (requirements <> Invalid AND type(requirements) = "roAssociativeArray")
+		' loop over each item in the array of requirements
+		for each requirement in requirements.items()
+			' check that the requirement value is valid and set to true
+			if (requirement.value <> Invalid AND requirement.value)
+				' get the global value based on the requirement key
+				deviceReady = getRequirement(requirement.key)
+				' check that the value retrieved is valid
+				if (deviceReady <> Invalid)
+					' check that the value retrieved is true
+					if (deviceReady)
+						' user an uppercase form of the requirement key to show the condition has passed
+						? uCase(requirement.key) + " = PASS"
+					else
+						' user an uppercase form of the requirement key to show the condition has failed
+						? uCase(requirement.key) + " = FAIL"
+						' this is where you can generate UI feedback in the form of a dialog box to inform and instruct the user about the error
+						createErrorDialog(requirement.key)
+						' exit the loop
+						exit for
+					end if
 				else
-					' user an uppercase form of the requirement key to show the condition has failed
-					? uCase(requirement.key) + " = FAIL"
-					' this is where you can generate UI feedback in the form of a dialog box to inform and instruct the user about the error
-					createErrorDialog(requirement.key)
+					? requirement.key + " is not a valid global value. Check Main.brs to ensure that the global value exists."
 					' exit the loop
 					exit for
 				end if
-			else
-				? requirement.key + " is not a valid global value. Check Main.brs to ensure that the global value exists."
-				' exit the loop
-				exit for
 			end if
-		end if
-	end for
-
-	' deviceReady is Invalid when a global variable does not exist
-	' deviceReady is false when a requirement is not met
-	' deviceReady is true when all requirements have passed
-	return deviceReady
+		end for
+		' deviceReady is Invalid when a global variable does not exist
+		' deviceReady is false when a requirement is not met
+		' deviceReady is true when all requirements have passed
+		return deviceReady
+	else
+		? "ERROR: requirements in argument is invalid or of invalid type in checkRequirements(requirements) - HomeScene.brs"
+	end if
 end function
 
 function getRequirement(requirement)
@@ -69,6 +80,8 @@ function getRequirement(requirement)
 			' send the requirement and global value to return a boolean type
 			return setvToBool(requirement, v)
 		end if
+	else
+		? "ERROR: requirement in argument is invalid or of invalid type in getRequirement(requirement) - HomeScene.brs"
 	end if
 end function
 
@@ -97,7 +110,7 @@ function setMinOS(currentVersion)
 			return false
 		end if
 	else
-		? "currentVersion in argument is invalid or of invalid type in setMinOS(currentVersion)"
+		? "ERROR: currentVersion in argument is invalid or of invalid type in setMinOS(currentVersion) - HomeScene.brs"
 		return false
 	end if
 end function
@@ -122,6 +135,6 @@ sub startApp(ready = true)
 		' show initial landing screen
 		m.top.getScene().findNode("LandingScreen").visible = true
 	else
-		? "Unable to start app - check requirements"
+		? "WARNING: Unable to start app - HomeScene.brs"
 	end if
 end sub
