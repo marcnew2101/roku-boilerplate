@@ -1,7 +1,7 @@
 sub init()
 	' set requirements to true if certain conditions need to be met before opening the app
 	' set requirements to false to bypass and continue opening the app
-	setRequirements(true)
+	setRequirements(false)
 end sub
 
 sub setRequirements(arg)
