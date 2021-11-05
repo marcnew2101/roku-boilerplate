@@ -21,20 +21,20 @@ sub screenVisible(obj)
         populateLabelList()
         ' center the label list on the screen
         centerLabelList()
-        ' set key focus to label list
+        ' set key focus to the label list
         m.labelList.setFocus(true)
     end if
 end sub
 
 sub populateLandingTitle()
-    ' set the text strring for the title label
-    m.landingTitle.text = tr("Welcome To The Landing Page")
+    ' set the text strring for the title label - tr() is optional for translating the string to another language
+    m.landingTitle.text = tr("Welcome To The Landing Screen")
     ' set the font size for the title label
-    m.landingTitle.font.size = 60
+    m.landingTitle.font.size = 62
 end sub
 
 sub populateLabelList()
-    ' create array of strings to be displayed in the label list
+    ' create array of strings to be displayed in the label list - tr() is optional for translating the strings to another language
     listItems = [
         tr("Sign In"),
         tr("Sign Up"),
@@ -83,7 +83,7 @@ sub onItemSelected(obj)
     ? itemSelected.title
 
     ' observe when the exit key is selected
-    if (itemSelected.title = "Exit")
+    if (itemSelected.title = tr("Exit"))
         ' set the home scene exitApp interface to close the app
         m.top.getScene().exitApp = true
     end if

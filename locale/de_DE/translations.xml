@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" target-language="fr-CA">
+  <file source-language="en-US" target-language="de-DE">
     <body>
       <trans-unit id="0">
         <source>Welcome To The Landing Screen</source>
-        <target>Bienvenue Sur L'écran D'accueil</target>
+        <target>Willkommen Auf dem Landebildschirm</target>
       </trans-unit>
       <trans-unit id="1">
         <source>Sign In</source>
-        <target>S'identifier</target>
+        <target>Einloggen</target>
       </trans-unit>
       <trans-unit id="2">
         <source>Sign Up</source>
-        <target>S'inscrire</target>
+        <target>Anmeldung</target>
       </trans-unit>
       <trans-unit id="3">
         <source>Exit</source>
-        <target>Sortir</target>
+        <target>Ausgang</target>
       </trans-unit>
     </body> 
   </file> 
