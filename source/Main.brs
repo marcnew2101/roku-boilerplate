@@ -1,7 +1,7 @@
 sub main()
 
 '######################### DEVELOPER VARIABLES ##########################
-	showDeviceInfo = true		' show device and app info in the console
+	showDeviceInfo = false		' show device and app info in the console
 	showBandwidth = false		' show info about bandwidth utilization
 	showHttpErrors = false		' show http and url errors
 '########################################################################

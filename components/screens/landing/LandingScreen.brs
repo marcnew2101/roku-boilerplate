@@ -2,6 +2,7 @@ sub init()
     ' ### node identifiers ###
     ' identify the label list
     m.labelList = m.top.findNode("landingLabelList")
+    m.landingTitle = m.top.findNode("landingTitle")
 
     ' ### node observers ###
     ' observe screen visibility
@@ -14,6 +15,8 @@ sub screenVisible(obj)
     visible = obj.getData()
     if (visible)
         ? "LandingScreen is now visible"
+        ' populate the title label
+        populateLandingTitle()
         ' populate the label list with content
         populateLabelList()
         ' center the label list on the screen
@@ -23,12 +26,19 @@ sub screenVisible(obj)
     end if
 end sub
 
+sub populateLandingTitle()
+    ' set the text strring for the title label
+    m.landingTitle.text = tr("Welcome To The Landing Page")
+    ' set the font size for the title label
+    m.landingTitle.font.size = 60
+end sub
+
 sub populateLabelList()
     ' create array of strings to be displayed in the label list
     listItems = [
-        "Sign In",
-        "Sign Up",
-        "Exit"
+        tr("Sign In"),
+        tr("Sign Up"),
+        tr("Exit")
     ]
 
     ' create parent content node

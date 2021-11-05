@@ -3,12 +3,11 @@
 	<script type="text/brightscript" uri="LandingScreen.brs" />
 	<children>
         <Label
-            id="landingLabel"
+            id="landingTitle"
             translation="[0, 70]"
             width="1920"
             horizAlign="center"
             vertAlign="center"
-            text="Welcome To The Landing Page"
             font="font:LargeBoldSystemFont"/>
 
         <LabelList
