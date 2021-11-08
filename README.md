@@ -28,14 +28,17 @@ The ".vscode/launch.json" file at the root of the project contains definitions f
  - The ZIP file will be automatically generated in /out/roku-deploy.zip and then automatically deployed to your Roku device
 
 ## console and debugging
- - The OUTPUT and DEBUG CONSOLE windows in vscode will show your app activity. Enabling "showDeviceInfo" at the top of the Main.brs file will present you with an example of printing to the console
- - The session will automatically close when exiting the app
+ - The OUTPUT and DEBUG CONSOLE windows inside vscode will show your app activity and print commands, once deployed
+ - Enabling "showDeviceInfo" or "showAppInfo" at the top of the Main.brs file will present you with an example of printing to the console
+ - The console session will automatically close when exiting the app
 
 ## screens
 The /components/screens/LandingScreen is a sample file and is not necessary for deployment. This is added only as a visual representation that the app has successfully been deployed.
 
 ## globals
-The /source/Main.brs file includes 5 examples in the m.global object that can be accessed from anywhere in the app (m.global.*). The "os" and "internet" global key/values from Main.brs are used in /components/utils/Requirements.brs to represent conditional requirements for opening the app (minimum RokuOS version and internet connectivity). The app requirements are turned off (requirements = false) at the top of /components/HomeScene.brs. Set requirements = true if you want to test this feature.
+ - The /source/Main.brs file includes 5 examples, under setGlobals() at bottom, assigned to the m.global object. The "os" and "internet" key/values inside the m.global object are used inside of /components/utils/Requirements.brs to represent conditional requirements for opening the app (minimum RokuOS version and internet connectivity)
+ - The app requirements are turned off by default (requirements = false) at the top of /components/HomeScene.brs. Change to requirements = true, if you want to test this feature.
+ - The values inside of the m.global object can be accessed from anywhere in the app using m.global."key". 
 
 ## translations
-The /locale folder contains sample folders and files for translating English to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses "tr("string to translate")" from anywhere in the app. Additional languages can be added using the same folder(language) and file(translations.xml) structure.
+The /locale folder contains sample folders and files for translating English to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses tr("string to translate") from anywhere in the app. Additional languages can be added using the same folder(language) and file(translations.xml) structure.
