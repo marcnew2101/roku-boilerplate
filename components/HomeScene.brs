@@ -1,9 +1,9 @@
 sub init()
-	' create an AA of all child nodes from HomeScene
+	' create an associate array of all child nodes from HomeScene.xml
 	setScreens()
 	
-	' set requirements to false and open app right away
-	' set requirements to true and specify conditions before opening app - see /components/utils/Requirements.brs
+	' set requirements = false to open app right away
+	' set requirements = true to specify conditions before opening app - see /components/utils/Requirements.brs
 	requirements = false
 
 	' start the app
@@ -14,9 +14,14 @@ sub startApp(ready = true)
 	if (ready <> Invalid AND ready)
 		' certification requires the following to indicate the app is finished loading
 		m.top.getScene().signalBeacon("AppLaunchComplete")
-		' show initial landing screen
-		m.top.getScene().findNode("LandingScreen").visible = true
+		' get the landing screen
+		landingscreen = getScreen("LandingScreen")
+		' check that the landing screen is not invalid
+		if (landingscreen <> Invalid)
+			' show initial landing screen
+			landingscreen.visible = true
+		end if
 	else
-		? "WARNING: Unable to start app - HomeScene.brs"
+		? "WARNING: Unable to start app from HomeScene.brs"
 	end if
 end sub

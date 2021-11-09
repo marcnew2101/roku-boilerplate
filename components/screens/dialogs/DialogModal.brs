@@ -1,5 +1,5 @@
 sub init()
-    ' create a dialog node
+    ' create the initial dialog node
     createDialogNode()
 
     ' observe screen visibility
@@ -29,8 +29,10 @@ sub createDialogNode()
     m.top.appendChild(m.dialogNode)
 end sub
 
+' screen visibility observer
 sub screenVisible(obj)
     visible = obj.getData()
+    ' check if the screen is visible
     if (visible)
         ' set key focus to the dialog node
         m.dialogNode.setFocus(true)
@@ -38,28 +40,39 @@ sub screenVisible(obj)
 end sub
 
 sub populateDialogBox(obj)
-    dialogInfo = obj.getData()
+    m.dialogInfo = obj.getData()
 
     if (m.legacyDialog)
         ' TODO define legacy dialog node
     else
-        m.dialogNode.title = dialogInfo.title
-        m.dialogNode.message = [dialogInfo.message]
-        m.dialogNode.buttons = ["OKAY"]
-
-        if (dialogInfo.help <> Invalid AND len(dialogInfo.help) > 0)
-            m.dialogNode.bulletText = [dialogInfo.help]
-        end if
+        ' check that the dialog info title is not Invalid and not an empty string
+        if m.dialogInfo.title <> Invalid AND len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
+        ' check that the dialog info message is not Invalid and not an empty string
+        if m.dialogInfo.message <> Invalid AND len(m.dialogInfo.message) > 0 then m.dialogNode.message = [m.dialogInfo.message]
+        ' check that the dialog info help message is not Invalid and not an empty array
+        if m.dialogInfo.help <> Invalid AND m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
+        ' check that the dialog info buttons are not Invalid and not an empty array
+        if m.dialogInfo.buttons <> Invalid AND m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
     end if
 
+    ' set screen to visible
     m.top.visible = true
 end sub
 
 sub onButtonSelected(obj)
+    ' get button index
     buttonIndex = obj.getData()
+    ' get button title
     buttonSelected = m.dialogNode.buttons[buttonIndex]
-    ? buttonSelected
-    ' TODO define button presses
+
+    ' check if button pressed is "OKAY" button
+    if (buttonSelected = "OKAY")
+        ' check that closeApp is not invalid and set to true
+        if (m.dialogInfo.exitApp <> Invalid AND m.dialogInfo.exitApp)
+            ' immdediately close the app
+            m.top.getScene().exitApp = true
+        end if
+    end if
 end sub
 
 sub customizeDialogNode(dialogNode)

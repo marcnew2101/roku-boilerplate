@@ -1,52 +1,65 @@
 ' requirements is true unless set otherwise
 function setRequirements(args = true)
-    ' add any number of requirements to the object tree (AA) below
-	' each top level key is obtained from the m.global key set in Main.brs
-	' the top level key must match the key in m.global
-	m.requirements = {
-		' first key (internet) must match the key in m.global object from Main.brs
-        "internet": {
-			"required": true,
-			"error": {
-				' set the message to appear in the onscreen dialog
-				"message": "Check the internet connection on this device and try again",
-				' help info will only appear if filled out below. Remove line or use empty string to not show the help info.
-				"help": "From the Roku home screen, go to Settings -> Network -> Check connection.",
-				' set the title to appear at the top of the dialog box
-				"title": "ERROR",
-				' set to true to immediately close the app after error pressing okay on error window
-				"closeApp": true
-			}
-		},
-		' first key (os) must match the key in m.global object from Main.brs
-        "os": {
-			"required": true,
-			"minVersion": 9.1,
-			"error": {
-				"message": "This device does not meet minimum requirements for OS version 9.1",
-				"help": "From the Roku home screen, go to Settings -> System -> System update."
-				"title": "ERROR",
-				"closeApp": true
-			}
-		}
-    }
-
-	' used for testing the dialog modal screen
-	'createErrorDialog(m.requirements.internet.error)
+    ' see function on how to create requirements for opening app
+	m.requirements = createRequirements()
 
 	' check that args is not invalid and has a value of true/false
 	if (args <> Invalid AND type(args) = "Boolean")
 		' check if args is true
 		if (args)
-			' check the requirements before starting the app
-			return checkRequirements(m.requirements)
+			' check that the requirements are not Invalid before sending for verification
+			if m.requirements <> Invalid then return checkRequirements(m.requirements)
 		else
 			' start app without any requirements
 			return true
 		end if
 	else
-		? "ERROR: setRequirements() in HomeScene.brs requires a value of true or false"
+		? "ERROR: setRequirements() requires a value of true or false - HomeScene.brs"
 	end if
+end function
+
+function createRequirements()
+	' add any number of requirements to the object tree (AA) below
+	' each top level key is obtained from the m.global key set in Main.brs
+	' the top level key must match the key set in m.global
+	return {
+		' first key (internet) must match the key in m.global object from Main.brs
+        "internet": {
+			"required": true,
+			' OPTIONAL: this is where you set each of the error requirements that will appear on the dialog pop-up in /components/screens/dialogs/DialogModal.xml
+			' the error object and all its key/values can be removed if no error message is needed to appear to the user
+			"error": {
+				' set the error title to appear at the top of the dialog box. Remove this line or leave empty string to hide title.
+				"title": "NO INTERNET CONNECTION",
+				' set the main message to appear in the onscreen dialog box - this is required for the message pop-up to work.
+				"message": "Check the internet connection on this device and try again",
+				' set any number of help messages to appear below the error message. Remove this line or use an empty array "[]" to hide the help message.
+				"help": [
+					"From the Roku home screen, go to Settings -> Network -> Check connection.",
+					"If the internet connection continues to fail, try restarting the Roku from Settings -> System -> System restart."
+				],
+				' set any number of buttons to appear at the bottom of the dialog box. Remove this line or use an empty array "[]" to hide the buttons.
+				"buttons": ["OKAY"],
+				' set to true to immediately close the app after error pressing okay on error window or false to continue letting the user interact with the UI
+				"exitApp": true
+			}
+		},
+        "os": {
+			"required": true,
+			' set the minimum version here as well as in the error message below
+			"minVersion": 9.1,
+			"error": {
+				"title": "ROKU UPDATE REQUIRED",
+				"message": "This device does not meet minimum requirements for OS version 9.1",
+				"help": [
+					"From the Roku home screen, go to Settings -> System -> System update.",
+					"If your Roku cannot be updated to the minimum required version, you will need to obtain a newer Roku device."
+				],
+				"buttons": ["OKAY"],
+				"exitApp": true
+			}
+		}
+    }
 end function
 
 function checkRequirements(requirements)
@@ -63,17 +76,17 @@ function checkRequirements(requirements)
 					' check that the value retrieved is true
 					if (deviceReady)
 						' user an uppercase form of the requirement key to show the condition has passed
-						? uCase(requirement.key) + " = PASS"
+						? uCase(requirement.key) + " CHECK = PASS"
 					else
 						' user an uppercase form of the requirement key to show the condition has failed
-						? uCase(requirement.key) + " = FAIL"
+						? uCase(requirement.key) + " CHECK = FAIL"
 						' this is where you can generate UI feedback in the form of a dialog box to inform and instruct the user about the error
 						createErrorDialog(requirement.value["error"]) ' see /components/utils/Errors.brs
 						' exit the loop
 						exit for
 					end if
 				else
-					? requirement.key + " is not a valid global value. Check Main.brs to ensure that the global value exists."
+					? requirement.key + " is not a valid global key/value. Check Main.brs to ensure that the requirement exists - HomeScene.brs"
 					' exit the loop
 					exit for
 				end if
@@ -97,23 +110,24 @@ function getRequirement(requirement)
 		if (v = Invalid OR type(v) = "roBoolean")
 			return v
 		else
-			' if the global value is valid but not of type boolean then additional conditions must be set
-			' send the requirement and global value to return a boolean type
-			return setvToBool(requirement, v)
+			' if the global value is valid but not of type boolean (true/false)
+			' then we need to send the requirement and value (v) to return a boolean type value
+			return setAsBool(requirement, v)
 		end if
 	else
 		? "ERROR: argument is invalid or of invalid type in getRequirement(requirement) - HomeScene.brs"
 	end if
 end function
 
-function setvToBool(requirement, v)
+function setAsBool(requirement, v)
 	' check to see if the requirement is looking for the OS version
 	if (requirement = "os")
+		' send the value (v) to be returned as a conditional true or false value
 		return setMinOS(v)
 	else
-		' NOTE: additional else if conditions will be required for any non boolean values
-		' print the requirement and it's current value type
-		? "The global key " + requirement + " has a value of type " + v + ". Create another condition to return a true or false value"
+		' NOTE: additional else if conditions will be required for any non boolean type values
+		' print the following to show the requirement and value and explain that it will need a special condition to return a true or false value
+		? requirement + " has a value of type " + v + " in setvToBool(requirement, v). Create another elseif condition to return a true or false value. - HomeScene.brs"
 	end if
 end function
 

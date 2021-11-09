@@ -4,13 +4,13 @@ sub createErrorDialog(error = {})
 		' check that AA is not empty
 		if (error.count() > 0)
 			' check that both the error title and message are included
-			if (error.title <> Invalid AND len(error.title) > 0 AND error.message <> Invalid AND len(error.message) > 0)
+			if (error.message <> Invalid AND len(error.message) > 0)
 				' set error valid to true
 				errorValid = true
 			else
 				' set error valid to false
 				errorValid = false
-				? "ERROR: a valid error title and error message is required - Errors.brs"
+				? "a valid error.message is required - Errors.brs"
 				? "error is: "; error
 			end if
 
@@ -24,7 +24,11 @@ sub createErrorDialog(error = {})
 					showErrorDialog(error, screen)
 				end if
 			end if
+		else
+			? "error object is empty - Errors.brs"
 		end if
+	else
+		? "error object is invalid in createErrorDialog(error = {}) - Errors.brs"
 	end if
 end sub
 
