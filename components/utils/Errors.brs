@@ -3,41 +3,32 @@ sub createErrorDialog(error = {})
 	if (error <> Invalid AND type(error) = "roAssociativeArray")
 		' check that AA is not empty
 		if (error.count() > 0)
-			' check that both the error type and message are included
-			if (error.type <> Invalid AND error.message <> Invalid)
+			' check that both the error title and message are included
+			if (error.title <> Invalid AND len(error.title) > 0 AND error.message <> Invalid AND len(error.message) > 0)
+				' set error valid to true
 				errorValid = true
-				' check error types
-				if (error.type = 1)
-					' TODO set custom interfaces on error dialog screen
-					? error.message
-				else if (error.type = 2)
-					' TODO set custom interfaces on error dialog screen
-					? error.message
-				else if (error.type = 3)
-					' TODO set custom interfaces on error dialog screen
-					? error.message
-				else
-					errorValid = false
-					? "ERROR: a valid error.type (1, 2 ,3) is required - Errors.brs"
-				end if
-
-				' check that help message is not invalid and the string is not empty
-				if (error.help <> Invalid AND len(error.help) > 0)
-					' TODO set custom interfaces on error dialog screen
-					? error.help
-				end if
-
-				if (errorValid)
-					showErrorDialog()
-				end if
 			else
-				? "ERROR: a valid error message and/or error type is missing - Errors.brs"
-				? "error object is: "; error
+				' set error valid to false
+				errorValid = false
+				? "ERROR: a valid error title and error message is required - Errors.brs"
+				? "error is: "; error
+			end if
+
+			' check if error is valid and true
+			if (errorValid <> Invalid AND errorValid)
+				' get the Dialog Modal screen
+				screen = getScreen("DialogModal")
+				' check that the screen is not invalid
+				if (screen <> Invalid)
+					' show the error dialog screen/modal
+					showErrorDialog(error, screen)
+				end if
 			end if
 		end if
 	end if
 end sub
 
-sub showErrorDialog()
-	' TODO make error dialog screen visible
+sub showErrorDialog(error, screen)
+	' send the AA to the interface AA on the Dialog Modal screen
+	screen.dialogInfo = error
 end sub

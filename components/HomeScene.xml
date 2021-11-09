@@ -3,19 +3,21 @@
 	<script type="text/brightscript" uri="HomeScene.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Requirements.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Errors.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
 	<interface>
 		<field id="exitApp" type="boolean" value="false"/>
+		<field id="screens" type="assocarray"/>
 	</interface>
 	<children>
-		<Rectangle
-			id="backdrop"
-			color="0x0A0A0BFF"
-			translation="[0, 0]"
-			width="1920"
-			height="1080"/>
-
+		<!-- landing screen when app first loads and user is not yet logged in -->
 		<LandingScreen
 			id="LandingScreen"
+			translation="[0, 0]"
+			visible="false"/>
+
+		<!-- dialog pop-up for showing feedback to user -->
+		<DialogModal
+			id="DialogModal"
 			translation="[0, 0]"
 			visible="false"/>
 	</children>

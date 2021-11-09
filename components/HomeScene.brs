@@ -1,4 +1,7 @@
 sub init()
+	' create an AA of all child nodes from HomeScene
+	setScreens()
+	
 	' set requirements to false and open app right away
 	' set requirements to true and specify conditions before opening app - see /components/utils/Requirements.brs
 	requirements = false

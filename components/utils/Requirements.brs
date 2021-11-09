@@ -10,13 +10,12 @@ function setRequirements(args = true)
 			"error": {
 				' set the message to appear in the onscreen dialog
 				"message": "Check the internet connection on this device and try again",
-				' help button will only appear if filled out below. Remove line or use empty string to not show a help button.
+				' help info will only appear if filled out below. Remove line or use empty string to not show the help info.
 				"help": "From the Roku home screen, go to Settings -> Network -> Check connection.",
-				' error types:
-				' 1 = critical (must close app and fix before retrying) ex. no internet connection
-				' 2 = warning (app remains open and user can retry last operation) ex. issue with starting playback
-				' 3 = info (general info to user) ex. issue with processing payment
-				"type": 1
+				' set the title to appear at the top of the dialog box
+				"title": "ERROR",
+				' set to true to immediately close the app after error pressing okay on error window
+				"closeApp": true
 			}
 		},
 		' first key (os) must match the key in m.global object from Main.brs
@@ -26,10 +25,14 @@ function setRequirements(args = true)
 			"error": {
 				"message": "This device does not meet minimum requirements for OS version 9.1",
 				"help": "From the Roku home screen, go to Settings -> System -> System update."
-				"type": 1
+				"title": "ERROR",
+				"closeApp": true
 			}
 		}
     }
+
+	' used for testing the dialog modal screen
+	'createErrorDialog(m.requirements.internet.error)
 
 	' check that args is not invalid and has a value of true/false
 	if (args <> Invalid AND type(args) = "Boolean")

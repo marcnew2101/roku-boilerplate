@@ -2,6 +2,15 @@
 <component name="LandingScreen" extends="Group">
 	<script type="text/brightscript" uri="LandingScreen.brs" />
 	<children>
+    	<!-- solid color background -->
+		<Rectangle
+			id="Backdrop"
+			translation="[0, 0]"
+			color="0x0A0A0BFF"
+			width="1920"
+			height="1080"/>
+
+        <!-- title at top of screen -->
         <Label
             id="landingTitle"
             translation="[0, 70]"
@@ -10,6 +19,7 @@
             vertAlign="center"
             font="font:LargeBoldSystemFont"/>
 
+        <!-- list options at middle of screen -->
         <LabelList
             id="landingLabelList"
             translation="[0, 0]"
