@@ -17,7 +17,7 @@ sub createErrorDialog(error = {})
 			' check if error is valid and true
 			if (errorValid <> Invalid AND errorValid)
 				' get the Dialog Modal screen
-				screen = getScreen("DialogModal")
+				screen = setScreen("DialogModal")
 				' check that the screen is not invalid
 				if (screen <> Invalid)
 					' show the error dialog screen/modal

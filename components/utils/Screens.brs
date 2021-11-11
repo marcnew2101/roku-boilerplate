@@ -1,4 +1,4 @@
-sub setScreens()
+sub getScreens()
     screens = {}
     for each screen in m.top.getScene().getChildren(-1, 0)
         if (screen.id <> Invalid AND len(screen.id) > 0)
@@ -8,7 +8,7 @@ sub setScreens()
     m.top.getScene().screens = screens
 end sub
 
-function getScreen(screen = Invalid)
+function setScreen(screen = Invalid)
     ' check that the argument/screen is not invalid
     if (screen <> Invalid)
         ' request the screen from the HomeScene interface

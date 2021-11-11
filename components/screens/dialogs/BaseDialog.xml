@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BaseDialog" extends="StandardDialog">
+	<script type="text/brightscript" uri="BaseDialog.brs" />
+    <interface>
+        <field id="title" type="string" onChange="onTitleChange"/>
+        <field id="message" type="string" onChange="onMessageChange"/>
+		<field id="bulletText" type="array" onChange="onBulletTextChange"/>
+        <field id="buttons" type="array" onChange="onButtonChange"/>
+	</interface>
+	<children>
+        <StdDlgTitleArea id="titleArea"/>
+        <StdDlgContentArea id="contentArea">
+            <StdDlgTextItem 
+                id="messageText"
+                namedTextStyle="secondary"/>
+            <StdDlgBulletTextItem id="bulletArea"/>
+        </StdDlgContentArea>
+        <StdDlgButtonArea id="buttonArea"/>
+	</children>
+</component>

@@ -4,6 +4,7 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/Requirements.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Errors.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
 	<interface>
 		<field id="exitApp" type="boolean" value="false"/>
 		<field id="screens" type="assocarray"/>

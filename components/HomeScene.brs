@@ -1,13 +1,15 @@
 sub init()
-	' create an associate array of all child nodes from HomeScene.xml
-	setScreens()
-	
-	' set requirements = false to open app right away
-	' set requirements = true to specify conditions before opening app - see /components/utils/Requirements.brs
-	requirements = false
+	' set an associate array with each child node (direct descendant) from HomeScene.xml
+	' see /components/utils/Screens.brs
+	getScreens()
 
-	' start the app
-	startApp(setRequirements(requirements))
+	' set the overall look of the app (requires Roku OS 9.4 or later)
+	' see /components/utils/Themes.brs
+	getTheme("dark-red")
+	
+	' setRequirements(false) to start app right away or setRequirements(true) to specify conditions before opening app
+	' see /components/utils/Requirements.brs
+	startApp(setRequirements(false))
 end sub
 
 sub startApp(ready = true)
@@ -15,7 +17,7 @@ sub startApp(ready = true)
 		' certification requires the following to indicate the app is finished loading
 		m.top.getScene().signalBeacon("AppLaunchComplete")
 		' get the landing screen
-		landingscreen = getScreen("LandingScreen")
+		landingscreen = setScreen("LandingScreen")
 		' check that the landing screen is not invalid
 		if (landingscreen <> Invalid)
 			' show initial landing screen

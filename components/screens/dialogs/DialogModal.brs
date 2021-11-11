@@ -4,26 +4,21 @@ sub init()
 
     ' observe screen visibility
     m.top.observeField("visible", "screenVisible")
-
-    ' set the inital value to false for using the legacy dialog window (before RokuOS 10.0)
-    m.legacyDialog = false
 end sub
 
 sub createDialogNode()
     ' check if the Roku device is running at least version 10
     if (m.global.os >= 10.0)
-        ' create the standard message dialog node
-        m.dialogNode = CreateObject("roSGNode", "StandardMessageDialog")
-        m.dialogNode.observeField("buttonSelected", "onButtonSelected")
+        ' create standard message dialog node
+        m.dialogNode = CreateObject("roSGNode", "BaseDialog")
+        m.legacyNode = false
     else
-        ' set legacy node to true
-        m.legacyDialog = true
-        ' create the legacy dialog node
+        ' create legacy dialog node
         m.dialogNode = CreateObject("roSGNode", "Dialog")
     end if
 
-    ' OPTIONAL customize the appearance of text/background colors
-    customizeDialogNode(m.dialogNode)
+    ' observe button selection on the dialog node
+    m.dialogNode.observeField("buttonSelected", "onButtonSelected")
 
     ' add the dialog node to the top parent (screen) node
     m.top.appendChild(m.dialogNode)
@@ -36,24 +31,22 @@ sub screenVisible(obj)
     if (visible)
         ' set key focus to the dialog node
         m.dialogNode.setFocus(true)
+    else
+
     end if
 end sub
 
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
 
-    if (m.legacyDialog)
-        ' TODO define legacy dialog node
-    else
-        ' check that the dialog info title is not Invalid and not an empty string
-        if m.dialogInfo.title <> Invalid AND len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
-        ' check that the dialog info message is not Invalid and not an empty string
-        if m.dialogInfo.message <> Invalid AND len(m.dialogInfo.message) > 0 then m.dialogNode.message = [m.dialogInfo.message]
-        ' check that the dialog info help message is not Invalid and not an empty array
-        if m.dialogInfo.help <> Invalid AND m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
-        ' check that the dialog info buttons are not Invalid and not an empty array
-        if m.dialogInfo.buttons <> Invalid AND m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
-    end if
+    ' check that the dialog info title is not Invalid and not an empty string
+    if m.dialogInfo.title <> Invalid AND len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
+    ' check that the dialog info message is not Invalid and not an empty string
+    if m.dialogInfo.message <> Invalid AND len(m.dialogInfo.message) > 0 then m.dialogNode.message = m.dialogInfo.message
+    ' check that the dialog info help message is not Invalid and not an empty array
+    if m.dialogInfo.help <> Invalid AND m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
+    ' check that the dialog info buttons are not Invalid and not an empty array
+    if m.dialogInfo.buttons <> Invalid AND m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
 
     ' set screen to visible
     m.top.visible = true
@@ -69,12 +62,14 @@ sub onButtonSelected(obj)
     if (buttonSelected = "OKAY")
         ' check that closeApp is not invalid and set to true
         if (m.dialogInfo.exitApp <> Invalid AND m.dialogInfo.exitApp)
-            ' immdediately close the app
+            ' immediately close the app
             m.top.getScene().exitApp = true
+        else
+            ' remove visibility of the dialog box
+            m.top.visible = false
         end if
+    else if (buttonSelected = "CANCEL")
+        ' remove visibility of the dialog box
+        m.top.visible = false
     end if
-end sub
-
-sub customizeDialogNode(dialogNode)
-    ' TODO create variables for dialog customization
 end sub

@@ -1,6 +1,6 @@
 ' requirements is true unless set otherwise
 function setRequirements(args = true)
-    ' see function on how to create requirements for opening app
+    ' see function on how to create requirements before opening app
 	m.requirements = createRequirements()
 
 	' check that args is not invalid and has a value of true/false
