@@ -1,10 +1,10 @@
-sub getTheme(theme)
+sub setTheme(theme)
     ' check if the OS version is set globally and is at least version 9.4
     if (m.global.os <> Invalid AND m.global.os >= 9.4)
         ' create initial palette Node
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         ' get the theme colors and background
-        themeColors = setTheme(theme)
+        themeColors = getTheme(theme)
         ' check that themeColors is not invalid
         if (themeColors <> Invalid)
             ' get the top parent HomeScene node
@@ -30,7 +30,7 @@ sub getTheme(theme)
     end if
 end sub
 
-function setTheme(theme)
+function getTheme(theme)
     ' empty AA for setting colors
     palette = {}
     ' create empty strings for setting background color or image URI

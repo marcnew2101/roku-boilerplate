@@ -193,7 +193,8 @@ sub setGlobals(screen, deviceInfo, appInfo)
 
 	' assign variables to global object
 	m.global.addFields({ 
-		"deviceId": deviceInfo.id, 
+		"deviceId": deviceInfo.id,
+		"model": deviceInfo.model,
 		"os": deviceInfo.os,
 		"internet": deviceInfo.network.internet, 
 		"language": deviceInfo.language, 

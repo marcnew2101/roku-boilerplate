@@ -1,0 +1,31 @@
+{
+    "internet": {
+        "title": "NO INTERNET CONNECTION",
+        "message": "Check the internet connection on this device and try again",
+        "help": [
+            "From the Roku home screen, go to Settings -> Network -> Check connection.",
+            "If the internet connection continues to fail, try restarting the Roku from Settings -> System -> System restart."
+        ],
+        "buttons": ["OKAY"],
+        "exitApp": true
+    },
+    "os": {
+        "title": "ROKU UPDATE REQUIRED",
+        "message": "This device does not meet minimum requirements for OS version 9.1",
+        "help": [
+            "From the Roku home screen, go to Settings -> System -> System update.",
+            "If your Roku cannot be updated to the minimum required version, you will need to obtain a newer Roku device."
+        ],
+        "buttons": ["OKAY"],
+        "exitApp": true
+    },
+    "model": {
+        "title": "INCOMPATIBLE DEVICE",
+        "message": "Due to hardware limitations, we no longer support your Roku device.",
+        "help": [
+            "Please visit roku.com/products for a list of supported devices."
+        ],
+        "buttons": ["OKAY"],
+        "exitApp": true
+    }
+}

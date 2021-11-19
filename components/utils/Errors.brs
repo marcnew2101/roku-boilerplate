@@ -17,7 +17,7 @@ sub createErrorDialog(error = {})
 			' check if error is valid and true
 			if (errorValid <> Invalid AND errorValid)
 				' get the Dialog Modal screen
-				screen = setScreen("DialogModal")
+				screen = getScreen("DialogModal")
 				' check that the screen is not invalid
 				if (screen <> Invalid)
 					' show the error dialog screen/modal
@@ -35,4 +35,25 @@ end sub
 sub showErrorDialog(error, screen)
 	' send the AA to the interface AA on the Dialog Modal screen
 	screen.dialogInfo = error
+end sub
+
+function getError(errorString = "")
+    errorfile = ReadAsciiFile("pkg:/components/data/errors.json")
+	if (errorfile <> Invalid)
+		json = ParseJson(errorfile)
+		if (json <> Invalid)
+            for each error in json.items()
+                if (error.key = errorString AND error.value <> Invalid)
+                    return error.value
+                    exit for
+                end if
+            end for
+        end if
+	else
+		return Invalid
+	end if
+end function
+
+sub setError(error)
+	m.top.getScene().error = error
 end sub
