@@ -8,6 +8,7 @@
 	<interface>
 		<field id="exitApp" type="boolean" value="false"/>
 		<field id="screens" type="assocarray"/>
+		<field id="error" type="string" onChange="onError" alwaysNotify="true"/>
 	</interface>
 	<children>
 		<!-- landing screen when app first loads and user is not yet logged in -->

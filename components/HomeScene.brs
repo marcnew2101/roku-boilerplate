@@ -23,3 +23,13 @@ sub startApp(ready = true)
 		? "WARNING: Unable to start app from HomeScene.brs"
 	end if
 end sub
+
+sub onError(obj)
+	' get the error string
+	error = obj.getData()
+	' check that the error string is not invalid and not empty
+	if (error <> Invalid AND len(error) > 0)
+		' create error dialog screen
+		createErrorDialog(getError(error))
+	end if
+end sub
