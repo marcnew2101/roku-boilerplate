@@ -11,16 +11,9 @@
 		<field id="error" type="string" onChange="onError" alwaysNotify="true"/>
 	</interface>
 	<children>
-		<!-- landing screen when app first loads and user is not yet logged in -->
-		<LandingScreen
-			id="LandingScreen"
-			translation="[0, 0]"
-			visible="false"/>
-
+		<!-- landing screen when app first loads and user is not yet authenticated or registered -->
+		<LandingScreen id="LandingScreen"/>
 		<!-- dialog pop-up for showing feedback to user -->
-		<DialogModal
-			id="DialogModal"
-			translation="[0, 0]"
-			visible="false"/>
+		<DialogModal id="DialogModal"/>
 	</children>
 </component>
