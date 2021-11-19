@@ -1,4 +1,6 @@
 sub init()
+    ' set the initial visibility of the screen to false
+    m.top.visible = false
     ' create the initial dialog node
     createDialogNode()
 
