@@ -19,9 +19,13 @@ function setRequirements(params = true)
 end function
 
 function createRequirements()
+	' create any number of requirements in the object tree (AA) below
+	' each top level key is obtained from the m.global key set in Main.brs - setGlobals()
+	' the top level key must match the key set in m.global.*
 	return {
         "internet": {
 			"required": true,
+			' the actual error that appears to the user is defined at /components/data/errors.json
 			"error": true
 		},
         "os": {
@@ -129,7 +133,7 @@ function getModel(model)
 	' check that the current version is valid and is a float value
 	if (model <> Invalid AND type(model) = "roString")
 		' set a list of unsupported roku hardware model numbers
-		isModelSupported = setUnsupportedModel(model)
+		isModelSupported = setUnsupportedModels(model)
 		' check that the current version is valid and is a float value
 		if (isModelSupported <> Invalid AND isModelSupported)
 			return true
@@ -141,9 +145,10 @@ function getModel(model)
 	end if
 end function
 
-function setUnsupportedModel(model)
+function setUnsupportedModels(model)
 	' array of discontinued roku devices (cannot update past version 3.1)
-	' other models Giga, Paolo, Jackson, Briscoe, Littlefield are supported up to version 10.5 but may have performace issues (not listed here)
+	' other models (not listed here) such as Giga, Paolo, Jackson, Briscoe, Littlefield are supported but may have performace issues
+	' see https://developer.roku.com/docs/specs/hardware.md for an additional list of supported hardware
 	legacyModels = [
 		"N1000",
 		"N1050",
@@ -156,12 +161,16 @@ function setUnsupportedModel(model)
 		"2100N"
 	]
 
+	' set device compatibility to be true initially
 	compatibleDevice = true
-
+	' loop over the array of unsupported legacy models
 	for each legacyModel in legacyModels
+		' check if the currently used model is a match
 		if (model = legacyModel)
+			' set compability to false
 			compatibleDevice = false
-			? "incompatible hardware found in legacyModels array of setUnsupportedModel(model) - Requirements.brs"
+			? "Roku model " + model + " found in legacyModels array of setUnsupportedModel(model) - Requirements.brs"
+			' exit the for loop
 			exit for
 		end if
 	end for
