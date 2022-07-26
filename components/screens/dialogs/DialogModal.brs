@@ -3,7 +3,6 @@ sub init()
     m.top.visible = false
     ' create the initial dialog node
     createDialogNode()
-
     ' observe screen visibility
     m.top.observeField("visible", "screenVisible")
 end sub
@@ -40,7 +39,6 @@ end sub
 
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
-
     ' check that the dialog info title is not Invalid and not an empty string
     if m.dialogInfo.title <> Invalid AND len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
     ' check that the dialog info message is not Invalid and not an empty string
@@ -49,7 +47,6 @@ sub populateDialogBox(obj)
     if m.dialogInfo.help <> Invalid AND m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
     ' check that the dialog info buttons are not Invalid and not an empty array
     if m.dialogInfo.buttons <> Invalid AND m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
-
     ' set screen to visible
     m.top.visible = true
 end sub
@@ -59,7 +56,6 @@ sub onButtonSelected(obj)
     buttonIndex = obj.getData()
     ' get button title
     buttonSelected = m.dialogNode.buttons[buttonIndex]
-
     ' check if button pressed is "OKAY" button
     if (buttonSelected = "OKAY")
         ' check that closeApp is not invalid and set to true
