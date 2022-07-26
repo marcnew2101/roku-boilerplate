@@ -11,8 +11,8 @@
         <target>Einloggen</target>
       </trans-unit>
       <trans-unit id="2">
-        <source>Sign Up</source>
-        <target>Anmeldung</target>
+        <source>Register</source>
+        <target>Registrieren</target>
       </trans-unit>
       <trans-unit id="3">
         <source>Exit</source>

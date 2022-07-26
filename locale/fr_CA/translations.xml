@@ -11,7 +11,7 @@
         <target>S'identifier</target>
       </trans-unit>
       <trans-unit id="2">
-        <source>Sign Up</source>
+        <source>Register</source>
         <target>S'inscrire</target>
       </trans-unit>
       <trans-unit id="3">
