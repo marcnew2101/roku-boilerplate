@@ -1,0 +1,52 @@
+{
+    "dark": [
+        {
+            "red": {
+                "backgroundColor": "0x0A0A0BFF",
+                "palette": {
+                    "primaryTextColor": "0xFFFFFFFF",
+                    "secondaryTextColor": "0xBEBABAFF",
+                    "inputFieldColor": "0xC8C4C4FF",
+                    "dialogBackgroundColor": "0x373737FF",
+                    "dialogItemColor": "0xFF0000FF",
+                    "dialogTextColor": "0xFFFFFFFF",
+                    "dialogBulletTextColor": "0xBEBABAFF",
+                    "dialogFocusColor": "0xA60000FF",
+                    "dialogFocusItemColor": "0xFFFFFFFF",
+                    "dialogSecondaryTextColor": "0xBEBABAFF",
+                    "dialogSecondaryItemColor": "0xFFFFFFFF",
+                    "dialogInputFieldColor": "0xFFFFFFFF",
+                    "dialogKeyboardColor": "0xFFFFFFFF",
+                    "dialogFootprintColor": "0xFFFFFFFF"
+                },
+                "selectorURI": "",
+                "backgroundURI": ""
+            }
+        }
+    ],
+    "light": [
+        {
+            "red": {
+                "backgroundColor": "0x0A0A0BFF",
+                "palette": {
+                    "primaryTextColor": "0xFFFFFFFF",
+                    "secondaryTextColor": "0xBEBABAFF",
+                    "inputFieldColor": "0xC8C4C4FF",
+                    "dialogBackgroundColor": "0x373737FF",
+                    "dialogItemColor": "0xFF0000FF",
+                    "dialogTextColor": "0xFFFFFFFF",
+                    "dialogBulletTextColor": "0xBEBABAFF",
+                    "dialogFocusColor": "0xA60000FF",
+                    "dialogFocusItemColor": "0xFFFFFFFF",
+                    "dialogSecondaryTextColor": "0xBEBABAFF",
+                    "dialogSecondaryItemColor": "0xFFFFFFFF",
+                    "dialogInputFieldColor": "0xFFFFFFFF",
+                    "dialogKeyboardColor": "0xFFFFFFFF",
+                    "dialogFootprintColor": "0xFFFFFFFF"
+                },
+                "selectorURI": "",
+                "backgroundURI": ""
+            }
+        }
+    ]
+}
