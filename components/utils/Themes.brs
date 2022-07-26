@@ -2,7 +2,7 @@ sub setTheme(params as boolean)
     ' check if theme is true
     if (params)
         ' set default theme
-        defaultTheme = {"type": "dark", "color": "red"}
+        defaultTheme = { "type": "dark", "color": "red" }
         ' check if theme was previously set by user
         theme = getThemeFromRegistry(defaultTheme)
         ' create initial palette Node
@@ -10,28 +10,28 @@ sub setTheme(params as boolean)
         ' get the theme colors and background
         themeColors = getTheme(theme)
         ' check that themeColors is not invalid
-        if (themeColors <> Invalid)
+        if (themeColors <> invalid)
             ' get the top parent HomeScene node
             homeScene = m.top.getScene()
             ' set theme specific colors for the app if not invalid and object is not empty
-            if (themeColors.palette <> Invalid AND themeColors.palette.count() > 0)
+            if (themeColors.palette <> invalid and themeColors.palette.count() > 0)
                 ' assign the color theme to the palette node
                 paletteNode.colors = themeColors.palette
                 ' set palette to HomeScene node
                 homeScene.palette = paletteNode
             end if
             ' set theme specific background image URI for the app if valid and string is not empty
-            if (themeColors.backgroundURI <> Invalid AND len(themeColors.backgroundURI) > 0)
+            if (themeColors.backgroundURI <> invalid and len(themeColors.backgroundURI) > 0)
                 ' set background URI to HomeScene node
                 homeScene.backgroundURI = themeColors.backgroundURI
             end if
             ' set theme specific background color for the app if valid and string is not empty
-            if (themeColors.backgroundColor <> Invalid AND len(themeColors.backgroundColor) > 0)
+            if (themeColors.backgroundColor <> invalid and len(themeColors.backgroundColor) > 0)
                 ' set background color to HomeScene node
                 homeScene.backgroundColor = themeColors.backgroundColor
             end if
             ' set theme specific selector for rows/grids/lists if valid and string is not empty
-            if (themeColors.selectorURI <> Invalid AND len(themeColors.selectorURI) > 0)
+            if (themeColors.selectorURI <> invalid and len(themeColors.selectorURI) > 0)
                 ' set selector URI to HomeScene node
                 homeScene.selectorURI = themeColors.selectorURI
             end if
@@ -54,11 +54,11 @@ function getTheme(theme as object) as dynamic
     ' get json file from local storage
     themefile = ReadAsciiFile("pkg:/components/data/themes.json")
     ' check that file exists
-	if (themefile <> invalid)
+    if (themefile <> invalid)
         ' convert file to readable json
-		json = ParseJson(themefile)
+        json = ParseJson(themefile)
         ' check that json is valid
-		if (json <> invalid)
+        if (json <> invalid)
             ' get dark or light theme (array)
             themeType = json[theme.type]
             ' check that theme array is valid and contains at least one entry
@@ -75,6 +75,6 @@ function getTheme(theme as object) as dynamic
                 end for
             end if
         end if
-	end if
+    end if
     return invalid
 end function

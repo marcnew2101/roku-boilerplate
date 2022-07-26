@@ -10,17 +10,17 @@ function createRequirements() as object
 	if (requirementsFile <> invalid)
 		json = ParseJson(requirementsFile)
 		if (json <> invalid)
-            return json
-        end if
+			return json
+		end if
 	end if
-    return invalid
+	return invalid
 end function
 function checkRequirements(requirements as object) as boolean
 	for each requirement in requirements.items()
-		if (requirement.value <> invalid AND requirement.value["required"])
+		if (requirement.value <> invalid and requirement.value["required"])
 			deviceReady = getRequirement(requirement)
 			if (deviceReady <> invalid)
-				if (NOT deviceReady AND requirement.value["error"])
+				if (not deviceReady and requirement.value["error"])
 					meetsRequirements = false
 					m.top.error = requirement.key
 				end if

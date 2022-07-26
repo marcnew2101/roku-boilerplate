@@ -9,12 +9,12 @@ end sub
 sub onTitleChange(obj)
     title = obj.getData()
     ' check that the existing titla area text is not invalid and is not an empty string
-    if (m.titlearea <> Invalid AND len(m.titlearea.primaryTitle) > 0)
+    if (m.titlearea <> invalid and len(m.titlearea.primaryTitle) > 0)
         ' reset the title area text
         m.titlearea.primaryTitle = ""
     end if
     ' check that the new title is not invalid and is not an empty string
-    if (title <> Invalid AND len(title) > 0)
+    if (title <> invalid and len(title) > 0)
         ' set the title
         m.titlearea.primaryTitle = title
     end if
@@ -23,12 +23,12 @@ end sub
 sub onMessageChange(obj)
     message = obj.getData()
     ' check that the existing message text is not invalid and is not an empty string
-    if (m.messagetext <> Invalid AND len(m.messagetext.text) > 0)
+    if (m.messagetext <> invalid and len(m.messagetext.text) > 0)
         ' reset the message text
         m.messagetext.text = ""
     end if
     ' check that the new message is not invalid and is not an empty string
-    if (message <> Invalid AND len(message) > 0)
+    if (message <> invalid and len(message) > 0)
         ' set the  message
         m.messagetext.text = message
         'set the message type
@@ -41,12 +41,12 @@ end sub
 sub onBulletTextChange(obj)
     bullets = obj.getData()
     ' check that the existing bullet text array is not invalid and is not an empty array
-    if (m.bulletarea <> Invalid AND m.bulletarea.bulletText.count() > 0)
+    if (m.bulletarea <> invalid and m.bulletarea.bulletText.count() > 0)
         ' reset the bullet text array
         m.bulletarea.bulletText = []
     end if
     ' check that the new bullet array is not invalid and is not an empty array
-    if (bullets <> Invalid AND bullets.count() > 0)
+    if (bullets <> invalid and bullets.count() > 0)
         ' set the bullet text
         m.bulletarea.bulletText = bullets
         ' loop over each node inside bullet area
@@ -62,7 +62,7 @@ end sub
 sub onButtonChange(obj)
     buttons = obj.getData()
     ' check that the existing button node is not invalid and is not an empty node array
-    if (m.buttonarea <> Invalid AND m.buttonarea.getChildCount() > 0)
+    if (m.buttonarea <> invalid and m.buttonarea.getChildCount() > 0)
         ' get all child nodes from inside the button area node
         childNodes = m.buttonarea.getChildren(-1, 0)
         ' remove all child nodes from inside the button area node
@@ -71,7 +71,7 @@ sub onButtonChange(obj)
         m.bulletarea.bulletText = []
     end if
     ' check that the new button array is not invalid and is not an empty array
-    if (buttons <> Invalid AND buttons.count() > 0)
+    if (buttons <> invalid and buttons.count() > 0)
         ' loop over each new button
         for each button in buttons
             ' create a button node

@@ -79,7 +79,7 @@ sub onItemSelected(obj)
 end sub
 
 ' capture key events from remote control
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     if (press)
         if (key = "back")
             ? "back key pressed"

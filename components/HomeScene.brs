@@ -10,12 +10,12 @@ sub startApp()
 	' get the landing screen
 	landingscreen = getScreen("LandingScreen")
 	' check that the landing screen is not invalid and show screen
-	if landingscreen <> Invalid then landingscreen.visible = true
+	if landingscreen <> invalid then landingscreen.visible = true
 end sub
 
 sub onError(obj)
 	' get the error string
 	error = obj.getData()
 	' check that the error string is not invalid and not empty then create error dialog
-	if error <> Invalid AND len(error) > 0 then createErrorDialog(getError(error))
+	if error <> invalid and len(error) > 0 then createErrorDialog(getError(error))
 end sub

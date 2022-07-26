@@ -40,13 +40,13 @@ end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
     ' check that the dialog info title is not Invalid and not an empty string
-    if m.dialogInfo.title <> Invalid AND len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
+    if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
     ' check that the dialog info message is not Invalid and not an empty string
-    if m.dialogInfo.message <> Invalid AND len(m.dialogInfo.message) > 0 then m.dialogNode.message = m.dialogInfo.message
+    if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then m.dialogNode.message = m.dialogInfo.message
     ' check that the dialog info help message is not Invalid and not an empty array
-    if m.dialogInfo.help <> Invalid AND m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
+    if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
     ' check that the dialog info buttons are not Invalid and not an empty array
-    if m.dialogInfo.buttons <> Invalid AND m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
+    if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
     ' set screen to visible
     m.top.visible = true
 end sub
@@ -59,7 +59,7 @@ sub onButtonSelected(obj)
     ' check if button pressed is "OKAY" button
     if (buttonSelected = "OKAY")
         ' check that closeApp is not invalid and set to true
-        if (m.dialogInfo.exitApp <> Invalid AND m.dialogInfo.exitApp)
+        if (m.dialogInfo.exitApp <> invalid and m.dialogInfo.exitApp)
             ' immediately close the app
             m.top.getScene().exitApp = true
         else
