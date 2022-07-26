@@ -1,6 +1,10 @@
-sub setTheme(theme)
-    ' check if the OS version is set globally and is at least version 9.4
-    if (m.global.os <> Invalid AND m.global.os >= 9.4)
+sub setTheme(params as boolean)
+    ' check if theme is true
+    if (params)
+        ' set default theme
+        defaultTheme = {"type": "dark", "color": "red"}
+        ' check if theme was previously set by user
+        theme = getThemeFromRegistry(defaultTheme)
         ' create initial palette Node
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         ' get the theme colors and background
@@ -10,77 +14,67 @@ sub setTheme(theme)
             ' get the top parent HomeScene node
             homeScene = m.top.getScene()
             ' set theme specific colors for the app if not invalid and object is not empty
-            if (themeColors.palette <> Invalid AND themeColors.count() > 0)
+            if (themeColors.palette <> Invalid AND themeColors.palette.count() > 0)
                 ' assign the color theme to the palette node
                 paletteNode.colors = themeColors.palette
                 ' set palette to HomeScene node
                 homeScene.palette = paletteNode
             end if
-            ' set theme specific background colors for the app if not invalid and object is not empty
-            if (themeColors.bgURI <> Invalid AND len(themeColors.bgURI))
+            ' set theme specific background image URI for the app if valid and string is not empty
+            if (themeColors.backgroundURI <> Invalid AND len(themeColors.backgroundURI) > 0)
                 ' set background URI to HomeScene node
-                homeScene.backgroundURI = themeColors.bgURI
-            else if (themeColors.bgColor <> Invalid AND len(themeColors.bgColor))
-                ' HomeScene prioritizes using a URI image over a solid color. This will ensure the background color appears by disabling the backgroundURI field
-                homeScene.backgroundURI = ""
+                homeScene.backgroundURI = themeColors.backgroundURI
+            end if
+            ' set theme specific background color for the app if valid and string is not empty
+            if (themeColors.backgroundColor <> Invalid AND len(themeColors.backgroundColor) > 0)
                 ' set background color to HomeScene node
-                homeScene.backgroundColor = themeColors.bgColor
+                homeScene.backgroundColor = themeColors.backgroundColor
+            end if
+            ' set theme specific selector for rows/grids/lists if valid and string is not empty
+            if (themeColors.selectorURI <> Invalid AND len(themeColors.selectorURI) > 0)
+                ' set selector URI to HomeScene node
+                homeScene.selectorURI = themeColors.selectorURI
             end if
         end if
     end if
 end sub
 
-function getTheme(theme)
-    ' empty AA for setting colors
-    palette = {}
-    ' create empty strings for setting background color or image URI
-    bgColor = ""
-    bgURI = ""
-
-    ' check if theme is set to dark red
-    if (theme = "dark-red")
-        ' set the background color for the app
-        bgColor = "0x0A0A0BFF"
-        ' set the background image for the app
-        bgURI = ""
-        ' set colors for palette
-        palette.PrimaryTextColor = "0xFFFFFFFF" ' white
-        palette.SecondaryTextColor = "0xBEBABAFF" ' light gray
-        palette.InputFieldColor = "0x000000FF" ' black
-        palette.DialogBackgroundColor = "0x373737FF" ' dark gray
-        palette.DialogItemColor = "0xFF0000FF" ' red
-        palette.DialogTextColor = "0xFFFFFFFF" ' white
-        palette.DialogBulletTextColor = "0xBEBABAFF" ' light gray
-        palette.DialogFocusColor = "0xA60000FF" ' dark red
-        palette.DialogFocusItemColor = "0xFFFFFFFF" ' white
-        palette.DialogSecondaryTextColor = "0xBEBABAFF" ' light gray
-        palette.DialogSecondaryItemColor = "0xFFFFFFFF" ' white
-        palette.DialogInputFieldColor = "0xFFFFFFFF" ' white
-        palette.DialogKeyboardColor = "0xFFFFFFFF" ' white
-        palette.DialogFootprintColor = "0xFFFFFFFF" ' white
-
-    ' check if theme is set to light red
-    else if (theme = "light-red")
-        ' set the background color for the app
-        bgColor = "0x0A0A0BFF"
-        ' set the background image for the app
-        bgURI = ""
-        ' set colors for palette
-        palette.PrimaryTextColor = "0x000000FF" ' black
-        palette.SecondaryTextColor = "0x373737FF" ' dark gray
-        palette.InputFieldColor = "0xFFFFFFFF" ' white
-        palette.DialogBackgroundColor = "0xEBEBEBFF" ' white
-        palette.DialogItemColor = "0x10AEFEFF" ' blue
-        palette.DialogTextColor = "0x000000FF" ' black
-        palette.DialogBulletTextColor = "0x373737FF" ' dark gray
-        palette.DialogFocusColor = "0xA60000FF" ' dark red
-        palette.DialogFocusItemColor = "0xFFFFFFFF" ' white
-        palette.DialogSecondaryTextColor = "0x373737FF" ' dark gray
-        palette.DialogSecondaryItemColor = "0x373737FF" ' dark gray
-        palette.DialogInputFieldColor = "0xFFFFFFFF" ' white
-        palette.DialogKeyboardColor = "0xFFFFFFFF" ' white
-        palette.DialogFootprintColor = "0xFFFFFFFF" ' white
+function getThemeFromRegistry(theme as object) as object
+    ' create registry section
+    reg = createObject("roRegistrySection", "theme")
+    ' check that keys exist in the registry
+    if (reg.exists("type") and reg.exists("color"))
+        ' set theme to object from registry
+        theme = reg.readMulti(["type", "color"])
     end if
+    return theme
+end function
 
-    return {"palette": palette, "bgColor": bgColor, "bgURI": bgURI} 
+function getTheme(theme as object) as dynamic
+    ' get json file from local storage
+    themefile = ReadAsciiFile("pkg:/components/data/themes.json")
+    ' check that file exists
+	if (themefile <> invalid)
+        ' convert file to readable json
+		json = ParseJson(themefile)
+        ' check that json is valid
+		if (json <> invalid)
+            ' get dark or light theme (array)
+            themeType = json[theme.type]
+            ' check that theme array is valid and contains at least one entry
+            if (themeType <> invalid and themeType.count() > 0)
+                ' loop over color AA in theme array
+                for each color in themeType
+                    ' check that theme color exists (object)
+                    if (color[theme.color] <> invalid)
+                        ' return color object
+                        return color
+                        ' exit for loop
+                        exit for
+                    end if
+                end for
+            end if
+        end if
+	end if
+    return invalid
 end function
