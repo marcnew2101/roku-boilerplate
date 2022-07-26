@@ -6,7 +6,6 @@ sub init()
     m.labelList = m.top.findNode("landingLabelList")
     ' identify the title label
     m.landingTitle = m.top.findNode("landingTitle")
-
     ' ### node observers ###
     ' observe screen visibility
     m.top.observeField("visible", "screenVisible")
@@ -36,16 +35,15 @@ sub populateLandingTitle()
 end sub
 
 sub populateLabelList()
-    ' create array of strings to be displayed in the label list - tr() is optional for translating the strings to another language
+    ' create array of strings to be displayed in the label list
+    ' tr() is optional for translating to another language
     listItems = [
         tr("Sign In"),
-        tr("Sign Up"),
+        tr("Register"),
         tr("Exit")
     ]
-
     ' create parent content node
     parentNode = createObject("roSGNode", "ContentNode")
-
     ' loop over the list items
     for each item in listItems
         ' create child content node to hold list data
@@ -55,21 +53,15 @@ sub populateLabelList()
         ' add the child node to the parent node
         parentNode.appendChild(childNode)
     end for
-
     ' assign the parent node to the label list content
     m.labelList.content = parentNode
 end sub
 
 sub centerLabelList()
-    ' set the total screen width and height
-    screenWidth = 1920
-    screenHeight = 1080
-
-    ' subtract the label list width from the screen width and divide in half
-    labelListX = (screenWidth - m.labelList.boundingRect().width) / 2
-    ' subtract the label list height from the screen height and divide in half
-    labelListY = (screenHeight - m.labelList.boundingRect().height) / 2
-
+    ' subtract the label list width from the screen width and divide
+    labelListX = (1920 - m.labelList.boundingRect().width) / 2
+    ' subtract the label list height from the screen height and divide
+    labelListY = (1080 - m.labelList.boundingRect().height) / 2
     ' set the label list X and Y coordinates
     m.labelList.translation = [labelListX, labelListY]
 end sub
@@ -77,13 +69,8 @@ end sub
 sub onItemSelected(obj)
     ' get the index from the selection
     itemIndex = obj.getData()
-
     ' get the item from the content nodes using the item index
     itemSelected = m.labelList.content.getChild(itemIndex)
-
-    ' print the label string
-    ? itemSelected.title
-
     ' observe when the exit key is selected
     if (itemSelected.title = tr("Exit"))
         ' set the home scene exitApp interface to close the app
