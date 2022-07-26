@@ -1,0 +1,16 @@
+{
+    "internet": {
+        "required": true,
+        "showError": true
+    },
+    "os": {
+        "required": true,
+        "minVersion": 9.4,
+        "showError": true
+    },
+    "model": {
+        "required": true,
+        "legacyModels": ["2400X","3000X","3050X","3100X","2450X","2500X","3400X","3420X","N1000","N1050","N1100","N1101","2000C","2050X","2050N","2100X","2100N"],
+        "showError": true
+    }
+}
