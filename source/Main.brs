@@ -89,16 +89,8 @@ function setDeviceInfo()
 	' create HDMI info object
 	hdmiInfo = createObject("roHdmiStatus")
 
-	' determine if device will return version info
-	osVersionStatus = findMemberFunction(deviceInfo, "getOSVersion")
-	if (osVersionStatus <> Invalid)
-		' required minimum OS version 9.2
-		os = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
-	else
-		major = deviceInfo.getVersion().mid(osVersion, 3, 1)
-		minor = deviceInfo.getVersion().mid(osVersion, 5, 2)
-		os = major + "." + minor
-	end if
+	' required minimum OS version 10.0
+	os = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
 
 	' determine if device will return internet status
 	internetStatus = findMemberFunction(deviceInfo, "getInternetStatus")
