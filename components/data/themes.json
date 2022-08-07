@@ -2,7 +2,7 @@
     "dark": [
         {
             "red": {
-                "backgroundColor": "0x0A0A0BFF",
+                "backgroundColor": "0x151515FF",
                 "palette": {
                     "primaryTextColor": "0xFFFFFFFF",
                     "secondaryTextColor": "0xBEBABAFF",
@@ -19,15 +19,15 @@
                     "dialogKeyboardColor": "0xFFFFFFFF",
                     "dialogFootprintColor": "0xFFFFFFFF"
                 },
-                "selectorURI": "",
-                "backgroundURI": ""
+                "selectorUri": "",
+                "backgroundUri": ""
             }
         }
     ],
     "light": [
         {
             "red": {
-                "backgroundColor": "0x0A0A0BFF",
+                "backgroundColor": "0x151515FF",
                 "palette": {
                     "primaryTextColor": "0xFFFFFFFF",
                     "secondaryTextColor": "0xBEBABAFF",
@@ -44,8 +44,8 @@
                     "dialogKeyboardColor": "0xFFFFFFFF",
                     "dialogFootprintColor": "0xFFFFFFFF"
                 },
-                "selectorURI": "",
-                "backgroundURI": ""
+                "selectorUri": "",
+                "backgroundUri": ""
             }
         }
     ]
