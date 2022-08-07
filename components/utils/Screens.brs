@@ -27,3 +27,6 @@ sub showAllScreens()
     end for
     ? ""
 end sub
+sub saveFocus(node)
+    m.top.getScene().focusedNode = node
+end sub
