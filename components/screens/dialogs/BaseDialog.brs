@@ -5,7 +5,6 @@ sub init()
     m.bulletarea = m.top.findNode("bulletArea")
     m.buttonarea = m.top.findNode("buttonArea")
 end sub
-
 sub onTitleChange(obj)
     title = obj.getData()
     ' check that the existing titla area text is not invalid and is not an empty string
@@ -19,7 +18,6 @@ sub onTitleChange(obj)
         m.titlearea.primaryTitle = title
     end if
 end sub
-
 sub onMessageChange(obj)
     message = obj.getData()
     ' check that the existing message text is not invalid and is not an empty string
@@ -36,8 +34,9 @@ sub onMessageChange(obj)
         ' set the message text size
         m.messagetext.getChild(0).font.size = 32
     end if
+    ' if dialogModal is invalid and get screen
+    if m.dialogModal = invalid then m.dialogModal = getScreen("dialogModal")
 end sub
-
 sub onBulletTextChange(obj)
     bullets = obj.getData()
     ' check that the existing bullet text array is not invalid and is not an empty array
@@ -52,13 +51,12 @@ sub onBulletTextChange(obj)
         ' loop over each node inside bullet area
         for each node in m.bulletarea.getChild(0).getChildren(-1, 0)
             ' set the text color
-            node.color = m.top.getScene().palette.colors.DialogBulletTextColor
+            node.color = m.top.getScene().palette.dialogBulletTextColor
             ' set the text size
             node.font.size = 29
         end for
     end if
 end sub
-
 sub onButtonChange(obj)
     buttons = obj.getData()
     ' check that the existing button node is not invalid and is not an empty node array
@@ -83,3 +81,16 @@ sub onButtonChange(obj)
         end for
     end if
 end sub
+function onKeyEvent(key as string, press as boolean) as boolean
+    if (press)
+        if (key = "back")
+            if (m.dialogModal <> invalid and m.dialogModal.dialogInfo <> invalid and m.dialogModal.dialogInfo.count() > 0)
+                if (m.dialogModal.dialogInfo.allowBack <> invalid and m.dialogModal.dialogInfo.allowBack)
+                    m.dialogModal.visible = false
+                end if
+            end if
+            return true
+        end if
+    end if
+    return false
+end function
