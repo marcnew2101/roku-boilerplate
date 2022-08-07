@@ -20,8 +20,8 @@ The ".vscode/launch.json" file at the root of the project contains definitions f
 
 ### pre-deployment
  - Begin by renaming the ".env_sample" file to ".env". This file is located at the root of the project folder
- - Replace "ROKU_HOST" with the IP address of your Roku device. The IP address can be found in the Roku onscreen menu at:  Settings -> Network -> About
- - Replace "ROKU_PASSWORD" with the password you created when you first enabled developer mode on your Roku device. If you forget the password, you will have to use your Roku remote to enter the same button pattern to enable developer mode (home, home, home, up, up, right, left, right, left, right)
+ - Replace "ROKU_HOST" with the IP address of your Roku device. The IP address can be found on the Roku menu screen:  Settings -> Network -> About
+ - Replace "ROKU_PASSWORD" with the password you created when you first enabled developer mode on your Roku device. If you forget the password, you will have to use your Roku remote to repeat the button pattern to enable developer mode (home, home, home, up, up, right, left, right, left, right)
 
 ### deploy app
  - On a Windows PC, press F5
@@ -29,20 +29,20 @@ The ".vscode/launch.json" file at the root of the project contains definitions f
  - The ZIP file will be automatically generated in /out/roku-deploy.zip and then automatically deployed to your Roku device
 
 ### console and debugging
- - The OUTPUT and DEBUG CONSOLE windows inside vscode will show your app activity and print commands, once deployed
- - Enabling "showDeviceInfo" or "showAppInfo" at the top of the Main.brs file will present you with an example of printing to the console
- - The console session will automatically close when exiting the app
+ - The OUTPUT and DEBUG CONSOLE windows inside vscode will show your app activity and print commands
+ - Enabling "showDeviceInfo" or "showAppInfo" at the top of the Main.brs file will print information about the device to the console
+ - The console/debug session will automatically close when exiting the app
 
 ### screens
 The /components/screens/LandingScreen is a sample file and is not necessary for deployment. This is added only as a visual representation that the app has successfully been deployed.
 
 ### globals
- - The /source/Main.brs file includes 6 key/value examples, located under setGlobals() at bottom. The "os", "internet", and "model" are assigned to the m.global object key/values. Each of these are used inside of /components/utils/Requirements.brs to represent conditional requirements for opening the app (RokuOS version, internet connectivity, model number of Roku device)
- - The app requirements are turned off by default "startApp(setRequirements(false))" at the top of /components/HomeScene.brs. Change to "startApp(setRequirements(true))", if you want to test the requirements feature.
- - The values inside of the m.global object can be accessed from anywhere in the app using m.global."key". 
+ - At the bottom of the /source/Main.brs file, under setGlobals(), there are key/value samples which are assigned to the m.global object. The "os", "internet", and "model" are used inside of /components/data/requirements.json to represent requirements for opening and using the app (minimum RokuOS version, internet connectivity, and model number of the Roku).
+ - The app requirements are turned off by default "setRequirements(false)" at the top of /components/HomeScene.brs. Change to "setRequirements(true)", if you want to test the requirements feature. Additional requirements can be added to the json file as long as the key values match the ones set in m.global.*
+ - m.global values can be accessed from anywhere in the app by accessing m.global.<name>. 
 
 ### translations
-The /locale folder contains sample folders and files for translating English to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses tr("string to translate") from anywhere in the app. Additional languages can be added using the same folder(language) and file(translations.xml) structure.
+The /locale folder contains sample folders and files for translating to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses tr("string to translate") from anywhere in the app. Additional languages can be added using the same folder and file structure.
 
-### errors
-The /components/utils/Errors.brs file utilizes a json data file located at /components/data/errors.json. This will show an error message modal in the UI for user notifications and feedback. Additional key/values can be added to errors.json for producing other error messages in the app.
+### messages
+The /components/utils/Messages.brs file utilizes a json data file located at /components/data/messages.json. This json data represents a message object that is activated by setting the message string interface on the top level node (HomeScene). If the message string matches the key in the json file, a modal/pop-up will appear in the UI for user interaction. Additional key/values can be added to the messages.json for representing both error and notification messages.
