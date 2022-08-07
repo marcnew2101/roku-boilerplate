@@ -1,6 +1,6 @@
 sub init()
-	setRequirements(true)
-	setTheme(true)
+	setRequirements(false)
+	setTheme(false)
 	startApp()
 end sub
 
