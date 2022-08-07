@@ -10,6 +10,7 @@
 		<field id="screens" type="assocarray"/>
 		<field id="message" type="string" onChange="onMessage" alwaysNotify="true"/>
 		<field id="selectorUri" type="uri"/>
+		<field id="focusedNode" type="node"/>
 	</interface>
 	<children>
 		<!-- landing screen when app first loads and user is not yet authenticated or registered -->
