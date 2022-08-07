@@ -21,24 +21,23 @@ sub setTheme(params as boolean)
                 homeScene.palette = paletteNode
             end if
             ' set theme specific background image URI for the app if valid and string is not empty
-            if (themeColors.backgroundURI <> invalid and len(themeColors.backgroundURI) > 0)
+            if (themeColors.backgroundUri <> invalid)
                 ' set background URI to HomeScene node
-                homeScene.backgroundURI = themeColors.backgroundURI
+                homeScene.backgroundUri = themeColors.backgroundUri
             end if
             ' set theme specific background color for the app if valid and string is not empty
-            if (themeColors.backgroundColor <> invalid and len(themeColors.backgroundColor) > 0)
+            if (themeColors.backgroundColor <> invalid)
                 ' set background color to HomeScene node
                 homeScene.backgroundColor = themeColors.backgroundColor
             end if
             ' set theme specific selector for rows/grids/lists if valid and string is not empty
-            if (themeColors.selectorURI <> invalid and len(themeColors.selectorURI) > 0)
+            if (themeColors.selectorUri <> invalid and len(themeColors.selectorUri) > 0)
                 ' set selector URI to HomeScene node
-                homeScene.selectorURI = themeColors.selectorURI
+                homeScene.selectorUri = themeColors.selectorUri
             end if
         end if
     end if
 end sub
-
 function getThemeFromRegistry(theme as object) as object
     ' create registry section
     reg = createObject("roRegistrySection", "theme")
@@ -49,7 +48,6 @@ function getThemeFromRegistry(theme as object) as object
     end if
     return theme
 end function
-
 function getTheme(theme as object) as dynamic
     ' get json file from local storage
     themefile = ReadAsciiFile("pkg:/components/data/themes.json")
@@ -68,7 +66,7 @@ function getTheme(theme as object) as dynamic
                     ' check that theme color exists (object)
                     if (color[theme.color] <> invalid)
                         ' return color object
-                        return color
+                        return color[theme.color]
                         ' exit for loop
                         exit for
                     end if
