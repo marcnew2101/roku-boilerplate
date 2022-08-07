@@ -24,6 +24,8 @@ sub screenVisible(obj)
         centerLabelList()
         ' set key focus to the label list
         m.labelList.setFocus(true)
+        ' save the focused node to the HomeScene
+        saveFocus(m.listings)
     end if
 end sub
 
