@@ -5,8 +5,11 @@ major_version=1
 minor_version=0
 build_version=0
 
-## Force to latest SceneGraph library
+## Force latest SceneGraph library
 rsg_version=1.2
+
+## Set deep linking
+supports_input_launch=1
 
 ## Subscription event dispatcher for channel search prioritization
 sg_component_libs_required=roku_analytics
