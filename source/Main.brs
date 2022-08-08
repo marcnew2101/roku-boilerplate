@@ -1,4 +1,4 @@
-sub main()
+sub main(args)
 	'######################### DEVELOPER VARIABLES ##########################
 	showDeviceInfo = false ' show device info in the console
 	showAppInfo = false ' show app info in the console
@@ -23,7 +23,7 @@ sub main()
 	' create root scenegraph node
 	screen = createObject("roSGScreen")
 	' set global values using info obtained from device and app
-	setGlobals(screen, deviceInfo, appInfo)
+	setGlobals(screen, deviceInfo, appInfo, args)
 	' set the message port for screen events
 	screen.setMessagePort(port)
 	' create the initial scenegraph object
@@ -76,7 +76,6 @@ sub main()
 	end while
 	'########################################################################
 end sub
-
 function setDeviceInfo()
 	' create device info object
 	deviceInfo = createObject("roDeviceInfo")
@@ -121,7 +120,6 @@ function setDeviceInfo()
 	}
 	return device
 end function
-
 function setAppInfo()
 	appInfo = createObject("roAppInfo")
 
@@ -134,7 +132,6 @@ function setAppInfo()
 	}
 	return app
 end function
-
 sub getDeviceInfo(deviceInfo)
 	' show information about device
 	? "- - - - - - - - - - - - - - - - - - -"
@@ -157,7 +154,6 @@ sub getDeviceInfo(deviceInfo)
 	? "- - - - - - - - - - - - - - - - - - -"
 	? ""
 end sub
-
 sub getAppInfo(appInfo)
 	' show information about app
 	? "- - - - - - - - - - - - - - - - - - -"
@@ -169,8 +165,7 @@ sub getAppInfo(appInfo)
 	? "- - - - - - - - - - - - - - - - - - -"
 	? ""
 end sub
-
-sub setGlobals(screen, deviceInfo, appInfo)
+sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 	' get the global reference object
 	m.global = screen.getGlobalNode()
 	' assign variables to global object
@@ -180,6 +175,18 @@ sub setGlobals(screen, deviceInfo, appInfo)
 		"os": deviceInfo.os,
 		"internet": deviceInfo.network.internet,
 		"language": deviceInfo.language,
-		"graphics": deviceInfo.graphics
+		"graphics": deviceInfo.graphics,
+		"deeplink": getDeepLinks(deepLinkArgs)
 	})
 end sub
+function getDeepLinks(args) as object
+    deeplink = invalid
+	' check if both contentId and mediaType are valid
+    if (args.contentId <> invalid and args.mediaType <> invalid)
+        deeplink = {
+            id: args.contentId
+            type: args.mediaType
+        }
+    end if
+    return deeplink
+end function
