@@ -1,5 +1,6 @@
 .*
 roku-deploy.zip
+roku-boilerplate.code-workspace
 !/.gitignore
 !/.vscode
 !/.env-sample
