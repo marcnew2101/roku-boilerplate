@@ -24,8 +24,8 @@ sub screenVisible(obj)
         centerLabelList()
         ' set key focus to the label list
         m.labelList.setFocus(true)
-        ' save the focused node to the HomeScene
-        saveFocus(m.listings)
+        ' save focused node
+        m.top.getScene().focusedNode = m.labelList
     end if
 end sub
 
@@ -75,8 +75,8 @@ sub onItemSelected(obj)
     itemSelected = m.labelList.content.getChild(itemIndex)
     ' observe when the exit key is selected
     if (itemSelected.title = tr("Exit"))
-        ' set the home scene exitApp interface to close the app
-        m.top.getScene().exitApp = true
+        ' send message to exit app
+        m.top.getScene().message = "exit"
     end if
 end sub
 
@@ -84,15 +84,14 @@ end sub
 function onKeyEvent(key as string, press as boolean) as boolean
     if (press)
         if (key = "back")
-            ? "back key pressed"
-            return false
+            ' send message to exit app
+            m.top.getScene().message = "exit"
+            return true
         end if
-
         if (key = "up")
             ? "up key pressed"
             return true
         end if
-
         if (key = "down")
             ? "down key pressed"
             return true
