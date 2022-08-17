@@ -101,8 +101,11 @@ function setDeviceInfo()
 		"display": {
 			"name": deviceInfo.getModelDisplayName(),
 			"type": deviceInfo.GetDisplayType(),
-			"size": deviceInfo.getDisplaySize().w.toStr() + " x " + deviceInfo.getDisplaySize().h.toStr(),
-			"ui": deviceInfo.getUIResolution().name,
+			"ui": {
+				"width": deviceInfo.getUIResolution().width,
+				"height": deviceInfo.getUIResolution().height,
+				"name": deviceInfo.getUIResolution().name
+			},
 			"video": deviceInfo.getVideoMode()
 		},
 		"network": {
@@ -142,7 +145,6 @@ sub getDeviceInfo(deviceInfo)
 	? "Graphics:         "; deviceInfo.graphics
 	? "Display Name:     "; deviceInfo.display.name
 	? "Display Type:     "; deviceInfo.display.type
-	? "Display Size:     "; deviceInfo.display.size
 	? "UI Resolution:    "; deviceInfo.display.ui
 	? "Video Mode:       "; deviceInfo.display.video
 	? "Internet Status:  "; deviceInfo.network.internet
@@ -176,6 +178,7 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 		"internet": deviceInfo.network.internet,
 		"language": deviceInfo.language,
 		"graphics": deviceInfo.graphics,
+		"ui": deviceInfo.display.ui,
 		"deeplink": getDeepLinks(deepLinkArgs)
 	})
 end sub
