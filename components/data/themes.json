@@ -19,7 +19,7 @@
                     "dialogKeyboardColor": "0xFFFFFFFF",
                     "dialogFootprintColor": "0xFFFFFFFF"
                 },
-                "selectorUri": "",
+                "selectorUri": "pkg:/images/selector.9.png",
                 "backgroundUri": ""
             }
         }
@@ -27,24 +27,24 @@
     "light": [
         {
             "red": {
-                "backgroundColor": "0x151515FF",
+                "backgroundColor": "0xEEEEEEFF",
                 "palette": {
-                    "primaryTextColor": "0xFFFFFFFF",
-                    "secondaryTextColor": "0xBEBABAFF",
-                    "inputFieldColor": "0xC8C4C4FF",
-                    "dialogBackgroundColor": "0x373737FF",
+                    "primaryTextColor": "0x000000FF",
+                    "secondaryTextColor": "0x272727FF",
+                    "inputFieldColor": "0x525252FF",
+                    "dialogBackgroundColor": "0xCCCCCCFF",
                     "dialogItemColor": "0xFF0000FF",
-                    "dialogTextColor": "0xFFFFFFFF",
-                    "dialogBulletTextColor": "0xBEBABAFF",
+                    "dialogTextColor": "0x000000FF",
+                    "dialogBulletTextColor": "0x323232FF",
                     "dialogFocusColor": "0xA60000FF",
                     "dialogFocusItemColor": "0xFFFFFFFF",
-                    "dialogSecondaryTextColor": "0xBEBABAFF",
+                    "dialogSecondaryTextColor": "0x272727FF",
                     "dialogSecondaryItemColor": "0xFFFFFFFF",
                     "dialogInputFieldColor": "0xFFFFFFFF",
-                    "dialogKeyboardColor": "0xFFFFFFFF",
+                    "dialogKeyboardColor": "0xCCCCCCFF",
                     "dialogFootprintColor": "0xFFFFFFFF"
                 },
-                "selectorUri": "",
+                "selectorUri": "pkg:/images/selector.9.png",
                 "backgroundUri": ""
             }
         }
