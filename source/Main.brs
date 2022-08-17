@@ -66,11 +66,11 @@ sub main(args)
 				? "Status error: "; i.Status
 				? "URL error: "; i.origUrl
 				? "IP: "; i.TargetIp
-				? ""
+				? " "
 			else if (i.LogType = "bandwidth.minute" and showBandwidth)
 				bandwidth = i.Bandwidth / 1000
 				? "Bandwidth: "; bandwidth.toStr() + " Mbps"
-				? ""
+				? " "
 			end if
 		end if
 	end while
@@ -81,7 +81,9 @@ function setDeviceInfo()
 	deviceInfo = createObject("roDeviceInfo")
 	' create HDMI info object
 	hdmiInfo = createObject("roHdmiStatus")
-	' required minimum OS version 10.0
+	' check for an active version of hdcp
+	if len(hdmiInfo.getHdcpVersion()) > 0 then hdcpStatus = true else hdcpStatus = false
+	' get OS version
 	os = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
 	' determine if device will return internet status
 	internetStatus = findMemberFunction(deviceInfo, "getInternetStatus")
@@ -115,10 +117,7 @@ function setDeviceInfo()
 		},
 		"hdmi": {
 			"connected": hdmiInfo.isConnected(),
-			"hdcp": {
-				"active": hdmiInfo.isHdcpActive("1.4"),
-				"version": hdmiInfo.getHdcpVersion()
-			}
+			"hdcp": hdcpStatus
 		}
 	}
 	return device
@@ -151,10 +150,9 @@ sub getDeviceInfo(deviceInfo)
 	? "Connection Type:  "; deviceInfo.network.type
 	? "External IP:      "; deviceInfo.network.externalIP
 	? "HDMI Status:      "; deviceInfo.hdmi.connected
-	? "HDCP Valid:       "; deviceInfo.hdmi.hdcp.active
-	? "HDCP Version:     "; deviceInfo.hdmi.hdcp.version
+	? "HDCP Valid:       "; deviceInfo.hdmi.hdcp
 	? "- - - - - - - - - - - - - - - - - - -"
-	? ""
+	? " "
 end sub
 sub getAppInfo(appInfo)
 	' show information about app
@@ -165,7 +163,7 @@ sub getAppInfo(appInfo)
 	? "Title:            "; appInfo.title
 	? "Version:          "; appInfo.version
 	? "- - - - - - - - - - - - - - - - - - -"
-	? ""
+	? " "
 end sub
 sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 	' get the global reference object
@@ -179,6 +177,7 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 		"language": deviceInfo.language,
 		"graphics": deviceInfo.graphics,
 		"ui": deviceInfo.display.ui,
+		"hdcp": deviceInfo.hdmi.hdcp,
 		"deeplink": getDeepLinks(deepLinkArgs)
 	})
 end sub
