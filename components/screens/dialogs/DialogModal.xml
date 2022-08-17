@@ -5,11 +5,5 @@
 		<field id="dialogInfo" type="assocarray" onChange="populateDialogBox"/>
 	</interface>
 	<children>
-        <Rectangle
-        	id="backdrop"
-        	color="0x000000DD"
-        	translation="[ 0, 0 ]"
-        	width="1920"
-            height="1080"/>
 	</children>
 </component>
