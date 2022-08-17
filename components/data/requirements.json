@@ -30,5 +30,9 @@
             "2100N"
         ],
         "showError": true
+    },
+    "hdcp": {
+        "required": true,
+        "showError": true
     }
 }
