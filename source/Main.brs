@@ -183,13 +183,13 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 	})
 end sub
 function getDeepLinks(args) as object
-    deeplink = invalid
+	deeplink = invalid
 	' check if both contentId and mediaType are valid
-    if (args.contentId <> invalid and args.mediaType <> invalid)
-        deeplink = {
-            id: args.contentId
-            type: args.mediaType
-        }
-    end if
-    return deeplink
+	if (args.contentId <> invalid and args.mediaType <> invalid)
+		deeplink = {
+			id: args.contentId
+			type: args.mediaType
+		}
+	end if
+	return deeplink
 end function
