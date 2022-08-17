@@ -1,10 +1,10 @@
-sub setTheme(params as boolean)
-    ' check if theme is true
-    if (params)
-        ' set default theme
-        defaultTheme = { "type": "dark", "color": "red" }
+sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as object)
+    ' check if args is true
+    if (args)
         ' check if theme was previously set by user
-        theme = getThemeFromRegistry(defaultTheme)
+        prevTheme = getThemeFromRegistry()
+        ' set theme to prevTheme if valid
+        if prevTheme <> invalid then theme = prevTheme
         ' create initial palette Node
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         ' get the theme colors and background
@@ -38,7 +38,9 @@ sub setTheme(params as boolean)
         end if
     end if
 end sub
-function getThemeFromRegistry(theme as object) as object
+function getThemeFromRegistry() as object
+    ' set theme to initial state
+    theme = invalid
     ' create registry section
     reg = createObject("roRegistrySection", "theme")
     ' check that keys exist in the registry
