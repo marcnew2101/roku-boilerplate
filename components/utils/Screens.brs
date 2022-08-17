@@ -17,7 +17,6 @@ function getScreen(screen = invalid)
         showAllScreens()
     end if
 end function
-
 sub showAllScreens()
     ' show a list of valid screens on HomeScene
     ? ""
@@ -26,7 +25,4 @@ sub showAllScreens()
         ? "  " + screen.key
     end for
     ? ""
-end sub
-sub saveFocus(node)
-    m.top.getScene().focusedNode = node
 end sub
