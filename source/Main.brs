@@ -145,7 +145,7 @@ sub getDeviceInfo(deviceInfo)
 	? "Graphics:         "; deviceInfo.graphics
 	? "Display Name:     "; deviceInfo.display.name
 	? "Display Type:     "; deviceInfo.display.type
-	? "UI Resolution:    "; deviceInfo.display.ui
+	? "UI Resolution:    "; deviceInfo.display.ui.name
 	? "Video Mode:       "; deviceInfo.display.video
 	? "Internet Status:  "; deviceInfo.network.internet
 	? "Connection Type:  "; deviceInfo.network.type
