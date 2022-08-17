@@ -51,7 +51,7 @@ sub onBulletTextChange(obj)
         ' loop over each node inside bullet area
         for each node in m.bulletarea.getChild(0).getChildren(-1, 0)
             ' set the text color
-            node.update({"color": m.top.getScene().palette.colors.dialogBulletTextColor}, true)
+            node.update({ "color": m.top.getScene().palette.colors.dialogBulletTextColor }, true)
             ' set the text size
             node.font.size = 29
         end for
