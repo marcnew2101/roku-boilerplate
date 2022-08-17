@@ -36,7 +36,7 @@ end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
     ' check that the dialogInfo object is valid and count is greater than zero
-    if (m.dialogInfo <> Invalid AND m.dialogInfo.count() > 0)
+    if (m.dialogInfo <> invalid and m.dialogInfo.count() > 0)
         ' create the dialog node
         createDialogNode()
         ' check that the dialog info title is not Invalid and not an empty string
@@ -66,7 +66,7 @@ sub onButtonSelected(obj)
             ' remove visibility of the dialog box
             m.top.visible = false
         end if
-    ' check if button pressed is "CANCEL" or "NO"
+        ' check if button pressed is "CANCEL" or "NO"
     else if (buttonSelected = "CANCEL" or buttonSelected = "NO")
         ' remove visibility of the dialog box
         m.top.visible = false
