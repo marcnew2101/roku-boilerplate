@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" target-language="it-IT">
-    <body>
-      <trans-unit id="0">
-        <source>Welcome To The Landing Screen</source>
-        <target>Benvenuti Nella Schermata di Atterraggio</target>
-      </trans-unit>
-      <trans-unit id="1">
-        <source>Sign In</source>
-        <target>Registrazione</target>
-      </trans-unit>
-      <trans-unit id="2">
-        <source>Register</source>
-        <target>Registrati</target>
-      </trans-unit>
-      <trans-unit id="3">
-        <source>Exit</source>
-        <target>Uscita</target>
-      </trans-unit>
-    </body> 
-  </file> 
+<xliff version="1.2"
+	xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en-US" target-language="it-IT">
+		<body>
+			<trans-unit id="0">
+				<source>Welcome To The Landing Screen</source>
+				<target>Benvenuti Nella Schermata di Atterraggio</target>
+			</trans-unit>
+			<trans-unit id="1">
+				<source>Sign In</source>
+				<target>Registrazione</target>
+			</trans-unit>
+			<trans-unit id="2">
+				<source>Register</source>
+				<target>Registrati</target>
+			</trans-unit>
+			<trans-unit id="3">
+				<source>Exit</source>
+				<target>Uscita</target>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>
