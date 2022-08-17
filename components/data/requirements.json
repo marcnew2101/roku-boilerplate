@@ -5,7 +5,7 @@
     },
     "os": {
         "required": true,
-        "minVersion": 9.4,
+        "minVersion": 10.0,
         "showError": true
     },
     "model": {
