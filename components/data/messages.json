@@ -6,7 +6,9 @@
             "From the Roku home screen, go to Settings -> Network -> Check connection.",
             "If the internet connection continues to fail, try restarting the Roku from Settings -> System -> System restart."
         ],
-        "buttons": ["OKAY"],
+        "buttons": [
+            "OKAY"
+        ],
         "exitApp": true,
         "allowBack": false
     },
@@ -17,7 +19,9 @@
             "From the Roku home screen, go to Settings -> System -> System update.",
             "If your Roku cannot be updated, please check your internet connection. Otherwise, you will need to obtain a newer Roku device."
         ],
-        "buttons": ["OKAY"],
+        "buttons": [
+            "OKAY"
+        ],
         "exitApp": true,
         "allowBack": false
     },
@@ -27,7 +31,9 @@
         "help": [
             "Please visit roku.com/products for a list of supported devices."
         ],
-        "buttons": ["OKAY"],
+        "buttons": [
+            "OKAY"
+        ],
         "exitApp": true,
         "allowBack": false
     },
@@ -35,7 +41,10 @@
         "title": "EXIT APP",
         "message": "Would you like to exit the app?",
         "help": [],
-        "buttons": ["YES", "NO"],
+        "buttons": [
+            "YES",
+            "NO"
+        ],
         "exitApp": true,
         "allowBack": true
     }
