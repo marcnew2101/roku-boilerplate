@@ -81,8 +81,8 @@ function setDeviceInfo()
 	deviceInfo = createObject("roDeviceInfo")
 	' create HDMI info object
 	hdmiInfo = createObject("roHdmiStatus")
-	' check for an active version of hdcp
-	if len(hdmiInfo.getHdcpVersion()) > 0 then hdcpStatus = true else hdcpStatus = false
+	' check for an active version of hdcp or a device type of "TV" - all others refer to a set top box
+	if len(hdmiInfo.getHdcpVersion()) > 0 or deviceInfo.getModelType() = "TV" then hdcpStatus = true else hdcpStatus = false
 	' get OS version
 	os = deviceInfo.getOSVersion().major + "." + deviceInfo.getOSVersion().minor
 	' determine if device will return internet status
