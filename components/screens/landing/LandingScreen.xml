@@ -7,7 +7,8 @@
         <Label 
             id="landingTitle" 
             translation="[0, 70]" 
-            width="1920" 
+            width="1800"
+            wrap="true"
             horizAlign="center" 
             vertAlign="center" 
             font="font:LargeBoldSystemFont"/>
@@ -20,8 +21,6 @@
             itemSpacing="[0, 10]" 
             textHorizAlign="center" 
             font="font:MediumSystemFont" 
-            color="0xFFFFFFFF" 
-            focusedColor="0xFFFFFFFF" 
             focusedFont="font:MediumBoldSystemFont" 
             vertFocusAnimationStyle="floatingFocus"/>
     </children>
