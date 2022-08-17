@@ -22,6 +22,8 @@ sub screenVisible(obj)
         populateLabelList()
         ' center the label list on the screen
         centerLabelList()
+        ' check if the top level selector URI is valid and set to label list
+        if m.top.getScene().selectorUri <> invalid then m.labelList.focusBitmapUri = m.top.getScene().selectorUri
         ' set key focus to the label list
         m.labelList.setFocus(true)
         ' save focused node
@@ -60,10 +62,10 @@ sub populateLabelList()
 end sub
 
 sub centerLabelList()
-    ' subtract the label list width from the screen width and divide
-    labelListX = (1920 - m.labelList.boundingRect().width) / 2
-    ' subtract the label list height from the screen height and divide
-    labelListY = (1080 - m.labelList.boundingRect().height) / 2
+    ' locate the horiz midpoint using screen UI width and the total width of the label list
+    labelListX = (m.global.ui.width - m.labelList.boundingRect().width) / 2
+    ' locate the vert midpoint using screen UI height and the total height of the label list
+    labelListY = (m.global.ui.height - m.labelList.boundingRect().height) / 2
     ' set the label list X and Y coordinates
     m.labelList.translation = [labelListX, labelListY]
 end sub
