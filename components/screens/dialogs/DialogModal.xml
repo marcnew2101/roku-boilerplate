@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="DialogModal" extends="Group">
 	<script type="text/brightscript" uri="DialogModal.brs" />
-    <interface>
+	<interface>
 		<field id="dialogInfo" type="assocarray" onChange="populateDialogBox"/>
 	</interface>
 	<children>
