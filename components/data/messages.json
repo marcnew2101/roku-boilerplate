@@ -37,6 +37,19 @@
         "exitApp": true,
         "allowBack": false
     },
+    "hdcp": {
+        "title": "HDCP PROTECTION NOT ACTIVE",
+        "message": "There is a problem with the HDMI connection to your Roku. The app will not start.",
+        "help": [
+            "Please verify that the HDMI connection from your Roku is connected directly to a compatible TV or monitor.",
+            "If you are using an HDMI splitter, please ensure that it is HDCP compliant."
+        ],
+        "buttons": [
+            "OKAY"
+        ],
+        "exitApp": true,
+        "allowBack": false
+    },
     "exit": {
         "title": "EXIT APP",
         "message": "Would you like to exit the app?",
