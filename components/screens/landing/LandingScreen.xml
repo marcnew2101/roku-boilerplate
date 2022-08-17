@@ -17,8 +17,11 @@
             id="landingLabelList"
             translation="[0, 0]"
             itemSize="[260, 70]"
+            itemSpacing="[0, 10]"
             textHorizAlign="center"
             font="font:MediumSystemFont"
+            color="0xFFFFFFFF"
+            focusedColor="0xFFFFFFFF"
             focusedFont="font:MediumBoldSystemFont"
             vertFocusAnimationStyle="floatingFocus"/>
 	</children>
