@@ -20,12 +20,12 @@ function checkRequirements(requirements as object) as boolean
 		if (requirement.value <> invalid and requirement.value["required"])
 			deviceReady = getRequirement(requirement)
 			if (deviceReady <> invalid)
-				if (not deviceReady and requirement.value["error"])
-					meetsRequirements = false
-					m.top.error = requirement.key
+				if (not deviceReady and requirement.value["showError"] <> invalid and requirement.value["showError"])
+					m.top.message = requirement.key
+					exit for
 				end if
 			else
-				exit for
+				deviceReady = true
 			end if
 		end if
 	end for
