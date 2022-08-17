@@ -41,6 +41,9 @@ The /components/screens/LandingScreen is a sample file and is not necessary for 
  - The app requirements are turned off by default "setRequirements(false)" at the top of /components/HomeScene.brs. Change to "setRequirements(true)", if you want to test the requirements feature. Additional requirements can be added to the json file as long as the key values match the ones set in m.global.*
  - m.global values can be accessed from anywhere in the app by accessing m.global.* 
 
+### themes
+The /components/utils/Themes.brs file utilizes a json data file located at /components/data/themes.json. This json data represents a central theme for various colors throughout the app. This includes the pallete for the scene node which dictates the color for dialogs, keyboards, pin pads, as well as background colors/images. A selectorUri is also available for creating custom 9-patch selectors in rowlists.
+
 ### translations
 The /locale folder contains sample folders and files for translating to French, Italian, and German languages. You can modify the translations.xml file to associate any string that uses tr("string to translate") from anywhere in the app. Additional languages can be added using the same folder and file structure.
 
@@ -48,4 +51,4 @@ The /locale folder contains sample folders and files for translating to French, 
 The /components/utils/Messages.brs file utilizes a json data file located at /components/data/messages.json. This json data represents a message object that is activated by setting the message string interface on the top level node (HomeScene). If the message string matches the key in the json file, a modal/pop-up will appear in the UI for user interaction. Additional key/values can be added to the messages.json for representing both error and notification messages.
 
 ### focus
-Roku uses the term "focus" to define which node is assigned key events from the remote control. The HomeScene uses a top level interface called "focusedNode" which takes in a node as a placeholder. This allows other screens such as the Dialog Modal to easily return focus to the previous node. This can also be used from other screens/nodes where pressing the back button on the remote control can set focus to a node from the previous stack. An example of this is set inside the screenVisible() function at /componenents/screens/landing/LandingScreen.brs
+Roku uses the term "focus" to define which node is assigned key events from the remote control. The HomeScene uses a top level interface called "focusedNode" which takes in a node as a placeholder. This allows other screens such as the Dialog Modal to easily return focus to the previous node. This can also be used when pressing the back button to set focus to a node on the previous stack. An example of this is used inside the screenVisible() function at /componenents/screens/landing/LandingScreen.brs
