@@ -21,7 +21,7 @@ sub startApp()
 	' certification requires the following to indicate the app is finished loading
 	m.top.getScene().signalBeacon("AppLaunchComplete")
 end sub
-function createNode(params as object)
+function createNode(params as object) as object
 	' check that the object from params is valid
 	if (params <> invalid and params.count() > 0)
 		' check that the screenName value in the object is valid
