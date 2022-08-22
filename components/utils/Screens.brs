@@ -51,7 +51,7 @@ function setScreen(screenName as string, screenId = invalid as string, showScree
             ? screenId + " is already assigned to another node. Please choose another id for this node."
         else
             ' return the created screen by calling the createScreen interface function from HomeScene.xml
-            return m.top.callFunc("createScreen", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+            return m.top.callFunc("createNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
         end if
     else
         ' show a console message stating that createScreen requires a valid screenName
