@@ -1,4 +1,6 @@
 sub init()
+    ' check if the node ID is invalid or string length of node ID is zero
+    if m.top.id = invalid or len(m.top.id) = 0 then m.top.id = "baseDialog"
     m.titlearea = m.top.findNode("titleArea")
     m.contentarea = m.top.findNode("contentArea")
     m.messagetext = m.top.findNode("messageText")
