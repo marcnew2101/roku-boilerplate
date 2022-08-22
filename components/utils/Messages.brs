@@ -9,7 +9,7 @@ sub createDialog(params = {})
 				? "message is: "; params
 			end if
 			if (messageValid <> invalid and messageValid)
-				screen = getScreen("DialogModal")
+				screen = getScreen("dialogModal")
 				if (screen <> invalid)
 					showDialog(params, screen)
 				end if
@@ -18,7 +18,7 @@ sub createDialog(params = {})
 			? "message object is empty - Messages.brs"
 		end if
 	else
-		? "message is not an object - Messages.brs"
+		? "message is not an object(AA) - Messages.brs"
 	end if
 end sub
 sub showDialog(params, screen)
