@@ -1,5 +1,5 @@
 # roku-boilerplate
-A basic starting point for creating new Roku/Brightscript projects. This project is in no way affiliated with Roku Inc. or its subsidaries.
+A basic starting point for creating new Roku/Brightscript projects. This project is in no way affiliated with Roku or its subsidaries.
 
 ## preface
  - An understanding of the Roku language and framework is not required. While Roku's Brightscript language and SceneGraph framework is not as popular as other programming languages and frameworks, there are a multitude of sample files developed by the community that can be found here - https://github.com/rokudev/samples
@@ -16,7 +16,7 @@ A basic starting point for creating new Roku/Brightscript projects. This project
 This project requires the vscode-brightscript-language plugin. It can be added through the extensions library in vscode or from the marketplace at https://marketplace.visualstudio.com/items?itemName=RokuCommunity.brightscript.
 
 ### structure
-The ".vscode/launch.json" file at the root of the project contains definitions for handling the folder structure and deployment of your app. If you create additional folders for your project, you must update the launch.json file ("files": [".."]) so that the new folders are included in the deployment.
+The ".vscode/launch.json" file at the root of the project contains definitions for handling the folder structure and deployment of your app. If you create additional folders for your project, you must update the launch.json file ("files": ["..."]) so that the new folders are included in the deployment.
 
 ### pre-deployment
  - Begin by renaming the ".env_sample" file to ".env". This file is located at the root of the project folder
@@ -51,4 +51,16 @@ The /locale folder contains sample folders and files for translating to French, 
 The /components/utils/Messages.brs file utilizes a json data file located at /components/data/messages.json. This json data represents a message object that is activated by setting the message string interface on the top level node (HomeScene). If the message string matches the key in the json file, a modal/pop-up will appear in the UI for user interaction. Additional key/values can be added to the messages.json for representing both error and notification messages.
 
 ### focus
-Roku uses the term "focus" to define which node is assigned key events from the remote control. The HomeScene uses a top level interface called "focusedNode" which takes in a node as a placeholder. This allows other screens such as the Dialog Modal to easily return focus to the previous node. This can also be used when pressing the back button to set focus to a node on the previous stack. An example of this is used inside the screenVisible() function at /componenents/screens/landing/LandingScreen.brs
+Roku uses the term "focus" to define which node is assigned key events from the remote control. The HomeScene uses a top level interface called "focusedNode" which takes in a node as a placeholder. This allows other screens such as the Dialog Modal to easily return focus to the previous node. This can also be used when pressing the back button to set focus to a specific node on the previous screen. An example of this is used inside the screenVisible() function at /componenents/screens/landing/LandingScreen.brs
+
+### history
+To create a new node/screen and add it as a child of HomeScene.xml, use the setScreen("screenName", "screenId") function from /components/utils/Screens.brs. You can see this function being used to create the Landing Screen inside the startApp() function of HomeScene.brs. If the 2nd argument is ommitted (screenId) from the function arguments, the screenName (1st argument) will be assigned as the node ID.
+
+There are 3 additional arguments that can be used with setScreen() - showScreen, hidePrevScreen, and addToStack. All are set to true by default. 
+- showScreen as false will prevent the newly created node from appearing on the screen.
+- hidePrevScreen as false will prevent the current screen from being hidden.
+- addToStack as false will prevent the newly created screen from being added to history.
+
+To find an existing node screen (existing child of HomeScene.xml), use the getScreen("screenId") function. There is a 2nd argument (showScreen) regarding the visibility of the node which is set to false by default. Setting the argument to true will make the node immediately visible.
+
+To create and find nodes/screens from a BRS file, the associated xml file requires a top level script - "pkg:/components/utils/Screens.brs" (see LandingScreen.xml). You will need to add this script entry to any XML file that uses the functions mentioned above.
