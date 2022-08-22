@@ -4,6 +4,7 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/Requirements.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Messages.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
 	<interface>
 		<field id="exitApp" type="boolean" value="false"/>
@@ -13,11 +14,8 @@
 		<field id="focusedNode" type="node"/>
 		<field id="contentId" type="string"/>
 		<field id="mediaType" type="string"/>
+		<function name="createNode"/>
 	</interface>
 	<children>
-		<!-- landing screen when app first loads -->
-		<LandingScreen id="LandingScreen"/>
-		<!-- dialog pop-up for showing feedback to user -->
-		<DialogModal id="DialogModal"/>
 	</children>
 </component>
