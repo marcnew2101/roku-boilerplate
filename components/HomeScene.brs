@@ -31,7 +31,7 @@ function createNode(params as object) as object
 			' check that the created node is valid
 			if (node <> invalid)
 				' check if the node ID is not yet assigned
-				if (node.id = invalid)
+				if (node.id = invalid or (node.id <> invalid and len(node.id) = 0))
 					' check if the screenId is valid and has a string length greater than zero
 					if (params.screenId <> invalid and len(params.screenId) > 0)
 						' assign the node ID using params.screenId
