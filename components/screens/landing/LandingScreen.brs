@@ -1,4 +1,6 @@
 sub init()
+    ' set the initial visibility of the screen to false
+    m.top.visible = false
     ' ### node identifiers ###
     ' identify the label list
     m.labelList = m.top.findNode("landingLabelList")
