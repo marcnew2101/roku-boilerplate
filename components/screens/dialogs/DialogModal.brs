@@ -14,7 +14,7 @@ sub createDialogNode()
         m.dialogNode = CreateObject("roSGNode", "Dialog")
     end if
     ' create id for dialog node
-    m.dialogNode.id = "dialog"
+    m.dialogNode.id = "baseDialog"
     ' observe button selection on the dialog node
     m.dialogNode.observeField("buttonSelected", "onButtonSelected")
     ' if the parent/top node contains more than 1 node then delete the last node
@@ -63,12 +63,12 @@ sub onButtonSelected(obj)
             ' immediately close the app
             m.top.getScene().exitApp = true
         else
-            ' remove visibility of the dialog box
-            m.top.visible = false
+            ' remove dialog node
+            deleteScreen(m.top)
         end if
         ' check if button pressed is "CANCEL" or "NO"
     else if (buttonSelected = "CANCEL" or buttonSelected = "NO")
-        ' remove visibility of the dialog box
-        m.top.visible = false
+        ' remove dialog node
+        deleteScreen(m.top)
     end if
 end sub
