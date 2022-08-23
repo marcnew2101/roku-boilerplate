@@ -63,6 +63,9 @@ There are 3 additional arguments that can be used with setScreen() - showScreen,
 
 To find an existing node screen (existing child of HomeScene.xml), use the getScreen("screenId") function. There is a 2nd argument (showScreen) regarding the visibility of the node which is set to false by default. Setting the argument to true will make the node immediately visible.
 
-To remove a node as a child of HomeScene, use the deleteScreen() function. There are 2 arguments. The 1st argument can be either the node itself (roSGNode) or the id (string) of the node to be removed. The 2nd arguemnt (removeFromStack) defaults to true for removing the node from the history stack.
+To remove a node as a child of HomeScene, use the deleteScreen() function. There are 3 total arguments:
+ - The 1st argument can be either the node itself (roSGNode) or the id (string) of the node to be removed.
+ - The 2nd argument (showPrevScreen) defaults to true for showing the previous screen if hidden.
+ - The 3rd argument (removeFromStack) defaults to true for removing the node from the history stack.
 
 To create, remove, and find nodes/screens from a BRS file, the associated xml file requires a top level script - "pkg:/components/utils/Screens.brs" (see LandingScreen.xml). You will need to add this script entry to any XML file that uses the functions mentioned above.
