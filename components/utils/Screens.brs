@@ -59,14 +59,14 @@ function setScreen(screenName as string, screenId = invalid as string, showScree
         ? "you must set a valid name (string) for screenName if you wish to create a new screen node."
     end if
 end function
-function deleteScreen(screenNode = invalid as dynamic, removeFromStack = true as boolean)
+function deleteScreen(screenNode = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
     if (screenNode <> invalid)
         if (type(screenNode) = "roSGNode")
-            m.top.getScene().callFunc("removeNode", {"node": screenNode, "removeFromStack": removeFromStack})
+            m.top.getScene().callFunc("removeNode", {"node": screenNode, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
         else if (type(screenNode) = "String")
             node = getScreen(screenNode)
             if (node <> invalid)
-                m.top.getScene().callFunc("removeNode", {"node": node, "removeFromStack": removeFromStack})
+                m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
             end if
         end if
     end if

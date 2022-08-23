@@ -54,7 +54,7 @@ function createNode(params as object) as object
 	end if
 end function
 function removeNode(params as object)
-	if (not removeScreen(params.node, params.removeFromStack))
+	if (not removeScreen(params.node, params.showPrevScreen, params.removeFromStack))
 		' show a console message stating that the node could not be added to HomeScene
 		? " "
 		? "there was an error removing the node from HomeScene"
