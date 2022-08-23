@@ -46,6 +46,9 @@ function createNode(params as object) as object
 					' show a console message stating that the node could not be added to HomeScene
 					? " "
 					? "there was an error adding " + node.id + " to HomeScene"
+				else
+					' set focus to node
+					node.setFocus(true)
 				end if
 				' return the node
 				return node
@@ -58,6 +61,9 @@ function removeNode(params as object)
 		' show a console message stating that the node could not be added to HomeScene
 		? " "
 		? "there was an error removing the node from HomeScene"
+	else
+		' check if top focused node interface is valid and set focus to node
+		if m.top.focusedNode <> invalid then m.top.focusedNode.setFocus(true)
 	end if
 end function
 sub onMessage(obj)
