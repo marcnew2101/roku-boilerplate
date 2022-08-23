@@ -15,6 +15,7 @@
 		<field id="contentId" type="string"/>
 		<field id="mediaType" type="string"/>
 		<function name="createNode"/>
+		<function name="removeNode"/>
 	</interface>
 	<children>
 	</children>
