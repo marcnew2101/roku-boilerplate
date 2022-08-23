@@ -36,8 +36,6 @@ sub onMessageChange(obj)
         ' set the message text size
         m.messagetext.getChild(0).font.size = 32
     end if
-    ' if dialogModal is invalid and get screen
-    if m.dialogModal = invalid then m.dialogModal = getScreen("dialogModal")
 end sub
 sub onBulletTextChange(obj)
     bullets = obj.getData()
@@ -86,14 +84,14 @@ end sub
 function onKeyEvent(key as string, press as boolean) as boolean
     if (press)
         if (key = "back")
+            ' get the dialog modal screen
+            dialogModal = getScreen("dialogModal")
             ' check that the dialog modal is valid and contains the dialog info object and they count is greater than zero
-            if (m.dialogModal <> invalid and m.dialogModal.dialogInfo <> invalid and m.dialogModal.dialogInfo.count() > 0)
+            if (dialogModal <> invalid and dialogModal.dialogInfo <> invalid and dialogModal.dialogInfo.count() > 0)
                 ' check if the dialog info object contains a key for allowBack and that it is set to true
-                if (m.dialogModal.dialogInfo.allowBack <> invalid and m.dialogModal.dialogInfo.allowBack)
-                    ' remove visibility of the dialog modal
-                    m.dialogModal.visible = false
-                    ' return focus to the previous node
-                    m.top.getScene().focusedNode.setFocus(true)
+                if (dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack)
+                    ' remove dialog modal node
+                    deleteScreen(dialogModal)
                 end if
             end if
             return true
