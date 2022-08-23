@@ -1,6 +1,6 @@
 sub init()
 	' change to true for testing themes set in /components/data/themes.json
-	' the setTheme() has a second argument for defining the theme ex. setTheme(true, { "type": "light", "color": "red" })
+	' the setTheme() has a 2nd argument for defining the theme ex. setTheme(true, { "type": "light", "color": "red" })
 	' ensure that both the "type" and "color" inside the object match the key/values in themes.json
 	setTheme(true)
 
@@ -42,11 +42,22 @@ function createNode(params as object) as object
 					end if
 				end if
 				' add the screen to History.brs
-				addScreen(node, params.showScreen, params.hidePrevScreen, params.addToStack)
+				if (not addScreen(node, params.showScreen, params.hidePrevScreen, params.addToStack))
+					' show a console message stating that the node could not be added to HomeScene
+					? " "
+					? "there was an error adding " + node.id + " to HomeScene"
+				end if
 				' return the node
 				return node
 			end if
 		end if
+	end if
+end function
+function removeNode(params as object)
+	if (not removeScreen(params.node, params.removeFromStack))
+		' show a console message stating that the node could not be added to HomeScene
+		? " "
+		? "there was an error removing the node from HomeScene"
 	end if
 end function
 sub onMessage(obj)
