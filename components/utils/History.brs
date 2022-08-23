@@ -5,7 +5,7 @@ end sub
 function addScreen(node as object, showScreen as boolean, hidePrevScreen as boolean, addToStack as boolean) as boolean
     ' check that new node is valid
     if (node <> invalid)
-        ' check if hide previous screen is both valid and true
+        ' check if hidePrevScreen is both valid and true
         if (hidePrevScreen <> invalid and hidePrevScreen)
             ' check that the screen stack array is valid and contains items
             if (m.screenStack <> invalid and m.screenStack.count() > 0)
@@ -23,12 +23,19 @@ function addScreen(node as object, showScreen as boolean, hidePrevScreen as bool
         return m.top.appendChild(node)
     end if
 end function
-function removeScreen(node as object, removeFromStack as boolean) as boolean
+function removeScreen(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean
     if (node <> invalid)
-        if (removeFromStack <> invalid and removeFromStack)
-            if (m.screenStack <> invalid and m.screenStack.peek() <> invalid and m.screenStack.peek().isSameNode(node))
+        ' check that the screen stack array is valid and contains items
+        if (m.screenStack <> invalid and m.screenStack.count() > 0)
+            ' check if removeFromStack is both valid and true
+            if (removeFromStack <> invalid and removeFromStack)
                 ' remove the last node from the screen stack array
-                m.screenStack.pop()
+                if m.screenStack.peek().isSameNode(node) then m.screenStack.pop()
+            end if
+            ' check that the screen stack array still contains items and showPrevScreen is both valid and true
+            if (m.screenStack.count() > 0 and showPrevScreen <> invalid and showPrevScreen)
+                ' get the last node in the screen stack array and check for visibility before setting visibility to true
+                if not m.screenStack.peek().visible then m.screenStack.peek().visible = true
             end if
         end if
         ' set the node visibility to false
