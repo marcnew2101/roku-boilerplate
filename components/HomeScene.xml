@@ -13,7 +13,7 @@
 		<field id="focusedNode" type="node"/>
 		<field id="contentId" type="string"/>
 		<field id="mediaType" type="string"/>
-		<function name="createNode"/>
+		<function name="addNode"/>
 		<function name="removeNode"/>
 	</interface>
 	<children>
