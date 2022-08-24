@@ -17,11 +17,11 @@ sub startApp()
 
 	' create the landing screen node (name) and assign an id
 	' see REAMDME for additional arguments (history)
-	setScreen("LandingScreen", "landingScreen")
+	addScreen("LandingScreen", "landingScreen")
 	' certification requires the following to indicate the app is finished loading
 	m.top.getScene().signalBeacon("AppLaunchComplete")
 end sub
-function createNode(params as object) as object
+function addNode(params as object) as object
 	' check that the object from params is valid
 	if (params <> invalid and params.count() > 0)
 		' check that the screenName value in the object is valid
@@ -42,7 +42,7 @@ function createNode(params as object) as object
 					end if
 				end if
 				' add the screen to History.brs
-				if (not addScreen(node, params.showScreen, params.hidePrevScreen, params.addToStack))
+				if (not addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack))
 					' show a console message stating that the node could not be added to HomeScene
 					? " "
 					? "there was an error adding " + node.id + " to HomeScene"
@@ -57,7 +57,7 @@ function createNode(params as object) as object
 	end if
 end function
 function removeNode(params as object)
-	if (not removeScreen(params.node, params.showPrevScreen, params.removeFromStack))
+	if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))
 		' show a console message stating that the node could not be added to HomeScene
 		? " "
 		? "there was an error removing the node from HomeScene"
