@@ -9,7 +9,7 @@ sub createDialog(params = {})
 				? "message is: "; params
 			end if
 			if (messageValid <> invalid and messageValid)
-				screen = setScreen("DialogModal", "dialogModal", false, false)
+				screen = addScreen("DialogModal", "dialogModal", false, false)
 				if (screen <> invalid)
 					showDialog(params, screen)
 				end if
