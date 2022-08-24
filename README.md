@@ -54,16 +54,16 @@ The /components/utils/Messages.brs file utilizes a json data file located at /co
 Roku uses the term "focus" to define which node is assigned key events from the remote control. The HomeScene uses a top level interface called "focusedNode" which takes in a node as a placeholder. This allows other screens such as the Dialog Modal to easily return focus to the previous node. This can also be used when pressing the back button to set focus to a specific node on the previous screen. An example of this is used inside the screenVisible() function at /componenents/screens/landing/LandingScreen.brs
 
 ### history
-To create a new node/screen and add it as a child of HomeScene.xml, use the setScreen("screenName", "screenId") function from /components/utils/Screens.brs. You can see this function being used to create the Landing Screen inside the startApp() function of HomeScene.brs. If the 2nd argument is ommitted (screenId) from the function arguments, the screenName (1st argument) will be assigned as the node ID.
+To create a new node/screen and add it as a child of HomeScene.xml, use the addScreen("screenName", "screenId") function from /components/utils/Screens.brs. You can see this function being used to create the Landing Screen inside the startApp() function of HomeScene.brs. If the 2nd argument is ommitted (screenId) from the function arguments, the screenName (1st argument) will be assigned as the node ID.
 
-There are 3 additional arguments that can be used with setScreen() - showScreen, hidePrevScreen, and addToStack. All are set to true by default. 
+There are 3 additional arguments that can be used with addScreen() - showScreen, hidePrevScreen, and addToStack. All are set to true by default. 
 - showScreen as false will prevent the newly created node from appearing on the screen.
 - hidePrevScreen as false will prevent the current screen from being hidden.
 - addToStack as false will prevent the newly created screen from being added to history.
 
 To find an existing node screen (existing child of HomeScene.xml), use the getScreen("screenId") function. There is a 2nd argument (showScreen) regarding the visibility of the node which is set to false by default. Setting the argument to true will make the node immediately visible.
 
-To remove a node as a child of HomeScene, use the deleteScreen() function. There are 3 total arguments:
+To remove a node as a child of HomeScene, use the removeScreen() function. There are 3 total arguments:
  - The 1st argument can be either the node itself (roSGNode) or the id (string) of the node to be removed.
  - The 2nd argument (showPrevScreen) defaults to true for showing the previous screen if hidden.
  - The 3rd argument (removeFromStack) defaults to true for removing the node from the history stack.
