@@ -1,5 +1,6 @@
 # Roku Boilerplate
-#### _A starting point for new Roku applications._
+_A starting point for new Roku applications._
+
 
 
 ## Getting Started
@@ -15,7 +16,7 @@ If you are unfamiliar with BrightScript and SceneGraph, you can reference the fo
 
 
  ## Requirements
- * A Roku device with a minimum OS version of 9.4
+ * A Roku device with a minimum OS version of 9.4**
 
     ** _earlier OS versions may not compile due to deprecated libraries_
 
