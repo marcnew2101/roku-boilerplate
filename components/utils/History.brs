@@ -2,7 +2,7 @@ sub initScreenStack()
     ' create the initial empty screen stack array
     m.screenStack = []
 end sub
-function addScreen(node as object, showScreen as boolean, hidePrevScreen as boolean, addToStack as boolean) as boolean
+function addHistory(node as object, showScreen as boolean, hidePrevScreen as boolean, addToStack as boolean) as boolean
     ' check that new node is valid
     if (node <> invalid)
         ' check if hidePrevScreen is both valid and true
@@ -23,7 +23,7 @@ function addScreen(node as object, showScreen as boolean, hidePrevScreen as bool
         return m.top.appendChild(node)
     end if
 end function
-function removeScreen(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean
+function removeHistory(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean
     if (node <> invalid)
         ' check that the screen stack array is valid and contains items
         if (m.screenStack <> invalid and m.screenStack.count() > 0)
@@ -44,7 +44,7 @@ function removeScreen(node as object, showPrevScreen as boolean, removeFromStack
         return m.top.removeChild(node)
     end if
 end function
-sub showAllHistory()
+sub getHistory()
     ' check that the screen stack array is valid and contains items
     if (m.screenStack <> invalid and m.screenStack.count() > 0)
         ' show a console message containing the array items

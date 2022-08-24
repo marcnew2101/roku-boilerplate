@@ -21,7 +21,7 @@ function getScreen(screenId as string, showScreen = false as boolean)
         ? "you must set a valid id (string) for screenId if you wish to locate a valid screen node."
     end if
 end function
-function setScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean)
+function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean)
     ' check that the argument for screenName is valid and has a string length greater than zero
     if (screenName <> invalid and len(screenName) > 0)
         ' set intial duplicate id value to false
@@ -51,7 +51,7 @@ function setScreen(screenName as string, screenId = invalid as string, showScree
             ? screenId + " is already assigned to another node. Please choose another id for this node."
         else
             ' return the created screen by calling the createScreen interface function from HomeScene.xml
-            return m.top.getScene().callFunc("createNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+            return m.top.getScene().callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
         end if
     else
         ' show a console message stating that createScreen requires a valid screenName
@@ -59,7 +59,7 @@ function setScreen(screenName as string, screenId = invalid as string, showScree
         ? "you must set a valid name (string) for screenName if you wish to create a new screen node."
     end if
 end function
-function deleteScreen(screenNode = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
+function removeScreen(screenNode = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
     if (screenNode <> invalid)
         if (type(screenNode) = "roSGNode")
             m.top.getScene().callFunc("removeNode", {"node": screenNode, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
