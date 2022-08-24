@@ -90,8 +90,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
             if (dialogModal <> invalid and dialogModal.dialogInfo <> invalid and dialogModal.dialogInfo.count() > 0)
                 ' check if the dialog info object contains a key for allowBack and that it is set to true
                 if (dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack)
-                    ' remove dialog modal node
-                    deleteScreen(dialogModal)
+                    ' remove dialog modal screen
+                    removeScreen(dialogModal)
                 end if
             end if
             return true

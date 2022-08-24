@@ -63,12 +63,12 @@ sub onButtonSelected(obj)
             ' immediately close the app
             m.top.getScene().exitApp = true
         else
-            ' remove dialog node
-            deleteScreen(m.top)
+            ' remove dialog modal screen
+            removeScreen(m.top)
         end if
         ' check if button pressed is "CANCEL" or "NO"
     else if (buttonSelected = "CANCEL" or buttonSelected = "NO")
-        ' remove dialog node
-        deleteScreen(m.top)
+        ' remove dialog modal screen
+        removeScreen(m.top)
     end if
 end sub
