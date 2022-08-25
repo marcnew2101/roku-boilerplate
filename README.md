@@ -58,7 +58,8 @@ ZIP file is automatically generated in /out/roku-deploy.zip and sent to your Rok
 
 
 ### Globals
-Roku uses "m.global" to reference an object with key/values from /source/Main.brs
+Roku uses "m.global" to reference an object as seen in /source/Main.brs
+![Screenshot](/docs/images/globals.png)
 
 
 ### Themes
