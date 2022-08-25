@@ -4,12 +4,12 @@ _A starting point for new Roku applications._
 
 
 ## Features
-* Preset globals
-* Theme customization
-* Node management + history + focus
-* Translations
-* Pop-up dialogs
-* Testing (Not yet implemented)
+- [X] Preset globals
+- [X] Theme customization
+- [X] Node management + history + focus
+- [X] Translations
+- [X] Pop-up dialogs
+- [ ] Testing (Not yet implemented)
 
 
  ## Requirements
@@ -51,7 +51,7 @@ Roku uses "m.global" to reference an object as seen in [/source/Main.brs](/sourc
     * m.global.ui could return a value of "HD" or "FHD". This would be useful in determing the background poster size to load from a remote image source (HD = 1280 x 720, FHD = 1920 x 1080)
     * 4 of the global object keys (model, os, internet, hdcp) are used with [/components/data/requirements.json](/components/data/requirements.json) to determine app eligibility at startup. See Requirements for more info.
 
-
+<br/><br/>
 ### Themes
 The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette field for customizing colors in child nodes.
  * Themes are set from the top of [/components/HomeScene.brs](/components/HomeScene.brs)
@@ -76,7 +76,7 @@ The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette 
 }
  ```
 
-
+<br/><br/>
 ### Node Management
 #### Adding a new node to the root scene node:
 > If "screenId" is not set, the "screenName" will be used as the node ID. If the ID is already being used, a console warning will appear.
@@ -131,21 +131,21 @@ In order to use the node management library, each XML file requires a top level 
 ```
 > also see [/components/screens/landing/LandingScreen.xml](/components/screens/landing/LandingScreen.xml)
 
-
+<br/><br/>
 ### Translations
 * The language translation folders are located at [/locale](/locale)
 * Each folder is named according to the locale ID (see [Roku localization docs](https://developer.roku.com/docs/references/brightscript/interfaces/ifdeviceinfo.md#getcurrentlocale-as-string) for list of ID's)
 * The files in each folder use the XLIFF format
 * additional folders and translations can be added by following the format above
 
-
+<br/><br/>
 ### Dialogs & Messages
 A pop-up message or notification can be generated as follows:
 ```
 setMessage("message")
 ```
 The string passed to setMessage is assigned using data from [/components/data/messages.json](/components/data/messages.json):
-> buttons are limited to the ones listed here. This can be further customized in onButtonSelected() at [/components/screens/dialogs/DialogModal.brs](/components/screens/dialogs/DialogModal.brs)
+> buttons are limited to the ones listed here. This can be further customized in `onButtonSelected()` at [/components/screens/dialogs/DialogModal.brs](/components/screens/dialogs/DialogModal.brs)
 ```
 {
    "message": {
@@ -166,8 +166,13 @@ The string passed to setMessage is assigned using data from [/components/data/me
    }
 }
 ```
+#### Note
+In order to use the dialog and messages library, each XML file requires a top level script assigned as follows:
+```
+<script type="text/brightscript" uri="pkg:/components/utils/Messages.brs" />
+```
 
-
+<br/><br/>
 ## Resources
 * Examples and other Roku libraries
     * [GitHub Roku Developers](https://github.com/rokudev)
