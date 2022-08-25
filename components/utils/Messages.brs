@@ -40,6 +40,6 @@ function getMessage(messageString = "")
 		return invalid
 	end if
 end function
-sub setMessage(message)
+sub setMessage(message as string)
 	m.top.getScene().message = message
 end sub
