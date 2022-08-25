@@ -6,10 +6,9 @@ _A starting point for new Roku applications._
 ## Features
 * Preset globals
 * Theme customization
-* App requirements
+* Node management + history + focus
 * Translations
 * Pop-up dialogs
-* Screen history & focus
 * Testing (Not yet implemented)
 
 
@@ -53,14 +52,40 @@ ZIP file is automatically generated in /out/roku-deploy.zip and sent to your Rok
 
 ## Console & Debugging
 * The OUTPUT and DEBUG CONSOLE within VSCode will show the app activity as well as any print commands.
-    * Enabling (true) "showDeviceInfo" and/or "showAppInfo" at the top of /source/Main.brs will print information about the device to the console.
+    * Enabling (true) "showDeviceInfo" and/or "showAppInfo" at the top of [/source/Main.brs](/source/Main.brs) will print information about the device to the console.
 * If the app closes, the console/debug session will automatically close
 
 
 ### Globals
-Roku uses "m.global" to reference an object as seen in /source/Main.brs
+Roku uses "m.global" to reference an object as seen in [/source/Main.brs](/source/Main.brs)
+
 ![Screenshot](/docs/images/globals.png)
+
+* Global object values can be accessed from anywhere in the app.
+    * m.global.ui could return a value of "HD" or "FHD". This would be useful in determing the background poster size to load from a remote image source (HD = 1280 x 720, FHD = 1920 x 1080)
+    * 4 of the global object keys (model, os, internet, hdcp) are used with [/components/data/requirements.json](/components/data/requirements.json) to determine app eligibility at startup. See Requirements for more info.
 
 
 ### Themes
-The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette field for customizing colors in child nodes. The palette node as well as background colors and selectors can be further customized in /components/data/themes.json
+The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette field for customizing colors in child nodes.
+ * Themes are set from /components/HomeScene.brs
+ > "dark" and "red" is the default theme here if no 2nd arugument is provided.
+ ```
+ setTheme(true, { "type": "dark", "color": "red" })
+ ```
+ * The palette colors, background colors and selectors can be customized in [/components/data/themes.json](/components/data/themes.json) 
+    * themes are defined using the following format:
+ ```
+ {
+    "dark": [
+        {
+            "color": {}
+        }
+    ],
+    "light": [
+        {
+            "color": {}
+        }
+    ]
+}
+ ```
