@@ -16,7 +16,7 @@ sub startApp()
 	initScreenStack()
 
 	' create the landing screen node (name) and assign an id
-	' see REAMDME for additional arguments (history)
+	' see REAMDME for additional arguments
 	addScreen("LandingScreen", "landingScreen")
 	' certification requires the following to indicate the app is finished loading
 	m.top.getScene().signalBeacon("AppLaunchComplete")
@@ -56,15 +56,14 @@ function addNode(params as object) as object
 		end if
 	end if
 end function
-function removeNode(params as object)
+function removeNode(params as object) as boolean
 	if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))
 		' show a console message stating that the node could not be added to HomeScene
 		? " "
 		? "there was an error removing the node from HomeScene"
-	else
-		' check if top focused node interface is valid and set focus to node
-		if m.top.focusedNode <> invalid then m.top.focusedNode.setFocus(true)
+		return false
 	end if
+	return true
 end function
 sub onMessage(obj)
 	' get the message string
