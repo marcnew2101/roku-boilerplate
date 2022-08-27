@@ -1,5 +1,5 @@
-sub createDialog(params = {})
-	if (params <> invalid and type(params) = "roAssociativeArray")
+sub createDialog(params = {} as object)
+	if (params <> invalid)
 		if (params.count() > 0)
 			if (params.title <> invalid and len(params.title) > 0)
 				messageValid = true
@@ -9,7 +9,7 @@ sub createDialog(params = {})
 				? "message is: "; params
 			end if
 			if (messageValid <> invalid and messageValid)
-				screen = addScreen("DialogModal", "dialogModal", false, false)
+				screen = addScreen("DialogModal", "dialogModal", true, false)
 				if (screen <> invalid)
 					showDialog(params, screen)
 				end if
@@ -21,10 +21,10 @@ sub createDialog(params = {})
 		? "message is not an object(AA) - Messages.brs"
 	end if
 end sub
-sub showDialog(params, screen)
+sub showDialog(params as object, screen as object)
 	screen.dialogInfo = params
 end sub
-function getMessage(messageString = "")
+function getMessage(messageString = "" as string)
 	messagefile = ReadAsciiFile("pkg:/components/data/messages.json")
 	if (messagefile <> invalid)
 		json = ParseJson(messagefile)
