@@ -59,7 +59,7 @@ function addScreen(screenName as string, screenId = invalid as string, showScree
         ? "you must set a valid name (string) for screenName if you wish to create a new screen node."
     end if
 end function
-function removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
+sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
     ' check that screen is valid
     if (screen <> invalid)
         ' set initial node value
@@ -76,10 +76,12 @@ function removeScreen(screen = invalid as dynamic, showPrevScreen = true as bool
         ' check if the node is valid
         if (node <> invalid)
             ' call the removeNode function on the HomeScene.xml interface
-            m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
+            screenRemoved = m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
+            ' check if screenRemoved is then set focus to previous node
+            if screenRemoved then setPrevFocus()
         end if
     end if
-end function
+end sub
 function getAllScreens() as dynamic
     ' create a variable to store all of the child nodes from HomeScene
     screenArray = m.top.getScene().getChildren(-1, 0)
@@ -109,4 +111,31 @@ sub showAllScreens()
         ? "there are no valid screens/nodes in HomeScene.xml:"
         ? " "
     end if
+end sub
+sub setFocus(node as dynamic, saveFocus = true as boolean)
+    ' check that node is valid
+    if (node <> invalid)
+        ' set initial focusedNode value
+        focusedNode = invalid
+        ' check if the node is a node type
+        if (type(node) = "roSGNode")
+            ' set the focusedNode value
+            focusedNode = node
+        ' check if the node is a string type
+        else if (type(node) = "String")
+            ' find the node and set the return valud
+            focusedNode = getScreen(node)
+        end if
+        ' check if the focusedNode is valid
+        if (focusedNode <> invalid)
+            ' set focus to node
+            focusedNode.setFocus(true)
+            ' check if saveFocus is true and set HomeScene node interface
+            if saveFocus then m.top.getScene().focusedNode = focusedNode
+        end if
+    end if
+end sub
+sub setPrevFocus()
+    ' check if focusedNode on HomeScene interface is valid and set focus to node
+    if m.top.getScene().focusedNode <> invalid then m.top.getScene().focusedNode.setFocus(true)
 end sub
