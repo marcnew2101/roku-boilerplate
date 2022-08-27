@@ -22,9 +22,7 @@ sub screenVisible(obj)
         ' set location and theme of label list
         setLabelList()
         ' set key focus to the label list
-        m.labelList.setFocus(true)
-        ' save focused node
-        m.top.getScene().focusedNode = m.labelList
+        setFocus(m.labelList)
     end if
 end sub
 sub setLandingTitle()
