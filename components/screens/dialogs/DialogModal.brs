@@ -1,8 +1,6 @@
 sub init()
     ' set the initial visibility of the screen to false
     m.top.visible = false
-    ' observe screen visibility
-    m.top.observeField("visible", "screenVisible")
 end sub
 sub createDialogNode()
     ' check if the Roku device is running at least version 10
@@ -21,17 +19,8 @@ sub createDialogNode()
     if m.top.getChildCount() > 1 then m.top.removeChildIndex(1)
     ' add the dialog node to the top parent (screen) node
     m.top.appendChild(m.dialogNode)
-end sub
-sub screenVisible(obj)
-    visible = obj.getData()
-    ' check if the screen is visible
-    if (visible)
-        ' set key focus to the dialog node
-        m.dialogNode.setFocus(true)
-    else
-        ' set focus to previous node if interface on HomeScene is valid
-        if m.top.getScene().focusedNode <> invalid then m.top.getScene().focusedNode.setFocus(true)
-    end if
+    ' set focus to the dialog node
+    setFocus(m.dialogNode, false)
 end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
@@ -47,8 +36,6 @@ sub populateDialogBox(obj)
         if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
         ' check that the dialog info buttons are not Invalid and not an empty array
         if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
-        ' set screen to visible
-        if not m.top.visible then m.top.visible = true
     end if
 end sub
 sub onButtonSelected(obj)
