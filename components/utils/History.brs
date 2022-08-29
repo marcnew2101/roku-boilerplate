@@ -34,7 +34,9 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
             end if
             ' check that the screen stack array still contains items and showPrevScreen is both valid and true
             if (m.screenStack.count() > 0 and showPrevScreen <> invalid and showPrevScreen)
+                ' set prevNode to last node in array
                 prevNode = m.screenStack.peek()
+                ' check if prevNode is valid
                 if (prevNode <> invalid)
                     ' get the last node in the screen stack array and check for visibility before setting visibility to true
                     if not prevNode.visible then prevNode.visible = true
