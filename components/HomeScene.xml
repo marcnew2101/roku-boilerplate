@@ -10,7 +10,6 @@
 		<field id="exitApp" type="boolean" value="false"/>
 		<field id="message" type="string" onChange="onMessage" alwaysNotify="true"/>
 		<field id="selectorUri" type="uri"/>
-		<field id="focusedNode" type="node"/>
 		<field id="contentId" type="string"/>
 		<field id="mediaType" type="string"/>
 		<function name="addNode"/>
