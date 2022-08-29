@@ -69,16 +69,14 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
             ' set the node value
             node = screen
         ' check if the screen is a string type
-        else if (type(screen) = "String")
+        else if (type(screen) = "String" and len(screen) > 0)
             ' find the node and set the return valud
             node = getScreen(screen)
         end if
         ' check if the node is valid
         if (node <> invalid)
-            ' call the removeNode function on the HomeScene.xml interface
-            screenRemoved = m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
-            ' check if screenRemoved is then set focus to previous node
-            if screenRemoved then setPrevFocus()
+            ' call the removeNode function on the HomeScene interface
+            m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
         end if
     end if
 end sub
@@ -122,7 +120,7 @@ sub setFocus(node as dynamic, saveFocus = true as boolean)
             ' set the focusedNode value
             focusedNode = node
         ' check if the node is a string type
-        else if (type(node) = "String")
+        else if (type(node) = "String" and len(node) > 0)
             ' find the node and set the return valud
             focusedNode = getScreen(node)
         end if
@@ -131,7 +129,7 @@ sub setFocus(node as dynamic, saveFocus = true as boolean)
             ' set focus to node
             focusedNode.setFocus(true)
             ' check if saveFocus is true and set HomeScene node interface
-            if saveFocus then m.top.getScene().focusedNode = focusedNode
+            if saveFocus then m.top.update({"focusedNode": focusedNode}, true)
         end if
     end if
 end sub
