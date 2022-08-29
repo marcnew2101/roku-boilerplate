@@ -56,15 +56,13 @@ function addNode(params as object) as object
 		end if
 	end if
 end function
-function removeNode(params as object) as boolean
+sub removeNode(params as object)
 	if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))
 		' show a console message stating that the node could not be added to HomeScene
 		? " "
 		? "there was an error removing the node from HomeScene"
-		return false
 	end if
-	return true
-end function
+end sub
 sub onMessage(obj)
 	' get the message string
 	message = obj.getData()
