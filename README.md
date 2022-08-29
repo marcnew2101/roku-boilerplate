@@ -112,7 +112,7 @@ getScreen(
 #### Removing a node from the root scene:
 > Pass the child node, such as "m.top", or use the ID of the node you want to remove
 ```
-removeScreen(Node or "screenId")
+removeScreen(node or "screenId")
 ```
 
 Additional arguments can be used as follows:
@@ -123,6 +123,20 @@ removeScreen(
    removeFromStack  ' removes the node from the history stack (true by default)
 )
 ```
+
+#### Setting screen focus
+> Pass the node to assign focus or the node ID of the node to assign focus to
+```
+setFocus(node or node ID)
+```
+Additional arguments can be used as follows:
+```
+setFocus(
+   node        ' the node or the node ID
+   saveFocus   ' adds the node to focusedNode field (true by default)
+)
+```
+
 
 #### Note
 In order to use the node management library, each XML file requires a top level script assigned as follows:
