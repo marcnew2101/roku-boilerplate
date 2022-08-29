@@ -133,7 +133,3 @@ sub setFocus(node as dynamic, saveFocus = true as boolean)
         end if
     end if
 end sub
-sub setPrevFocus()
-    ' check if focusedNode on HomeScene interface is valid and set focus to node
-    if m.top.getScene().focusedNode <> invalid then m.top.getScene().focusedNode.setFocus(true)
-end sub
