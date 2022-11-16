@@ -2,40 +2,38 @@ sub init()
     ' set the initial visibility of the screen to false
     m.top.visible = false
 end sub
-sub createDialogNode()
-    ' check if the Roku device is running at least version 10
-    if (m.global.os >= 10.0)
-        ' create standard message dialog node
-        m.dialogNode = CreateObject("roSGNode", "BaseDialog")
-    else
-        ' create legacy dialog node
-        m.dialogNode = CreateObject("roSGNode", "Dialog")
-    end if
-    ' create id for dialog node
-    m.dialogNode.id = "baseDialog"
+sub createDialogNode(title = "" as string, message = "" as string, help = [] as object, buttons = [] as object)
+    ' create message dialog node
+    m.dialogNode = CreateObject("roSGNode", "BaseDialog")
+    ' set dialog title
+    m.dialogNode.title = title
+    ' set dialog message
+    m.dialogNode.message = message
+    ' set dialog help bullets
+    m.dialogNode.bulletText = help
+    ' set dialog buttons
+    m.dialogNode.buttons = buttons
     ' observe button selection on the dialog node
     m.dialogNode.observeField("buttonSelected", "onButtonSelected")
-    ' if the parent/top node contains more than 1 node then delete the last node
-    if m.top.getChildCount() > 1 then m.top.removeChildIndex(1)
-    ' add the dialog node to the top parent (screen) node
+    ' add the dialog node to the top parent node
     m.top.appendChild(m.dialogNode)
     ' set focus to the dialog node
     setFocus(m.dialogNode, false)
 end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
-    ' check that the dialogInfo object is valid and count is greater than zero
+    ' check if the dialogInfo object is valid and count is greater than zero
     if (m.dialogInfo <> invalid and m.dialogInfo.count() > 0)
+        ' inspect the dialog info title
+        if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0 then title = m.dialogInfo.title else title = ""
+        ' inspect the dialog info message
+        if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then message = m.dialogInfo.message else message = ""
+        ' inspect the dialog info help message
+        if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then help = m.dialogInfo.bulletText else help = []
+        ' inspect the dialog info buttons
+        if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then buttons = m.dialogInfo.buttons else buttons = []
         ' create the dialog node
-        createDialogNode()
-        ' check that the dialog info title is not Invalid and not an empty string
-        if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0 then m.dialogNode.title = m.dialogInfo.title
-        ' check that the dialog info message is not Invalid and not an empty string
-        if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then m.dialogNode.message = m.dialogInfo.message
-        ' check that the dialog info help message is not Invalid and not an empty array
-        if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then m.dialogNode.bulletText = m.dialogInfo.help
-        ' check that the dialog info buttons are not Invalid and not an empty array
-        if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then m.dialogNode.buttons = m.dialogInfo.buttons
+        createDialogNode(title, message, help, buttons)
     end if
 end sub
 sub onButtonSelected(obj)
@@ -50,11 +48,21 @@ sub onButtonSelected(obj)
             ' immediately close the app
             m.top.getScene().exitApp = true
         else
-            ' remove dialog modal screen
-            removeScreen(m.top)
+            removeBaseDialog()
         end if
         ' check if button pressed is "CANCEL" or "NO"
     else if (buttonSelected = "CANCEL" or buttonSelected = "NO")
+        removeBaseDialog()
+    end if
+end sub
+sub removeBaseDialog()
+    ' check parent for child nodes greater than 1
+    if m.top.getChildCount() > 1
+        ' remove the parent's last child node
+        m.top.removeChildIndex(m.top.getChildCount() - 1)
+        ' set focus to next child node
+        setFocus(m.top.getChild(m.top.getChildCount() - 1), false)
+    else
         ' remove dialog modal screen
         removeScreen(m.top)
     end if
