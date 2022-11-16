@@ -9,16 +9,20 @@ sub createDialog(params = {} as object)
 				? "message is: "; params
 			end if
 			if (messageValid <> invalid and messageValid)
-				screen = addScreen("DialogModal", "dialogModal", true, false)
+				if not screenExists("dialogModal")
+					screen = addScreen("DialogModal", "dialogModal", true, false)
+				else
+					screen = getScreen("dialogModal")
+				end if
 				if (screen <> invalid)
 					showDialog(params, screen)
 				end if
 			end if
 		else
-			? "message object is empty - Messages.brs"
+			? "message is empty - Messages.brs"
 		end if
 	else
-		? "message is not an object(AA) - Messages.brs"
+		? "message is not an object - Messages.brs"
 	end if
 end sub
 sub showDialog(params as object, screen as object)
