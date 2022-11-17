@@ -23,6 +23,8 @@ sub screenVisible(obj)
         setLabelList()
         ' set key focus to the label list
         setFocus(m.labelList)
+        ' send signal beacon per Roku certification requirements
+        appLoaded()
     end if
 end sub
 sub setLandingTitle()

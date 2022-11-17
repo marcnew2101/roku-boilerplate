@@ -19,6 +19,8 @@ sub createDialogNode(title = "" as string, message = "" as string, help = [] as 
     m.top.appendChild(m.dialogNode)
     ' set focus to the dialog node
     setFocus(m.dialogNode, false)
+    ' send signal beacon per Roku certification requirements
+    dialogInit()
 end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
@@ -65,5 +67,7 @@ sub removeBaseDialog()
     else
         ' remove dialog modal screen
         removeScreen(m.top)
+        ' send signal beacon per Roku certification requirements
+        dialogComplete()
     end if
 end sub

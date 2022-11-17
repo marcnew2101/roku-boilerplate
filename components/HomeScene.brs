@@ -3,7 +3,6 @@ sub init()
 	' the setTheme() has a 2nd argument for defining the theme ex. setTheme(true, { "type": "light", "color": "red" })
 	' ensure that both the "type" and "color" inside the object match the key/values in themes.json
 	setTheme(true)
-
 	' set to true for forcing requirements in /components/data/requirements.json
 	' set to false to immediately return true and bypass requirements
 	' optional: test the error message for requirements by changing the minVersion in the requirements.json file from to 20.0
@@ -14,12 +13,9 @@ end sub
 sub startApp()
 	' create the initial screen stack array in History.brs
 	initScreenStack()
-
 	' create the landing screen node (name) and assign an id
 	' see REAMDME for additional arguments
 	addScreen("LandingScreen", "landingScreen")
-	' certification requires the following to indicate the app is finished loading
-	m.top.getScene().signalBeacon("AppLaunchComplete")
 end sub
 function addNode(params as object) as object
 	' check that the object from params is valid
