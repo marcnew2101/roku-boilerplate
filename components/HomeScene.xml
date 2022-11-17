@@ -6,8 +6,10 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
 	<interface>
 		<field id="exitApp" type="boolean" value="false"/>
+		<field id="appLoaded" type="boolean" value="false"/>
 		<field id="message" type="string" onChange="onMessage" alwaysNotify="true"/>
 		<field id="selectorUri" type="uri"/>
 		<field id="contentId" type="string"/>
