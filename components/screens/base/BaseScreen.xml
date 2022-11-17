@@ -6,6 +6,7 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
 	<children>
 	</children>
 </component>
