@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BaseScreen" extends="Group">
+	<script type="text/brightscript" uri="BaseScreen.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Requirements.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Messages.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
+	<children>
+	</children>
+</component>
