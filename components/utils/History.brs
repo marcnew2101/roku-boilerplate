@@ -57,8 +57,6 @@ sub getHistory()
         ' show a console message containing the array items
         ? m.screenStack
     else
-        ' show a console message stating the history is empty
-        ? " "
-        ? "there are no history items"
+        logging("there are no history items", 1)
     end if
 end sub

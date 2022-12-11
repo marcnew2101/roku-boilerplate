@@ -1,50 +1,36 @@
-function getScreen(screenId as string, showScreen = false as boolean)
-    ' check that the argument for screenId is valid and has a string length greater than zero
-    if (screenId <> invalid and len(screenId) > 0)
-        ' find the node
-        node = m.top.getScene().findNode(screenId)
-        ' check that the node is valid
-        if (node <> invalid)
-            ' show the node if the node is not visible and the showScreen argument is true
-            if not node.visible and showScreen then node.visible = true
-            ' return the requested node
-            return node
-        else
-            ' show a console message stating the requested screen/node is not valid
-            ? " "
-            ? screenId + " was not found"
-            return invalid
-        end if
+function getScreen(screenId as string, showScreen = false as boolean) as dynamic
+    ' check that screen exists
+    node = screenExists(screenId)
+    ' check that the node is valid
+    if (node <> invalid)
+        ' check if node is not visible and showScreen is true
+        if not node.visible and showScreen then node.visible = true
+        ' return the requested node
+        return node
     else
-        ' show a console message stating that getScreen requires a valid screenId
-        ? " "
-        ? "you must set a valid id (string) for screenId"
+        logging(screenId + " was not found", 1)
+        return invalid
     end if
 end function
-function screenExists(screenId as string) as boolean
+function screenExists(screenId as string) as dynamic
     ' ensure screenId is valid and not an empty string
-    if (screenId <> invalid and len(screenId) > 0)
+    if (not isNullOrEmpty(screenId))
         ' get the screen node
-        node = getScreen(screenId)
-        if node <> invalid then return true
+        return m.top.getScene().findNode(screenId)
     else
-        ? " "
-        ? "screen not found"
+        logging("screenId invalid or empty", 2)
     end if
-    return false
 end function
-function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
+function addScreen(screenName as string, screenId = "" as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
     ' check if screenId is invalid or empty
-    if screenId = invalid or screenId.len() = 0
+    if (isNullOrEmpty(screenId))
         ' assign the screenName to the screenId
         screenId = screenName
-        ? " "
-        ? "No screen ID assigned for " + screenName + " node. Using " + screenName + " as ID"
+        logging("No ID assigned for " + screenName + " node - using " + """" + screenName + """" + " as ID", 1)
     end if
-    ' check if the screenId is already been given to an existing screen node
-    if screenExists(screenId)
-        ? " "
-        ? "The id '" + screenId + "' is already assigned to another screen node. Please create a new id for this node."
+    ' check if the screenId has already been given to an existing screen node
+    if (isValid(screenExists(screenId)))
+        logging(screenId + "' is already assigned to another screen node. Please create a new id for this node.", 2)
         ' assign an empty string to the screenId
         screenId = ""
     end if
@@ -87,16 +73,13 @@ sub showAllScreens()
     screenArray = getAllScreens()
     ' check that the screen array is valid and has an item count of greater than zero
     if (screenArray <> invalid and screenArray.count() > 0)
-        ? "valid screens/nodes from HomeScene.xml:"
+        logging("valid screens nodes from HomeScene.xml:", 1)
         ' loop over each screen in the array and print to console
         for each screen in screenArray
-            ? " -> " + screen
+            print(" -> " + screen)
         end for
-        ? " "
     else
-        ' show a console message stating that there are no child nodes in HomeScene
-        ? "there are no valid screens/nodes in HomeScene.xml:"
-        ? " "
+        logging("there are no valid screens nodes for HomeScene", 2)
     end if
 end sub
 sub setFocus(node as dynamic, saveFocus = true as boolean)

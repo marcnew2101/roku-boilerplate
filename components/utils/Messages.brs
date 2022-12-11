@@ -1,49 +1,32 @@
 sub createDialog(params = {} as object)
-	if (params <> invalid)
-		if (params.count() > 0)
-			if (params.title <> invalid and len(params.title) > 0)
-				messageValid = true
-			else
-				messageValid = false
-				? "message title is required - Messages.brs"
-				? "message is: "; params
-			end if
-			if (messageValid <> invalid and messageValid)
-				if not screenExists("dialogModal")
-					screen = addScreen("DialogModal", "dialogModal", true, false)
-				else
-					screen = getScreen("dialogModal")
-				end if
-				if (screen <> invalid)
-					showDialog(params, screen)
-				end if
-			end if
+	if (not isNullOrEmpty(params) and not isNullOrEmpty(params.title))
+		if (not isValid(screenExists("dialogModal")))
+			screen = addScreen("DialogModal", "dialogModal", true, false)
 		else
-			? "message is empty - Messages.brs"
+			screen = getScreen("dialogModal")
 		end if
+		if screen <> invalid then showDialog(params, screen)
 	else
-		? "message is not an object - Messages.brs"
+		logging("message object is invalid or missing title", 3)
 	end if
 end sub
 sub showDialog(params as object, screen as object)
 	screen.dialogInfo = params
 end sub
-function getMessage(messageString = "" as string)
-	messagefile = ReadAsciiFile("pkg:/components/data/messages.json")
-	if (messagefile <> invalid)
-		json = ParseJson(messagefile)
-		if (json <> invalid)
-			for each message in json.items()
-				if (message.key = messageString and message.value <> invalid)
-					return message.value
-					exit for
-				end if
-			end for
-		end if
-	else
+function getMessage(messageString = "" as string) as dynamic
+	try
+		messagefile = parseJson(readAsciiFile("pkg:/components/data/messages.json"))
+		for each message in messagefile.items()
+			if (message.key = messageString and message.value <> invalid)
+				return message.value
+				exit for
+			end if
+		end for
+	catch e
+		logging("unable to read messages.json file - " + e.message, 3)
 		return invalid
-	end if
+	end try
 end function
-sub setMessage(message as string)
-	m.top.getScene().message = message
+sub setMessage(message as string, node = m.top.getScene())
+	node.message = message
 end sub
