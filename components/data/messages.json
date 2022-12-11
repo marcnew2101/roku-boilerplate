@@ -16,8 +16,7 @@
         "title": "ROKU UPDATE REQUIRED",
         "message": "A Roku system update is required in order to run this app.",
         "help": [
-            "From the Roku home screen, go to Settings -> System -> System update.",
-            "If your Roku cannot be updated, please check your internet connection. Otherwise, you will need to obtain a newer Roku device."
+            "From the Roku home screen, go to Settings -> System -> System update."
         ],
         "buttons": [
             "OKAY"
