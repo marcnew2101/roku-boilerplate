@@ -27,13 +27,13 @@ sub populateDialogBox(obj)
     ' check if the dialogInfo object is valid and count is greater than zero
     if (m.dialogInfo <> invalid and m.dialogInfo.count() > 0)
         ' inspect the dialog info title
-        if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0 then title = m.dialogInfo.title else title = ""
+        if not isNullOrEmpty(m.dialogInfo.title) then title = m.dialogInfo.title else title = ""
         ' inspect the dialog info message
-        if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then message = m.dialogInfo.message else message = ""
+        if not isNullOrEmpty(m.dialogInfo.message) then message = m.dialogInfo.message else message = ""
         ' inspect the dialog info help message
-        if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then help = m.dialogInfo.bulletText else help = []
+        if not isNullOrEmpty(m.dialogInfo.help) then help = m.dialogInfo.bulletText else help = []
         ' inspect the dialog info buttons
-        if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then buttons = m.dialogInfo.buttons else buttons = []
+        if not isNullOrEmpty(m.dialogInfo.buttons) then buttons = m.dialogInfo.buttons else buttons = []
         ' create the dialog node
         createDialogNode(title, message, help, buttons)
     end if
@@ -48,7 +48,7 @@ sub onButtonSelected(obj)
         ' check that closeApp is not invalid and set to true
         if (m.dialogInfo.exitApp <> invalid and m.dialogInfo.exitApp)
             ' immediately close the app
-            m.top.getScene().exitApp = true
+            exitApp()
         else
             removeBaseDialog()
         end if

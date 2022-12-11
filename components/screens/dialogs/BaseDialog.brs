@@ -10,12 +10,12 @@ end sub
 sub onTitleChange(obj)
     title = obj.getData()
     ' check that the existing titla area text is not invalid and is not an empty string
-    if (m.titlearea <> invalid and len(m.titlearea.primaryTitle) > 0)
+    if (m.titlearea <> invalid and not isNullOrEmpty(m.titlearea.primaryTitle))
         ' reset the title area text
         m.titlearea.primaryTitle = ""
     end if
     ' check that the new title is not invalid and is not an empty string
-    if (title <> invalid and len(title) > 0)
+    if (not isNullOrEmpty(title))
         ' set the title
         m.titlearea.primaryTitle = title
     end if
@@ -23,12 +23,12 @@ end sub
 sub onMessageChange(obj)
     message = obj.getData()
     ' check that the existing message text is not invalid and is not an empty string
-    if (m.messagetext <> invalid and len(m.messagetext.text) > 0)
+    if (m.messagetext <> invalid and not isNullOrEmpty(m.messagetext.text))
         ' reset the message text
         m.messagetext.text = ""
     end if
     ' check that the new message is not invalid and is not an empty string
-    if (message <> invalid and len(message) > 0)
+    if (not isNullOrEmpty(message))
         ' set the  message
         m.messagetext.text = message
         'set the message type
@@ -40,12 +40,12 @@ end sub
 sub onBulletTextChange(obj)
     bullets = obj.getData()
     ' check that the existing bullet text array is not invalid and is not an empty array
-    if (m.bulletarea <> invalid and m.bulletarea.bulletText.count() > 0)
+    if (m.bulletarea <> invalid and not isNullOrEmpty(m.bulletarea.bulletText))
         ' reset the bullet text array
         m.bulletarea.bulletText = []
     end if
     ' check that the new bullet array is not invalid and is not an empty array
-    if (bullets <> invalid and bullets.count() > 0)
+    if (not isNullOrEmpty(bullets))
         ' set the bullet text
         m.bulletarea.bulletText = bullets
         ' loop over each node inside bullet area
