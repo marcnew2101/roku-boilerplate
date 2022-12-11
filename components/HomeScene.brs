@@ -1,27 +1,33 @@
 sub init()
-	' change to true for testing themes set in /components/data/themes.json
-	' the setTheme() has a 2nd argument for defining the theme ex. setTheme(true, { "type": "light", "color": "red" })
-	' ensure that both the "type" and "color" inside the object match the key/values in themes.json
-	setTheme(true)
-	' set to true for forcing requirements in /components/data/requirements.json
-	' set to false to immediately return true and bypass requirements
-	' optional: test the error message for requirements by changing the minVersion in the requirements.json file from to 20.0
-	requirements = setRequirements(false)
-	' start the app if all requirements are met
-	if requirements then startApp()
+	' preset global values that are used throughout app
+	initGlobals()
+	' true: set config and global values (/components/data/config.json)
+	' false: bypass config
+	initConfiguration(true)
+	preLaunch()
+end sub
+sub preLaunch()
+	' true: set theme (/components/data/themes.json)
+	' false: bypass theme
+	' optional: set additional arguments to customize the theme ex. initTheme(true, "light", "red")
+	initTheme(true)
+	' true: set requirements (/components/data/requirements.json)
+	' false: bypass requirements
+	initRequirements(true)
 end sub
 sub startApp()
 	' create the initial screen stack array in History.brs
 	initScreenStack()
-	' create the landing screen node (name) and assign an id
-	' see REAMDME for additional arguments
-	addScreen("LandingScreen", "landingScreen")
+	' create the side nav menu (requires initConfiguration())
+	initMenuContent()
+	' create the landing screen
+	addScreen("LandingScreen")
 end sub
 function addNode(params as object) as object
 	' check that the object from params is valid
 	if (params <> invalid and params.count() > 0)
 		' check that the screenName value in the object is valid
-		if (params.screenName <> invalid and len(params.screenName) > 0)
+		if (not isNullOrEmpty(params.screenName))
 			' create the node using the params.screen value
 			node = createObject("roSGNode", params.screenName)
 			' check that the created node is valid
@@ -39,9 +45,7 @@ function addNode(params as object) as object
 				end if
 				' add the screen to History.brs
 				if (not addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack))
-					' show a console message stating that the node could not be added to HomeScene
-					? " "
-					? "there was an error adding " + node.id + " to HomeScene"
+					logging("there was an error adding " + node.id + " to HomeScene", 3)
 				else
 					' set focus to node
 					node.setFocus(true)
@@ -54,14 +58,12 @@ function addNode(params as object) as object
 end function
 sub removeNode(params as object)
 	if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))
-		' show a console message stating that the node could not be added to HomeScene
-		? " "
-		? "there was an error removing the node from HomeScene"
+		logging("there was an error removing " + params.node.id + " from HomeScene", 3)
 	end if
 end sub
 sub onMessage(obj)
 	' get the message string
 	message = obj.getData()
 	' check that the message string is not invalid and not empty then create message dialog
-	if message <> invalid and len(message) > 0 then createDialog(getMessage(message))
+	if not isNullOrEmpty(message) then createDialog(getMessage(message))
 end sub
