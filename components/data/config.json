@@ -1,0 +1,47 @@
+{
+    "buildType": "debug",
+    "debugLevel": 1,
+    "debugFlags": {
+        "showDeviceInfo": true,
+        "showAppInfo": true
+    },
+    "menu": [
+        {
+            "id": "home",
+            "title": "HOME",
+            "appState": [
+                "release",
+                "debug"
+            ]
+        },
+        {
+            "id": "settings",
+            "title": "SETTINGS",
+            "appState": [
+                "release",
+                "debug"
+            ]
+        },
+        {
+            "id": "developer",
+            "title": "DEVELOPER",
+            "appState": [
+                "debug"
+            ],
+            "subMenu": [
+                {
+                    "id": "logging",
+                    "title": "LOGGING"
+                },
+                {
+                    "id": "overlay",
+                    "title": "OVERLAY"
+                },
+                {
+                    "id": "proxy",
+                    "title": "PROXY"
+                }
+            ]
+        }
+    ]
+}
