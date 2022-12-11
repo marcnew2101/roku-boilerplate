@@ -1,45 +1,56 @@
-function setRequirements(params as boolean) as boolean
-	requirements = createRequirements()
-	if (params and requirements <> invalid)
-		return checkRequirements(requirements)
+sub initRequirements(setRequirements as boolean)
+	if (setRequirements)
+		logging("getting requirements...")
+		requirements = createRequirements()
+		if requirements <> invalid then checkRequirements(requirements)
+	else
+		if not m.top.getScene().startApp then m.top.getScene().startApp = true
 	end if
-	return true
-end function
+end sub
 function createRequirements() as object
-	requirementsFile = ReadAsciiFile("pkg:/components/data/requirements.json")
-	if (requirementsFile <> invalid)
-		json = ParseJson(requirementsFile)
-		if (json <> invalid)
-			return json
-		end if
-	end if
-	return invalid
+	try
+		logging("loading requirements file...")
+		return parseJson(readAsciiFile("pkg:/components/data/requirements.json"))
+	catch e
+		logging("unable to read requirements.json file - " + e.message, 3)
+		return invalid
+	end try
 end function
-function checkRequirements(requirements as object) as boolean
+sub checkRequirements(requirements as object)
+	pass = true
 	for each requirement in requirements.items()
-		if (requirement.value <> invalid and requirement.value["required"])
+		' check the requirement value and proceed if true
+		if (not isNullOrEmpty(requirement.value) and requirement.value["required"])
 			deviceReady = getRequirement(requirement)
-			if (deviceReady <> invalid)
-				if (not deviceReady and requirement.value["showError"] <> invalid and requirement.value["showError"])
-					m.top.getScene().message = requirement.key
-					exit for
+			' check if the requirement fails
+			if (not isNullOrEmpty(deviceReady))
+				if (not deviceReady)
+					pass = false
+					logging("(FAIL) " + requirement.key + " failed to meet requirements", 4)
+					' check if the showError field in Requirements.brs is set to true
+					if (requirement.value["showError"] <> invalid and requirement.value["showError"])
+						' trigger the error message dialog here
+						m.top.getScene().message = requirement.key
+						exit for
+					end if
+				else
+					logging("(PASS) " + requirement.key + " meets requirements", 1)
 				end if
-			else
-				deviceReady = true
 			end if
 		end if
 	end for
-	return deviceReady
-end function
+	if pass and not m.top.getScene().startApp then m.top.getScene().startApp = true
+end sub
 function getRequirement(requirement as object) as boolean
-	v = m.global[requirement.key]
-	if (v = invalid)
-		return false
-	else if (type(v) = "roBoolean")
-		return v
-	else
-		return setAsBool(requirement, v)
+	v = aaContains(m.global, requirement.key, true, true)
+	if (v <> invalid)
+		if (isBoolean(v))
+			return v
+		else
+			return setAsBool(requirement, v)
+		end if
 	end if
+	return invalid
 end function
 function setAsBool(requirement as object, v as dynamic)
 	if (requirement.key = "os")
@@ -52,14 +63,29 @@ function getMinOS(requirement as object, os as float) as boolean
 	if (os >= requirement.value["minVersion"])
 		return true
 	end if
+	logging("current os version " + str(os) + " does not meet minimum os version " + str(requirement.value["minVersion"]), 4)
 	return false
 end function
 function getModel(requirement as object, model as string) as boolean
-	for each legacyModel in requirement.value["legacyModels"]
-		if (model = legacyModel)
+	logging("getting hardware...")
+	roku = findModel(model)
+	if (not isNullOrEmpty(roku))
+		if (roku.legacy <> invalid and roku.legacy)
+			logging(roku.name + " (" + model + ") not supported", 4)
 			return false
-			exit for
 		end if
-	end for
+	else
+		logging("roku device not found")
+	end if
 	return true
+end function
+function findModel(model)
+	logging("loading hardware file...")
+	try
+		hardwareFile = parseJson(readAsciiFile("pkg:/components/data/hardware.json"))
+		return aaContains(hardwareFile, model, true, true)
+	catch e
+		logging("unable to read hardware.json file - " + e.message, 3)
+		return invalid
+	end try
 end function
