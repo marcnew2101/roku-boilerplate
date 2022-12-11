@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="MenuItem" extends="ContentNode">
+    <interface>
+        <field id="iconUri" type="string" />
+        <field id="focusedIconUri" type="string" />
+        <field id="highlighted" type="boolean" alwaysNotify="true" />
+    </interface>
+</component>
