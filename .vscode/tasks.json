@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "python ./scripts/build.py ${input:buildType}"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "buildType",
+            "type": "pickString",
+            "description": "release or debug?",
+            "options": [
+                "release",
+                "debug"
+            ],
+            "default": "debug"
+        }
+    ]
+}
