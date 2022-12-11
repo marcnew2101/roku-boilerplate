@@ -1,9 +1,7 @@
 sub main(args)
 	'######################### DEVELOPER VARIABLES ##########################
-	showDeviceInfo = false ' show device info in the console
-	showAppInfo = false ' show app info in the console
-	showBandwidth = false ' show bandwidth utilization
-	showHttpErrors = false ' show http and url errors
+	showBandwidth = false ' show bandwidth utilization in console
+	showHttpErrors = false ' show http and url errors in console
 	'########################################################################
 
 	'########################### DEVICE/APP INFO ############################
@@ -11,10 +9,6 @@ sub main(args)
 	deviceInfo = setDeviceInfo()
 	' create app/manifest info object
 	appInfo = setAppInfo()
-	' print device info to console
-	if showDeviceInfo then getDeviceInfo(deviceInfo)
-	' print app info to console
-	if showAppInfo then getAppInfo(appInfo)
 	'########################################################################
 
 	'########################## SCENEGRAPH SETUP ############################
@@ -54,7 +48,7 @@ sub main(args)
 		msgType = type(msg)
 		' check exitApp field on HomeScene - closes app (ends while loop) when set to true
 		if (scene.exitApp)
-			' exit app / end while loop
+			' exit app / end while
 			return
 		end if
 		' check if the message type is logging event and if developer variables are true
@@ -76,7 +70,7 @@ sub main(args)
 	end while
 	'########################################################################
 end sub
-function setDeviceInfo()
+function setDeviceInfo() as object
 	' create device info object
 	deviceInfo = createObject("roDeviceInfo")
 	' create HDMI info object
@@ -93,6 +87,7 @@ function setDeviceInfo()
 	else
 		internet = deviceInfo.getLinkStatus()
 	end if
+	' create object with device info definitions
 	device = {
 		"id": deviceInfo.GetChannelClientId(),
 		"model": deviceInfo.getModel(),
@@ -122,72 +117,34 @@ function setDeviceInfo()
 	}
 	return device
 end function
-function setAppInfo()
+function setAppInfo() as object
+	' create app info object
 	appInfo = createObject("roAppInfo")
-
+	' create object with app info definitions
 	app = {
-		"id": appInfo.getID(),
+		"appId": appInfo.getID(),
 		"isDev": appInfo.isDev(),
 		"devId": appInfo.getDevID(),
 		"title": appInfo.getTitle(),
-		"version": appInfo.getVersion()
+		"appVersion": appInfo.getVersion()
 	}
 	return app
 end function
-sub getDeviceInfo(deviceInfo)
-	' show information about device
-	? "- - - - - - - - - - - - - - - - - - -"
-	? "Model:            "; deviceInfo.model
-	? "Type:             "; deviceInfo.type
-	? "OS Version:      "; deviceInfo.os
-	? "Language:         "; deviceInfo.language
-	? "Graphics:         "; deviceInfo.graphics
-	? "Display Name:     "; deviceInfo.display.name
-	? "Display Type:     "; deviceInfo.display.type
-	? "UI Resolution:    "; deviceInfo.display.ui.name
-	? "Video Mode:       "; deviceInfo.display.video
-	? "Internet Status:  "; deviceInfo.network.internet
-	? "Connection Type:  "; deviceInfo.network.type
-	? "External IP:      "; deviceInfo.network.externalIP
-	? "HDMI Status:      "; deviceInfo.hdmi.connected
-	? "HDCP Valid:       "; deviceInfo.hdmi.hdcp
-	? "- - - - - - - - - - - - - - - - - - -"
-	? " "
-end sub
-sub getAppInfo(appInfo)
-	' show information about app
-	? "- - - - - - - - - - - - - - - - - - -"
-	? "App ID:           "; appInfo.id
-	? "Is Dev:           "; appInfo.isDev
-	? "Dev ID:           "; appInfo.devId
-	? "Title:            "; appInfo.title
-	? "Version:          "; appInfo.version
-	? "- - - - - - - - - - - - - - - - - - -"
-	? " "
-end sub
 sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
+	' combine deviceInfo and appInfo as one object
+	deviceInfo.append(appInfo)
 	' get the global reference object
 	m.global = screen.getGlobalNode()
 	' assign variables to global object
-	m.global.addFields({
-		"deviceId": deviceInfo.id,
-		"model": deviceInfo.model,
-		"os": deviceInfo.os,
-		"internet": deviceInfo.network.internet,
-		"language": deviceInfo.language,
-		"graphics": deviceInfo.graphics,
-		"ui": deviceInfo.display.ui,
-		"hdcp": deviceInfo.hdmi.hdcp,
-		"deeplink": getDeepLinks(deepLinkArgs)
-	})
+	m.global.addFields(deviceInfo)
 end sub
 function getDeepLinks(args) as object
 	deeplink = invalid
 	' check if both contentId and mediaType are valid
 	if (args.contentId <> invalid and args.mediaType <> invalid)
 		deeplink = {
-			id: args.contentId
-			type: args.mediaType
+			"id": args.contentId,
+			"type": args.mediaType
 		}
 	end if
 	return deeplink
