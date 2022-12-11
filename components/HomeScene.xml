@@ -7,8 +7,12 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Types.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Debug.brs" />
 	<interface>
+		<field id="config" type="assocarray"/>
 		<field id="exitApp" type="boolean" value="false"/>
+		<field id="startApp" type="boolean" value="false" onChange="startApp"/>
 		<field id="appLoaded" type="boolean" value="false"/>
 		<field id="message" type="string" onChange="onMessage" alwaysNotify="true"/>
 		<field id="selectorUri" type="uri"/>
