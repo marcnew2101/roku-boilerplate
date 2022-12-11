@@ -1,0 +1,905 @@
+{
+    "Griffin": {
+        "N1000": {
+            "type": "box",
+            "name": "Roku DVP",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "480p",
+            "video": "720p",
+            "year": 2008,
+            "legacy": true
+        }
+    },
+    "Redwood": {
+        "N1050": {
+            "type": "box",
+            "name": "Roku SD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "480p",
+            "video": "480p",
+            "year": 2009,
+            "legacy": true
+        },
+        "N1100": {
+            "type": "box",
+            "name": "Roku HD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2009,
+            "legacy": true
+        },
+        "N1101": {
+            "type": "box",
+            "name": "Roku HD-XR",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2009,
+            "legacy": true
+        }
+    },
+    "Pico": {
+        "2000C": {
+            "type": "box",
+            "name": "Roku HD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2010,
+            "legacy": true
+        },
+        "2050X": {
+            "type": "box",
+            "name": "Roku XD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2010,
+            "legacy": true
+        },
+        "2050N": {
+            "type": "box",
+            "name": "Roku XD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2010,
+            "legacy": true
+        },
+        "2100X": {
+            "type": "box",
+            "name": "Roku XD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2010,
+            "legacy": true
+        },
+        "2100N": {
+            "type": "box",
+            "name": "Roku XD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 3.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2010,
+            "legacy": true
+        }
+    },
+    "Giga": {
+        "2400X": {
+            "type": "box",
+            "name": "Roku LT",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2011,
+            "legacy": true
+        },
+        "3000X": {
+            "type": "box",
+            "name": "Roku 2 HD",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2011,
+            "legacy": true
+        },
+        "3050X": {
+            "type": "box",
+            "name": "Roku 2 XD",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2011,
+            "legacy": true
+        },
+        "3100X": {
+            "type": "box",
+            "name": "Roku 2 XS",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2011,
+            "legacy": true
+        }
+    },
+    "Paolo": {
+        "2450X": {
+            "type": "box",
+            "name": "Roku LT",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2012,
+            "legacy": true
+        },
+        "2500X": {
+            "type": "box",
+            "name": "Roku HD",
+            "cpu": "MIPS 400 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2012,
+            "legacy": true
+        }
+    },
+    "Jackson": {
+        "3400X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2012,
+            "legacy": true
+        },
+        "3420X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "256 MB",
+            "maxOS": 9.1,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2012,
+            "legacy": true
+        }
+    },
+    "Tyler": {
+        "2700X": {
+            "type": "box",
+            "name": "Roku LT",
+            "cpu": "MIPS 600 Mhz",
+            "ram": "512 MB",
+            "maxOS": 11.0,
+            "hdr": false,
+            "ui": "720p",
+            "video": "720p",
+            "year": 2013,
+            "legacy": true
+        },
+        "2710X": {
+            "type": "box",
+            "name": "Roku 1, Roku SE",
+            "cpu": "MIPS 600 Mhz",
+            "ram": "512 MB",
+            "maxOS": 11.0,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2013,
+            "legacy": true
+        },
+        "2720X": {
+            "type": "box",
+            "name": "Roku 2",
+            "cpu": "MIPS 600 Mhz",
+            "ram": "512 MB",
+            "maxOS": 11.0,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2013,
+            "legacy": true
+        }
+    },
+    "Sugarland": {
+        "3500X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick",
+            "cpu": "ARM11 600 Mhz",
+            "ram": "512 MB",
+            "maxOS": 11.0,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2014,
+            "legacy": true
+        }
+    },
+    "Briscoe": {
+        "3600X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick",
+            "cpu": "ARM Cortex A7 800 MHz (Quad Core)",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2016,
+            "legacy": false
+        }
+    },
+    "Littlefield": {
+        "3700X": {
+            "type": "box",
+            "name": "Roku Express",
+            "cpu": "MIPS 900 MHz",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2016,
+            "legacy": false
+        },
+        "3710X": {
+            "type": "box",
+            "name": "Roku Express+",
+            "cpu": "MIPS 900 MHz",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2016,
+            "legacy": false
+        }
+    },
+    "Amarillo": {
+        "3800X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick",
+            "cpu": "ARM Cortex A53",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+            
+        },
+        "3810X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick+",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        },
+        "3811X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick+",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2019,
+            "legacy": false
+        }
+    },
+    "Gilbert": {
+        "3900X": {
+            "type": "box",
+            "name": "Roku Express",
+            "cpu": "ARM Cortex A53",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        },
+        "3910X": {
+            "type": "box",
+            "name": "Roku Express+",
+            "cpu": "ARM Cortex A53",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        },
+        "3920X": {
+            "type": "box",
+            "name": "Roku Premiere",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        },
+        "3921X": {
+            "type": "box",
+            "name": "Roku Premiere+",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        }
+    },
+    "Nemo": {
+        "3930X": {
+            "type": "box",
+            "name": "Roku Express",
+            "cpu": "ARM Cortex A53",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2019,
+            "legacy": false
+        },
+        "3931X": {
+            "type": "box",
+            "name": "Roku Express+",
+            "cpu": "ARM Cortex A53",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2019,
+            "legacy": false
+        }
+    },
+    "Cooper": {
+        "4620X": {
+            "type": "box",
+            "name": "Roku Premiere",
+            "cpu": "ARM Cortex A53 1.2 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2016,
+            "legacy": false
+        },
+        "4630X": {
+            "type": "box",
+            "name": "Roku Premiere+",
+            "cpu": "ARM Cortex A53 1.2 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2016,
+            "legacy": false
+        },
+        "4640X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A53 1.2 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2016,
+            "legacy": false
+        }
+    },
+    "Bryan": {
+        "4660X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2017,
+            "legacy": false
+        },
+        "4661X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        },
+        "4662X": {
+            "type": "box",
+            "name": "Roku Ultra LT",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2019,
+            "legacy": false
+        },
+        "4670X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A53",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2019,
+            "legacy": false
+        }
+    },
+    "Austin": {
+        "4200X": {
+            "type": "box",
+            "name": "Roku 3",
+            "cpu": "ARM Cortex A9 1.0 GHz (Dual Core)",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2013,
+            "legacy": false
+        }
+    },
+    "Mustang": {
+        "4210X": {
+            "type": "box",
+            "name": "Roku 2",
+            "cpu": "ARM Cortex A9 1.0 GHz (Dual Core)",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2015,
+            "legacy": false
+        },
+        "4230X": {
+            "type": "box",
+            "name": "Roku 3",
+            "cpu": "ARM Cortex A9 1.0 GHz (Dual Core)",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2015,
+            "legacy": false
+        }
+    },
+    "Dallas": {
+        "4400X": {
+            "type": "box",
+            "name": "Roku 4",
+            "cpu": "ARM (Quad Core)",
+            "ram": "1.5 GB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2016,
+            "legacy": false
+        }
+    },
+    "Liberty": {
+        "5000X": {
+            "type": "tv",
+            "name": "Roku TV",
+            "cpu": "MIPS 1 GHz",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2015,
+            "legacy": false
+        }
+    },
+    "Ft. Worth": {
+        "6000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM (Quad Core)",
+            "ram": "1.5 GB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2016,
+            "legacy": false
+        }
+    },
+    "Rockett": {
+        "3960X": {
+            "type": "box",
+            "name": "Roku Express",
+            "cpu": "ARM Cortex A55",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2022,
+            "legacy": false
+        }
+    },
+    "Marlin": {
+        "3940X": {
+            "type": "box",
+            "name": "Roku Express 4K",
+            "cpu": "ARM Cortex A55",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        },
+        "3941X": {
+            "type": "box",
+            "name": "Roku Express 4K+",
+            "cpu": "ARM Cortex A55",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        }
+    },
+    "Madison": {
+        "3820X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick 4K",
+            "cpu": "ARM Cortex A55",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        },
+        "3821X": {
+            "type": "stick",
+            "name": "Roku Streaming Stick 4K+",
+            "cpu": "ARM Cortex A55",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        }
+    },
+    "Benjamin": {
+        "4800X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A55",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        },
+        "4801X": {
+            "type": "box",
+            "name": "Roku Ultra LT",
+            "cpu": "ARM Cortex A55",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        },
+        "4802X": {
+            "type": "box",
+            "name": "Roku Ultra",
+            "cpu": "ARM Cortex A55",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2022,
+            "legacy": false
+        }
+    },
+    "Trinidad": {
+        "55R6xx": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM CA73 1.0 GHz (Quad Core)",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        },
+        "65R6xx": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM CA73 1.0 GHz (Quad Core)",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        },
+        "75R6xx": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM CA73 1.0 GHz (Quad Core)",
+            "ram": "2 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        }
+    },
+    "Longview": {
+        "7000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM 1.2 GHz (Dual Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2018,
+            "legacy": false
+        }
+    },
+    "Midland": {
+        "8000X": {
+            "type": "tv",
+            "name": "Roku TV",
+            "cpu": "ARM",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        }
+    },
+    "El Paso": {
+        "8000X": {
+            "type": "tv",
+            "name": "Roku TV (Brazil)",
+            "cpu": "ARM",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        }
+    },
+    "Roma": {
+        "D000X": {
+            "type": "tv",
+            "name": "Roku TV",
+            "cpu": "ARM Cortex A55",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        }
+    },
+    "Fruitland": {
+        "9100X": {
+            "type": "soundbar",
+            "name": "Roku Smart Soundbar",
+            "cpu": "ARM Cortex A53",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2020,
+            "legacy": false
+        }
+    },
+    "Chico": {
+        "9102X": {
+            "type": "soundbar",
+            "name": "Roku Streambar",
+            "cpu": "MStar C2",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2020,
+            "legacy": false
+        }
+    },
+    "Miami": {
+        "H000X": {
+            "type": "tv",
+            "name": "2K Roku TV",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "512 MB",
+            "maxOS": null,
+            "hdr": false,
+            "ui": "720p",
+            "video": "1080p",
+            "year": 2017,
+            "legacy": false
+        }
+    },
+    "Reno": {
+        "A000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "1.5 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2020,
+            "legacy": false
+        }
+    },
+    "Malone": {
+        "C000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2020,
+            "legacy": false
+        }
+    },
+    "Athens": {
+        "G000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        }
+    },
+    "Camden": {
+        "C000GB": {
+            "type": "tv",
+            "name": "4K Roku TV (EU)",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "4k",
+            "year": 2021,
+            "legacy": false
+        }
+    },
+    "Bandera": {
+        "E000X": {
+            "type": "tv",
+            "name": "4K Roku TV",
+            "cpu": "ARM 1.0 GHz (Quad Core)",
+            "ram": "1 GB",
+            "maxOS": null,
+            "hdr": true,
+            "ui": "1080p",
+            "video": "8k",
+            "year": 2021,
+            "legacy": false
+        }
+    }
+}
