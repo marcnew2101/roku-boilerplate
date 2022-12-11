@@ -60,9 +60,9 @@ end sub
 sub setLabelList()
     '### set location of label list ###
     ' locate the horiz midpoint using screen UI width and the total width of the label list
-    labelListX = (m.global.ui.width - m.labelList.boundingRect().width) / 2
+    labelListX = (m.global.display.ui.width - m.labelList.boundingRect().width) / 2
     ' locate the vert midpoint using screen UI height and the total height of the label list
-    labelListY = (m.global.ui.height - m.labelList.boundingRect().height) / 2
+    labelListY = (m.global.display.ui.height - m.labelList.boundingRect().height) / 2
     ' set the label list X and Y coordinates
     m.labelList.translation = [labelListX, labelListY]
 
@@ -94,11 +94,9 @@ function onKeyEvent(key as string, press as boolean) as boolean
             return true
         end if
         if (key = "up")
-            ? "up key pressed"
             return true
         end if
         if (key = "down")
-            ? "down key pressed"
             return true
         end if
     end if
