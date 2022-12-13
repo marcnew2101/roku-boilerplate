@@ -1,9 +1,8 @@
 sub init()
-	' preset global values that are used throughout app
-	initGlobals()
 	' true: set config and global values (/components/data/config.json)
 	' false: bypass config
 	initConfiguration(true)
+	' start prelaunch
 	preLaunch()
 end sub
 sub preLaunch()
