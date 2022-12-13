@@ -1,28 +1,16 @@
-
-## Channel Details
-title=MyApp
+title=My App
 major_version=1
 minor_version=0
 build_version=0
-
-## Force latest SceneGraph library
-rsg_version=1.2
-
-## Set deep linking
 supports_input_launch=1
-
-## Subscription event dispatcher for channel search prioritization
+rsg_version=1.2
 sg_component_libs_required=roku_analytics
-
-## Channel Assets
 mm_icon_focus_hd=pkg:/images/app_icon_hd.png
-mm_icon_focus_sd=pkg:/images/app_icon_sd.png
-
-###  Splash Screen
-#### Image sizes are FHD: 1920x1080px | HD: 1280x720px | SD: 720x480px
-splash_screen_fhd=pkg:/images/splash-screen_fhd.png
+mm_icon_focus_fhd=pkg:/images/app_icon_fhd.png
 splash_screen_hd=pkg:/images/splash-screen_hd.png
-splash_screen_sd=pkg:/images/splash-screen_sd.png
-
-## Set UI resolution to 1080p
+splash_screen_fhd=pkg:/images/splash-screen_fhd.png
+splash_min_time=1600
 ui_resolutions=fhd
+run_as_process=1
+debug=true
+debug_log_level=0
