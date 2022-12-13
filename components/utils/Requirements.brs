@@ -42,17 +42,18 @@ sub checkRequirements(requirements as object)
 	if pass and not m.top.getScene().startApp then m.top.getScene().startApp = true
 end sub
 function getRequirement(requirement as object) as boolean
-	v = aaContains(m.global, requirement.key, true, true)
-	if (v <> invalid)
+	keyExists = aaContains(m.global, requirement.key)
+	if (keyExists)
+		v = getAAValue(m.global, requirement.key)
 		if (isBoolean(v))
 			return v
 		else
-			return setAsBool(requirement, v)
+			return setAsBoolean(requirement, v)
 		end if
 	end if
 	return invalid
 end function
-function setAsBool(requirement as object, v as dynamic)
+function setAsBoolean(requirement as object, v as dynamic)
 	if (requirement.key = "os")
 		return getMinOS(requirement, v)
 	else if (requirement.key = "model")
@@ -60,9 +61,7 @@ function setAsBool(requirement as object, v as dynamic)
 	end if
 end function
 function getMinOS(requirement as object, os as float) as boolean
-	if (os >= requirement.value["minVersion"])
-		return true
-	end if
+	if os >= requirement.value["minVersion"] then return true
 	logging("current os version " + str(os) + " does not meet minimum os version " + str(requirement.value["minVersion"]), 4)
 	return false
 end function
@@ -75,7 +74,7 @@ function getModel(requirement as object, model as string) as boolean
 			return false
 		end if
 	else
-		logging("roku device not found")
+		logging("Roku model " + model + " not found", 1)
 	end if
 	return true
 end function
@@ -83,7 +82,8 @@ function findModel(model)
 	logging("loading hardware file...")
 	try
 		hardwareFile = parseJson(readAsciiFile("pkg:/components/data/hardware.json"))
-		return aaContains(hardwareFile, model, true, true)
+		deviceExists = aaContains(hardwareFile, model)
+		if deviceExists then return getAAValue(hardwareFile, model)
 	catch e
 		logging("unable to read hardware.json file - " + e.message, 3)
 		return invalid
