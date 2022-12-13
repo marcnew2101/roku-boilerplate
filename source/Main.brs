@@ -126,7 +126,9 @@ function setAppInfo() as object
 		"isDev": appInfo.isDev(),
 		"devId": appInfo.getDevID(),
 		"title": appInfo.getTitle(),
-		"appVersion": appInfo.getVersion()
+		"appVersion": appInfo.getVersion(),
+		"debug": stringToBool(appInfo.getValue("debug")),
+		"debugLogLevel": appInfo.getValue("debug_log_level").toInt()
 	}
 	return app
 end function
@@ -148,4 +150,10 @@ function getDeepLinks(args) as object
 		}
 	end if
 	return deeplink
+end function
+function stringToBool(value as string) as boolean
+	if (value <> invalid and value.len() > 0)
+		return lCase(value) = "true"
+	end if
+	return false
 end function
