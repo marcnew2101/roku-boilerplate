@@ -1,4 +1,4 @@
-sub logging(message as string, logLevel = 0 as integer, showTimeStamp = true as boolean, debug = m.global.debug as boolean, debugLevel = m.global.debugLevel as integer)
+sub logging(message as string, logLevel = 0 as integer, showTimeStamp = true as boolean, debug = m.global.debug as boolean, debugLevel = m.global.debugLogLevel as integer)
     if (debug <> invalid and debug)
         if (debugLevel <> invalid and logLevel >= debugLevel)
             if (showTimeStamp)
@@ -58,6 +58,7 @@ sub showAppInfo(appInfo = m.global as object)
 	? "Dev ID:   "; appInfo.devId
 	? "Title:    "; appInfo.title
 	? "Version:  "; appInfo.appVersion
+	? "Debug:    "; stringToBool(appInfo.getValue("debug"))
 	? "- - - - - - - - - - - - - - - - - - -"
 	? " "
 end sub
