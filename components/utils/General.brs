@@ -14,29 +14,21 @@ sub appLoaded(node = m.top.getScene() as object)
 	    node.signalBeacon("AppLaunchComplete")
     end if
 end sub
-sub initGlobals()
-    m.global.addFields({
-		"debug": false,
-		"debugLevel": 0
-	})
-end sub
 sub initConfiguration(setConfig as boolean, node = m.top.getScene() as object)
     if (setConfig)
-        logging("getting configuration...", 0, true, true)
+        logging("getting configuration...")
         try
-            logging("loading configuration file...", 0, true, true)
+            logging("loading configuration file...")
             ' get configuration file
             config = parseJson(readAsciiFile("pkg:/components/data/config.json"))
             ' set interface field on HomeScene node
             node.setField("config", config)
-            if not isNullOrEmpty(config.buildType) and config.buildType = "debug" then m.global.debug = true
-            if not isNullOrEmpty(config.debugLevel) and config.debugLevel >= 0 then m.global.debugLevel = config.debugLevel
             if not isNullOrEmpty(config.debugFlags)
-                if config.debugFlags.showDeviceInfo then showDeviceInfo()
-                if config.debugFlags.showAppInfo then showAppInfo()
+                if config.debugFlags.printDeviceInfo then showDeviceInfo()
+                if config.debugFlags.printAppInfo then showAppInfo()
             end if
         catch e
-            logging("unable to read config.json file - " + e.message, 3, true, true)
+            logging("unable to read config.json file - " + e.message, 3)
         end try
     end if
 end sub
@@ -87,20 +79,35 @@ function arrayContains(array as object, value as dynamic) as boolean
     end if
     return false
 end function
-function aaContains(aa as object, key as string, parseTree = false as boolean, getReturnValue = false as boolean) as dynamic
+function aaContains(aa as object, key as string, parseTree = true as boolean) as boolean
     if (isAA(aa) and not isNullOrEmpty(key))
-        keyExists = aa.lookUp(key)
-        if (keyExists <> invalid)
-            if getReturnValue then return keyExists else return true
-        end if
+        keyExists = aa.doesExist(key)
+        if keyExists then return true
         for each item in aa.items()
             if (isAA(item.value) and parseTree)
-                result = aaContains(item.value, key, parseTree, getReturnValue)
-                if (result <> invalid)
-                    if getReturnValue then return result else return true
-                end if
+                keyFound = aaContains(item.value, key, parseTree)
+                if keyFound then return true
             end if
         end for
     end if
-    if not getReturnValue then return false else return invalid
+    return false
+end function
+function getAAValue(aa as object, key as string, parseTree = true as boolean) as dynamic
+    if (isAA(aa) and not isNullOrEmpty(key))
+        keyExists = aa.lookUp(key)
+        if keyExists <> invalid then return keyExists
+        for each item in aa.items()
+            if (isAA(item.value) and parseTree)
+                keyFound = getAAValue(item.value, key, parseTree)
+                if keyFound <> invalid then return keyFound
+            end if
+        end for
+    end if
+    return invalid
+end function
+function stringToBool(value as string) as boolean
+	if (value <> invalid and value.len() > 0)
+		return lCase(value) = "true"
+	end if
+	return false
 end function
