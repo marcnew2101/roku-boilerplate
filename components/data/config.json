@@ -2,25 +2,87 @@
     "buildType": "debug",
     "debugLogLevel": 0,
     "debugFlags": {
-        "printDeviceInfo": true,
-        "printAppInfo": true
+        "printDeviceInfo": false,
+        "printAppInfo": false
     },
-    "manifest": {
-        "title": "My App",
-        "major_version": 1,
-        "minor_version": 0,
-        "build_version": 0,
-        "supports_input_launch": 1,
-        "rsg_version": 1.2,
-        "sg_component_libs_required": "roku_analytics",
-        "mm_icon_focus_hd": "pkg:/images/app_icon_hd.png",
-        "mm_icon_focus_fhd": "pkg:/images/app_icon_fhd.png",
-        "splash_screen_hd": "pkg:/images/splash-screen_hd.png",
-        "splash_screen_fhd": "pkg:/images/splash-screen_fhd.png",
-        "splash_min_time": 1600,
-        "ui_resolutions": "fhd",
-        "run_as_process": 1
-    },
+    "manifest": [
+        {
+            "title": "My App",
+            "comment": "## Channel Name ##",
+            "note": [
+                "set the name for your channel"
+            ]
+        },
+        {
+            "major_version": 1,
+            "minor_version": 0,
+            "build_version": 0,
+            "comment": "## Version/Build ##",
+            "note": [
+                "set the version and build number for your channel"
+            ]
+        },
+        {
+            "supports_input_launch": 1,
+            "comment": "## Deep Linking Support ##",
+            "note": [
+                "allows your channel to launch directly into a specific video"
+            ]
+        },
+        {
+            "sg_component_libs_required": "roku_analytics",
+            "comment": "## Authentication Tracking ##",
+            "note": [
+                "sends an authentication event to Roku each time an authorized user opens your channel",
+                "this will prioritize your channel above non-authenticated channels in the Roku search results"
+            ]
+        },
+        {
+            "mm_icon_focus_hd": "pkg:/images/app_icon_hd.png",
+            "mm_icon_focus_fhd": "pkg:/images/app_icon_fhd.png",
+            "comment": "## Home Screen Icon ##",
+            "note": [
+                "designates the file path for the channel icon image displayed on the Roku home screen"
+            ]
+        },
+        {
+            "splash_screen_hd": "pkg:/images/splash-screen_hd.png",
+            "splash_screen_fhd": "pkg:/images/splash-screen_fhd.png",
+            "splash_color": "#1A1A1A",
+            "splash_min_time": 1600,
+            "comment": "## Splash Screen Settings ##",
+            "note": [
+                "splash_screen designates the file path for the initial image to display when the channel is first launched",
+                "splash_color sets the background color when the splash_screen image is not full screen",
+                "splash_min_time sets the minimum time to display the splash screen in milliseconds"
+            ]
+        },
+        {
+            "ui_resolutions": "fhd",
+            "comment": "## Interface Screen Size ##",
+            "note": [
+                "sets the resolution of the UI using comma separated values ex. fhd,hd,sd"
+            ]
+        },
+        {
+            "run_as_process": 1,
+            "comment": "## Performance Debug ##",
+            "note": [
+                "allows the debug console (8080) to output the memory and CPU utilization for your channel"
+            ]
+        },
+        {
+            "supports_voice_roinput": 1,
+            "supports_etc_seek": 1,
+            "supports_etc_next": 1,
+            "comment": "## Voice Controls ##",
+            "note": [
+                "voice_roinput specifies that the channel supports voice commands",
+                "etc_seek enables the handling of the 'seek' and 'start over' voice commands",
+                "etc_next enables the handling of the 'next' voice command"
+            ]
+        }
+    ],
     "menu": [
         {
             "id": "home",
