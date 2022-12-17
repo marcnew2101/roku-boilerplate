@@ -57,7 +57,7 @@ function setAsBoolean(requirement as object, v as dynamic)
 	if (requirement.key = "os")
 		return getMinOS(requirement, v)
 	else if (requirement.key = "model")
-		return getModel(requirement, v)
+		return getModel(v)
 	end if
 end function
 function getMinOS(requirement as object, os as float) as boolean
@@ -65,7 +65,7 @@ function getMinOS(requirement as object, os as float) as boolean
 	logging("current os version " + str(os) + " does not meet minimum os version " + str(requirement.value["minVersion"]), 4)
 	return false
 end function
-function getModel(requirement as object, model as string) as boolean
+function getModel(model as string) as boolean
 	logging("getting hardware...")
 	roku = findModel(model)
 	if (not isNullOrEmpty(roku))
@@ -74,7 +74,7 @@ function getModel(requirement as object, model as string) as boolean
 			return false
 		end if
 	else
-		logging("Roku model " + model + " not found", 1)
+		logging("Roku model " + model + " not found", 2)
 	end if
 	return true
 end function
