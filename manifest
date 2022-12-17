@@ -1,16 +1,38 @@
+## Channel Name ##
 title=My App
+
+## Version/Build ##
 major_version=1
 minor_version=0
 build_version=0
+
+## Deep Linking Support ##
 supports_input_launch=1
-rsg_version=1.2
+
+## Authentication Tracking ##
 sg_component_libs_required=roku_analytics
+
+## Home Screen Icon ##
 mm_icon_focus_hd=pkg:/images/app_icon_hd.png
 mm_icon_focus_fhd=pkg:/images/app_icon_fhd.png
+
+## Splash Screen Settings ##
 splash_screen_hd=pkg:/images/splash-screen_hd.png
 splash_screen_fhd=pkg:/images/splash-screen_fhd.png
+splash_color=#1A1A1A
 splash_min_time=1600
+
+## Interface Screen Size ##
 ui_resolutions=fhd
+
+## Performance Debug ##
 run_as_process=1
+
+## Voice Controls ##
+supports_voice_roinput=1
+supports_etc_seek=1
+supports_etc_next=1
+
+## Debug Settings ##
 debug=true
 debug_log_level=0
