@@ -8,7 +8,7 @@ sub main(args)
 	' create device info object
 	deviceInfo = setDeviceInfo()
 	' create app/manifest info object
-	appInfo = setAppInfo()
+	appInfo = setAppInfo(args)
 	'########################################################################
 
 	'########################## SCENEGRAPH SETUP ############################
@@ -17,7 +17,7 @@ sub main(args)
 	' create root scenegraph node
 	screen = createObject("roSGScreen")
 	' set global values using info obtained from device and app
-	setGlobals(screen, deviceInfo, appInfo, args)
+	setGlobals(screen, deviceInfo, appInfo)
 	' set the message port for screen events
 	screen.setMessagePort(port)
 	' create the initial scenegraph object
@@ -117,7 +117,7 @@ function setDeviceInfo() as object
 	}
 	return device
 end function
-function setAppInfo() as object
+function setAppInfo(args) as object
 	' create app info object
 	appInfo = createObject("roAppInfo")
 	' create object with app info definitions
@@ -127,12 +127,13 @@ function setAppInfo() as object
 		"devId": appInfo.getDevID(),
 		"title": appInfo.getTitle(),
 		"appVersion": appInfo.getVersion(),
+		"deeplink": getDeepLinks(args),
 		"debug": stringToBool(appInfo.getValue("debug")),
 		"debugLogLevel": appInfo.getValue("debug_log_level").toInt()
 	}
 	return app
 end function
-sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
+sub setGlobals(screen, deviceInfo, appInfo)
 	' combine deviceInfo and appInfo as one object
 	deviceInfo.append(appInfo)
 	' get the global reference object
@@ -141,7 +142,7 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
 	m.global.addFields(deviceInfo)
 end sub
 function getDeepLinks(args) as object
-	deeplink = invalid
+	deeplink = {}
 	' check if both contentId and mediaType are valid
 	if (args.contentId <> invalid and args.mediaType <> invalid)
 		deeplink = {
