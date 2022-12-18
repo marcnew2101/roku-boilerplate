@@ -3,7 +3,7 @@
         {
             "id": "home",
             "title": "HOME",
-            "appState": [
+            "buildType": [
                 "release",
                 "debug"
             ]
@@ -11,7 +11,7 @@
         {
             "id": "settings",
             "title": "SETTINGS",
-            "appState": [
+            "buildType": [
                 "release",
                 "debug"
             ]
@@ -19,23 +19,28 @@
         {
             "id": "developer",
             "title": "DEVELOPER",
-            "appState": [
+            "buildType": [
                 "debug"
-            ],
-            "subMenu": [
-                {
-                    "id": "logging",
-                    "title": "LOGGING"
-                },
-                {
-                    "id": "overlay",
-                    "title": "OVERLAY"
-                },
-                {
-                    "id": "proxy",
-                    "title": "PROXY"
-                }
             ]
         }
-    ]
+    ],
+    "sub": {
+        "developer": [
+            {
+                "id": "logging",
+                "title": "LOGGING"
+            },
+            {
+                "id": "overlay",
+                "title": "OVERLAY"
+            },
+            {
+                "id": "proxy",
+                "title": "PROXY"
+            }
+        ],
+        "settings": [
+            
+        ]
+    }
 }
