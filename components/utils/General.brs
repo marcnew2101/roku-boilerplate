@@ -32,20 +32,31 @@ sub initConfiguration(setConfig as boolean, node = m.top.getScene() as object)
         end try
     end if
 end sub
-sub initMenuContent(config = m.top.getScene().config as object)
-    if (not isNullOrEmpty(config.menu))
-        logging("getting menu content...")
-        menuItems = []
-        for each item in config.menu
-            if (not isNullOrEmpty(item.appState) and arrayContains(item, config.buildType))
-                menuItem = createObject("roSGNode", "MenuItem")
-                menuItem.id = item.id
-                menuItem.title = item.title
-                menuItem.iconUri = "pkg:/images/menu/icon_" + menuItem.id + ".png"
-                menuItem.focusedIconUri = "pkg:/images/menu/icon_focused_" + menuItem.id + ".png"
-                menuItems.push(menuItem)
+sub initMenuContent(node = m.top.getScene() as object, config = m.top.getScene().config as object)
+    if (not isNullOrEmpty(config))
+        logging("getting menus...")
+        try
+            logging("loading menus file...")
+            ' get menus file
+            menus = parseJson(readAsciiFile("pkg:/components/data/menus.json"))
+            ' check for main (side) menu
+            if not isNullOrEmpty(menus.main)
+                menu = createObject("roSGNode", "Menu")
+                menu.id = "menu"
+                for each item in menus.main
+                    if (not isNullOrEmpty(item.buildType) and arrayContains(item.buildType, config.buildType))
+                        menuItem = createObject("roSGNode", "MenuItem")
+                        menuItem.id = item.id
+                        menuItem.title = item.title
+                        menuItem.iconUri = "pkg:/images/menu/icon_" + menuItem.id + ".png"
+                        menuItem.focusedIconUri = "pkg:/images/menu/icon_focused_" + menuItem.id + ".png"
+                        menu.appendChild(menuItem)
+                    end if
+                end for
             end if
-        end for
+        catch e
+            logging("unable to read menus.json file - " + e.message, 3)
+        end try
     end if
 end sub
 function isNullOrEmpty(value as dynamic) as boolean
