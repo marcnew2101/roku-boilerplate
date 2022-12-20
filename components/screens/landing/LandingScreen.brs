@@ -19,8 +19,8 @@ sub screenVisible(obj)
         setLandingTitle()
         ' populate the label list with content
         populateLabelList()
-        ' set location and theme of label list
-        setLabelList()
+        ' set translation and theme of label list
+        arrangeLabelList()
         ' set key focus to the label list
         setFocus(m.labelList)
         ' send signal beacon per Roku certification requirements
@@ -35,29 +35,10 @@ sub setLandingTitle()
     ' set the label color using the palette from the home scene node
     m.landingTitle.color = m.top.getScene().palette.colors.primaryTextColor
 end sub
-sub populateLabelList()
-    ' create array of strings to be displayed in the label list
-    ' tr() is optional for translating to another language
-    listItems = [
-        tr("Sign In"),
-        tr("Register"),
-        tr("Exit")
-    ]
-    ' create parent content node
-    parentNode = createObject("roSGNode", "ContentNode")
-    ' loop over the list items
-    for each item in listItems
-        ' create child content node to hold list data
-        childNode = createObject("roSGNode", "ContentNode")
-        ' use the list item string as the title for the content node
-        childNode.title = item
-        ' add the child node to the parent node
-        parentNode.appendChild(childNode)
-    end for
-    ' assign the parent node to the label list content
-    m.labelList.content = parentNode
+sub populateLabelList(menuNode = initMenuContent(m.top.subType()) as object)
+    m.labelList.content = menuNode
 end sub
-sub setLabelList()
+sub arrangeLabelList()
     '### set location of label list ###
     ' locate the horiz midpoint using screen UI width and the total width of the label list
     labelListX = (m.global.display.ui.width - m.labelList.boundingRect().width) / 2
@@ -82,15 +63,18 @@ sub onItemSelected(obj)
     ' observe when the exit key is selected
     if (itemSelected.title = tr("Exit"))
         ' send message to exit app
-        m.top.getScene().message = "exit"
+        exitApp()
+    else if (itemSelected.title = tr("Home Screen"))
+        ' create the home screen
+	    addScreen("HomeScreen")
     end if
 end sub
 ' capture key events from remote control
 function onKeyEvent(key as string, press as boolean) as boolean
     if (press)
         if (key = "back")
-            ' send message to exit app
-            m.top.getScene().message = "exit"
+            ' send message to exit app immediately
+            exitApp(false)
             return true
         end if
         if (key = "up")
