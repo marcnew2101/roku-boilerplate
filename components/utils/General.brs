@@ -32,22 +32,21 @@ sub initConfiguration(setConfig as boolean, node = m.top.getScene() as object)
         end try
     end if
 end sub
-sub initMenuContent(node = m.top.getScene() as object, config = m.top.getScene().config as object)
-    if (not isNullOrEmpty(config))
-        logging("getting menus...")
+sub initMenuContent(menuType as string, config = m.top.getScene().config as object) as object
+    menu = createObject("roSGNode", "ContentNode")
+    if (not isNullOrEmpty(menuType) and not isNullOrEmpty(config))
+        logging("getting menu for " + menuType)
         try
             logging("loading menus file...")
             ' get menus file
             menus = parseJson(readAsciiFile("pkg:/components/data/menus.json"))
             ' check for main (side) menu
-            if not isNullOrEmpty(menus.main)
-                menu = createObject("roSGNode", "Menu")
-                menu.id = "menu"
-                for each item in menus.main
+            if not isNullOrEmpty(menus[menuType])
+                for each item in menus[menuType]
                     if (not isNullOrEmpty(item.buildType) and arrayContains(item.buildType, config.buildType))
                         menuItem = createObject("roSGNode", "MenuItem")
                         menuItem.id = item.id
-                        menuItem.title = item.title
+                        menuItem.title = tr(item.title)
                         menuItem.iconUri = "pkg:/images/menu/icon_" + menuItem.id + ".png"
                         menuItem.focusedIconUri = "pkg:/images/menu/icon_focused_" + menuItem.id + ".png"
                         menu.appendChild(menuItem)
@@ -58,6 +57,7 @@ sub initMenuContent(node = m.top.getScene() as object, config = m.top.getScene()
             logging("unable to read menus.json file - " + e.message, 3)
         end try
     end if
+    return menu
 end sub
 function isNullOrEmpty(value as dynamic) as boolean
     if (isString(value))
@@ -77,8 +77,12 @@ function iffy(condition as boolean, this as dynamic, that as dynamic) as dynamic
         return that
     end if
 end function
-sub exitApp(node = m.top.getScene())
-    node.exitApp = true
+sub exitApp(confirm = true, node = m.top.getScene())
+    if (confirm)
+        node.message = "exit"
+    else
+        node.exitApp = true
+    end if
 end sub
 function arrayContains(array as object, value as dynamic) as boolean
     if (not isNullOrEmpty(array) and not isNullOrEmpty(value) and isArray(array))
