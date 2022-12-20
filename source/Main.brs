@@ -21,7 +21,7 @@ sub main(args)
 	' set the message port for screen events
 	screen.setMessagePort(port)
 	' create the initial scenegraph object
-	scene = screen.createScene("HomeScene")
+	scene = screen.createScene("App")
 	' render the initial scenegraph object
 	screen.show()
 	' observe changes to exitApp interface on HomeScene
