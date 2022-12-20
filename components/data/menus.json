@@ -42,5 +42,38 @@
         "settings": [
             
         ]
-    }
+    },
+    "LandingScreen": [
+        {
+            "id": "homeScreen",
+            "title": "HOME SCREEN",
+            "buildType": [
+                "debug"
+            ]
+        },
+        {
+            "id": "signIn",
+            "title": "SIGN IN",
+            "buildType": [
+                "release",
+                "debug"
+            ]
+        },
+        {
+            "id": "register",
+            "title": "REGISTER",
+            "buildType": [
+                "release",
+                "debug"
+            ]
+        },
+        {
+            "id": "exit",
+            "title": "EXIT",
+            "buildType": [
+                "release",
+                "debug"
+            ]
+        }
+    ]
 }
