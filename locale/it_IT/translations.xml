@@ -19,6 +19,10 @@
 				<source>Exit</source>
 				<target>Uscita</target>
 			</trans-unit>
+			<trans-unit id="4">
+				<source>Home Screen</source>
+				<target>Schermo di casa</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
