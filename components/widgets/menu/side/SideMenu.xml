@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="SideMenu" extends="Group">
+    <script type="text/brightscript" uri="SideMenu.brs" />
+    <interface>
+		<field id="content" type="node" onChange="onContentChanged"/>
+    </interface>
+    <children>
+        <Rectangle
+            id="background"
+            width="1920"
+            height="1080"
+            color="0x121212FF"
+            opacity="0"/>
+        <TargetList
+            id="menuList"/>
+    </children>
+</component>
