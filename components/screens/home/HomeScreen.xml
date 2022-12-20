@@ -2,6 +2,9 @@
 <component name="HomeScreen" extends="BaseScreen">
     <script type="text/brightscript" uri="HomeScreen.brs" />
     <children>
-        <Menu/>
+        <!-- initiate the side menu -->
+        <SideMenu
+            id="sideMenu"
+            opacity="0"/>
     </children>
 </component>
