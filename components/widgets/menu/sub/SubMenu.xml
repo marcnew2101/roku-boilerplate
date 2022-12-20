@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="SubMenu" extends="Group">
+    <script type="text/brightscript" uri="SubMenu.brs" />
+    <children>
+        <Rectangle
+            id="background"
+            width="1920"
+            height="1080"
+            color="0x121212FF"
+            opacity="0"/>
+    </children>
+</component>
