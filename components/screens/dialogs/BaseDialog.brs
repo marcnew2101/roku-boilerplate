@@ -8,7 +8,9 @@ sub init()
 end sub
 sub onTitleChange(obj)
     title = obj.getData()
-    if m.titlearea <> invalid and len(m.titlearea.primaryTitle) > 0 then m.titlearea.primaryTitle = ""
+    if m.titlearea <> invalid and len(m.titlearea.primaryTitle) > 0
+        m.titlearea.primaryTitle = ""
+    end if
     if title <> invalid and len(title) > 0 then m.titlearea.primaryTitle = title
 end sub
 sub onMessageChange(obj)
@@ -21,7 +23,9 @@ sub onMessageChange(obj)
 end sub
 sub onBulletTextChange(obj)
     bullets = obj.getData()
-    if m.bulletarea <> invalid and m.bulletarea.bulletText.count() > 0 then m.bulletarea.bulletText = []
+    if m.bulletarea <> invalid and m.bulletarea.bulletText.count() > 0
+        m.bulletarea.bulletText = []
+    end if
     if bullets = invalid or bullets.count() = 0 then return
     m.bulletarea.bulletText = bullets
     for each node in m.bulletarea.getChild(0).getChildren(-1, 0)
@@ -45,7 +49,11 @@ function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     if key <> Const().key.back then return false
     dialogModal = getScreen("dialogModal")
-    if dialogModal = invalid or dialogModal.dialogInfo = invalid or dialogModal.dialogInfo.count() = 0 then return true
-    if dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack then removeScreen(dialogModal)
+    if dialogModal = invalid or dialogModal.dialogInfo = invalid or dialogModal.dialogInfo.count() = 0
+        return true
+    end if
+    if dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack
+        removeScreen(dialogModal)
+    end if
     return true
 end function

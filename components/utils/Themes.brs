@@ -10,9 +10,15 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
         paletteNode.colors = themeColors.palette
         homeScene.palette = paletteNode
     end if
-    if themeColors.backgroundUri <> invalid then homeScene.backgroundUri = themeColors.backgroundUri
-    if themeColors.backgroundColor <> invalid then homeScene.backgroundColor = themeColors.backgroundColor
-    if themeColors.selectorUri <> invalid and len(themeColors.selectorUri) > 0 then homeScene.selectorUri = themeColors.selectorUri
+    if themeColors.backgroundUri <> invalid
+        homeScene.backgroundUri = themeColors.backgroundUri
+    end if
+    if themeColors.backgroundColor <> invalid
+        homeScene.backgroundColor = themeColors.backgroundColor
+    end if
+    if themeColors.selectorUri <> invalid and len(themeColors.selectorUri) > 0
+        homeScene.selectorUri = themeColors.selectorUri
+    end if
 end sub
 function getThemeFromRegistry() as object
     theme = invalid

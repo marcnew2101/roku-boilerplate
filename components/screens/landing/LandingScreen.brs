@@ -39,9 +39,12 @@ sub setLabelList()
     m.labelList.translation = [labelListX, labelListY]
 
     ' theme the label list using the HomeScene palette
-    if m.top.getScene().selectorUri <> invalid then m.labelList.focusBitmapUri = m.top.getScene().selectorUri
-    m.labelList.color = m.top.getScene().palette.colors.primaryTextColor
-    m.labelList.focusedColor = m.top.getScene().palette.colors.primaryTextColor
+    scene = m.top.getScene()
+    if scene.selectorUri <> invalid
+        m.labelList.focusBitmapUri = scene.selectorUri
+    end if
+    m.labelList.color = scene.palette.colors.primaryTextColor
+    m.labelList.focusedColor = scene.palette.colors.primaryTextColor
 end sub
 sub onItemSelected(obj)
     itemIndex = obj.getData()
