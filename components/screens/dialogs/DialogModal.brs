@@ -41,6 +41,10 @@ sub onButtonSelected(obj)
         end if
     else if buttonSelected = button.cancel or buttonSelected = button.no
         removeBaseDialog()
+    else
+        ' unknown label means the messages.json entry doesn't match Const().button —
+        ' dialog stays open so the dev sees this warning without losing user state
+        logWarn("unrecognized button '" + valueOr(buttonSelected, "<invalid>") + "' — must match Const().button", "DialogModal.brs")
     end if
 end sub
 

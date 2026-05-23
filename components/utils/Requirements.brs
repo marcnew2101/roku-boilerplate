@@ -19,10 +19,10 @@ function checkRequirements(requirements as object) as boolean
     deviceReady = true
     for each requirement in requirements.items()
         if requirement.value = invalid or requirement.value["required"] <> true then continue for
-        deviceReady = getRequirement(requirement)
-        if deviceReady = invalid
-            deviceReady = true
-        else if not deviceReady and requirement.value["showError"] = true
+        passed = getRequirement(requirement)
+        ' AND so any failed required check sticks; a later passing check can't unmask it
+        deviceReady = deviceReady and passed
+        if not passed and requirement.value["showError"] = true
             m.scene.message = requirement.key
             exit for
         end if

@@ -20,7 +20,13 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
     if node = invalid then return false
     if hasValue(m.screenStack)
         if removeFromStack = true
-            if m.screenStack.peek().isSameNode(node) then m.screenStack.pop()
+            ' walk from top so out-of-order removals don't leave ghost entries in the stack
+            for i = m.screenStack.count() - 1 to 0 step -1
+                if m.screenStack[i].isSameNode(node)
+                    m.screenStack.delete(i)
+                    exit for
+                end if
+            end for
         end if
         if m.screenStack.count() > 0 and showPrevScreen = true
             prevNode = m.screenStack.peek()

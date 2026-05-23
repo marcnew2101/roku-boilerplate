@@ -1,6 +1,8 @@
 ' ---- value helpers ----
 ' true when x is non-invalid and (for strings / arrays / AAs) non-empty.
-' Numbers, booleans, and nodes only get the non-invalid check.
+' Numbers, booleans, and nodes only get the non-invalid check, so hasValue(false)
+' and hasValue(0) both return true. Don't use valueOr() to default booleans:
+' false is "present" and the default never fires.
 function hasValue(x as dynamic) as boolean
     if x = invalid then return false
     valueType = type(x)

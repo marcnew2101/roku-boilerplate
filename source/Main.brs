@@ -144,8 +144,8 @@ sub getAppInfo(appInfo)
 end sub
 
 sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs, devLogging = true as boolean)
-    m.global = screen.getGlobalNode()
-    m.global.addFields({
+    globalNode = screen.getGlobalNode()
+    globalNode.addFields({
         "deviceId": deviceInfo.id,
         "model": deviceInfo.model,
         "os": deviceInfo.os,
