@@ -1,15 +1,14 @@
 sub createDialog(params = {} as object)
     if params = invalid
-        ? "message is not an object - Messages.brs"
+        logError("message is not an object", "Messages.brs")
         return
     end if
     if params.count() = 0
-        ? "message is empty - Messages.brs"
+        logError("message is empty", "Messages.brs")
         return
     end if
     if params.title = invalid or len(params.title) = 0
-        ? "message title is required - Messages.brs"
-        ? "message is: "; params
+        logError("message title is required; contents: " + FormatJson(params), "Messages.brs")
         return
     end if
     if screenExists("dialogModal")

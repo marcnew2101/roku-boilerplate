@@ -57,11 +57,11 @@ function onKeyEvent(key as string, press as boolean) as boolean
         return true
     end if
     if key = keys.up
-        ? "up key pressed"
+        logDebug("up key pressed", "LandingScreen.brs")
         return true
     end if
     if key = keys.down
-        ? "down key pressed"
+        logDebug("down key pressed", "LandingScreen.brs")
         return true
     end if
     return false

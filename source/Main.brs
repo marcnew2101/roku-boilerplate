@@ -4,6 +4,7 @@ sub main(args)
     showAppInfo = false ' show app info in the console
     showBandwidth = false ' show bandwidth utilization
     showHttpErrors = false ' show http and url errors
+    devLogging = true ' show logInfo/logDebug output (logError/logWarn always print)
     '########################################################################
 
     '########################### DEVICE/APP INFO ############################
@@ -23,7 +24,7 @@ sub main(args)
     ' create root scenegraph node
     screen = createObject("roSGScreen")
     ' set global values using info obtained from device and app
-    setGlobals(screen, deviceInfo, appInfo, args)
+    setGlobals(screen, deviceInfo, appInfo, args, devLogging)
     ' set the message port for screen events
     screen.setMessagePort(port)
     ' create the initial scenegraph object
@@ -165,10 +166,8 @@ sub getAppInfo(appInfo)
     ? "- - - - - - - - - - - - - - - - - - -"
     ? " "
 end sub
-sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
-    ' get the global reference object
+sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs, devLogging = true as boolean)
     m.global = screen.getGlobalNode()
-    ' assign variables to global object
     m.global.addFields({
         "deviceId": deviceInfo.id,
         "model": deviceInfo.model,
@@ -178,7 +177,8 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs)
         "graphics": deviceInfo.graphics,
         "ui": deviceInfo.display.ui,
         "hdcp": deviceInfo.hdmi.hdcp,
-        "deeplink": getDeepLinks(deepLinkArgs)
+        "deeplink": getDeepLinks(deepLinkArgs),
+        "devLogging": devLogging
     })
 end sub
 function getDeepLinks(args) as object
