@@ -31,7 +31,7 @@ sub populateDialogBox(obj)
         ' inspect the dialog info message
         if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then message = m.dialogInfo.message else message = ""
         ' inspect the dialog info help message
-        if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then help = m.dialogInfo.bulletText else help = []
+        if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then help = m.dialogInfo.help else help = []
         ' inspect the dialog info buttons
         if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then buttons = m.dialogInfo.buttons else buttons = []
         ' create the dialog node
