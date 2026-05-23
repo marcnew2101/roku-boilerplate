@@ -154,6 +154,11 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs, devLogging = true as b
         "graphics": deviceInfo.graphics,
         "ui": deviceInfo.display.ui,
         "hdcp": deviceInfo.hdmi.hdcp,
+        "appId": appInfo.id,
+        "appTitle": appInfo.title,
+        "appVersion": appInfo.version,
+        "appIsDev": appInfo.isDev,
+        "appDevId": appInfo.devId,
         "deeplink": getDeepLinks(deepLinkArgs),
         "devLogging": devLogging
     })

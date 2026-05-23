@@ -5,6 +5,9 @@ end sub
 
 function addHistory(node as object, showScreen as boolean, hidePrevScreen as boolean, addToStack as boolean) as boolean
     if node = invalid then return false
+    ' appendChild first so a failure leaves the stack and prev-screen visibility untouched;
+    ' BaseScreen.init() already sets visible=false, so no double-visible flash
+    if not m.top.appendChild(node) then return false
     if hidePrevScreen = true and hasValue(m.screenStack)
         prevNode = m.screenStack.peek()
         if prevNode <> invalid then prevNode.visible = false
@@ -13,7 +16,7 @@ function addHistory(node as object, showScreen as boolean, hidePrevScreen as boo
     if addToStack = true and m.screenStack <> invalid
         m.screenStack.push(node)
     end if
-    return m.top.appendChild(node)
+    return true
 end function
 
 function removeHistory(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean

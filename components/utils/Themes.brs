@@ -9,10 +9,11 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
         paletteNode.colors = themeColors.palette
         m.scene.palette = paletteNode
     end if
-    if themeColors.backgroundUri <> invalid
+    ' hasValue treats empty strings as absent, so "" in themes.json means "leave the default"
+    if hasValue(themeColors.backgroundUri)
         m.scene.backgroundUri = themeColors.backgroundUri
     end if
-    if themeColors.backgroundColor <> invalid
+    if hasValue(themeColors.backgroundColor)
         m.scene.backgroundColor = themeColors.backgroundColor
     end if
     if hasValue(themeColors.selectorUri)
