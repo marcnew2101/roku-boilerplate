@@ -18,39 +18,24 @@ sub startApp()
     addScreen("LandingScreen", "landingScreen")
 end sub
 function addNode(params as object) as object
-    ' check that the object from params is valid
-    if (params <> invalid and params.count() > 0)
-        ' check that the screenName value in the object is valid
-        if (params.screenName <> invalid and len(params.screenName) > 0)
-            ' create the node using the params.screen value
-            node = createObject("roSGNode", params.screenName)
-            ' check that the created node is valid
-            if (node <> invalid)
-                ' check if the node ID is not yet assigned
-                if (node.id = invalid or (node.id <> invalid and len(node.id) = 0))
-                    ' check if the screenId is valid and has a string length greater than zero
-                    if (params.screenId <> invalid and len(params.screenId) > 0)
-                        ' assign the node ID using params.screenId
-                        node.id = params.screenId
-                    else
-                        ' assign the node ID usind params.screenName
-                        node.id = params.screenName
-                    end if
-                end if
-                ' add the screen to History.brs
-                if (not addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack))
-                    ' show a console message stating that the node could not be added to HomeScene
-                    ? " "
-                    ? "there was an error adding " + node.id + " to HomeScene"
-                else
-                    ' set focus to node
-                    node.setFocus(true)
-                end if
-                ' return the node
-                return node
-            end if
+    if params = invalid or params.count() = 0 then return invalid
+    if params.screenName = invalid or len(params.screenName) = 0 then return invalid
+    node = createObject("roSGNode", params.screenName)
+    if node = invalid then return invalid
+    if node.id = invalid or len(node.id) = 0
+        if params.screenId <> invalid and len(params.screenId) > 0
+            node.id = params.screenId
+        else
+            node.id = params.screenName
         end if
     end if
+    if addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack)
+        node.setFocus(true)
+    else
+        ? " "
+        ? "there was an error adding " + node.id + " to HomeScene"
+    end if
+    return node
 end function
 sub removeNode(params as object)
     if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))

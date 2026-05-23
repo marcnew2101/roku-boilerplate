@@ -1,37 +1,25 @@
 function getScreen(screenId as string, showScreen = false as boolean)
-    ' check that the argument for screenId is valid and has a string length greater than zero
-    if (screenId <> invalid and len(screenId) > 0)
-        ' find the node
-        node = m.top.getScene().findNode(screenId)
-        ' check that the node is valid
-        if (node <> invalid)
-            ' show the node if the node is not visible and the showScreen argument is true
-            if not node.visible and showScreen then node.visible = true
-            ' return the requested node
-            return node
-        else
-            ' show a console message stating the requested screen/node is not valid
-            ? " "
-            ? screenId + " was not found"
-            return invalid
-        end if
-    else
-        ' show a console message stating that getScreen requires a valid screenId
+    if screenId = invalid or len(screenId) = 0
         ? " "
         ? "you must set a valid id (string) for screenId"
+        return invalid
     end if
+    node = m.top.getScene().findNode(screenId)
+    if node = invalid
+        ? " "
+        ? screenId + " was not found"
+        return invalid
+    end if
+    if not node.visible and showScreen then node.visible = true
+    return node
 end function
 function screenExists(screenId as string) as boolean
-    ' ensure screenId is valid and not an empty string
-    if (screenId <> invalid and len(screenId) > 0)
-        ' get the screen node
-        node = getScreen(screenId)
-        if node <> invalid then return true
-    else
+    if screenId = invalid or len(screenId) = 0
         ? " "
         ? "screen not found"
+        return false
     end if
-    return false
+    return getScreen(screenId) <> invalid
 end function
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
     ' check if screenId is invalid or empty
@@ -51,25 +39,15 @@ function addScreen(screenName as string, screenId = invalid as string, showScree
     return m.top.getScene().callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
 end function
 sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
-    ' check that screen is valid
-    if (screen <> invalid)
-        ' set initial node value
-        node = invalid
-        ' check if the screen is a node type
-        if (type(screen) = "roSGNode")
-            ' set the node value
-            node = screen
-        ' check if the screen is a string type
-        else if (type(screen) = "String" and len(screen) > 0)
-            ' find the node and set the return valud
-            node = getScreen(screen)
-        end if
-        ' check if the node is valid
-        if (node <> invalid)
-            ' call the removeNode function on the HomeScene interface
-            m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
-        end if
+    if screen = invalid then return
+    node = invalid
+    if type(screen) = "roSGNode"
+        node = screen
+    else if type(screen) = "String" and len(screen) > 0
+        node = getScreen(screen)
     end if
+    if node = invalid then return
+    m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
 end sub
 function getAllScreens() as dynamic
     ' create a variable to store all of the child nodes from HomeScene
@@ -100,25 +78,15 @@ sub showAllScreens()
     end if
 end sub
 sub setFocus(node as dynamic, saveFocus = true as boolean)
-    ' check that node is valid
-    if (node <> invalid)
-        ' set initial focusedNode value
-        focusedNode = invalid
-        ' check if the node is a node type
-        if (type(node) = "roSGNode")
-            ' set the focusedNode value
-            focusedNode = node
-        ' check if the node is a string type
-        else if (type(node) = "String" and len(node) > 0)
-            ' find the node and set the return valud
-            focusedNode = getScreen(node)
-        end if
-        ' check if the focusedNode is valid
-        if (focusedNode <> invalid)
-            ' set focus to node
-            focusedNode.setFocus(true)
-            ' check if saveFocus is true and set HomeScene node interface
-            if saveFocus then m.top.update({"focusedNode": focusedNode}, true)
-        end if
+    if node = invalid then return
+    focusedNode = invalid
+    if type(node) = "roSGNode"
+        focusedNode = node
+    else if type(node) = "String" and len(node) > 0
+        focusedNode = getScreen(node)
     end if
+    if focusedNode = invalid then return
+    focusedNode.setFocus(true)
+    ' createFields=true keeps non-BaseScreen callers (e.g. HomeScene) working
+    if saveFocus then m.top.update({"focusedNode": focusedNode}, true)
 end sub
