@@ -1,7 +1,3 @@
-sub init()
-    ' set the initial visibility of the screen to false
-    m.top.visible = false
-end sub
 sub createDialogNode(title = "" as string, message = "" as string, help = [] as object, buttons = [] as object)
     ' create message dialog node
     m.dialogNode = CreateObject("roSGNode", "BaseDialog")

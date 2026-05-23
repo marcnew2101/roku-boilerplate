@@ -1,31 +1,15 @@
-sub init()
-    ' set the initial visibility of the screen to false
-    m.top.visible = false
-    ' ### node identifiers ###
-    ' identify the label list
+sub onScreenInit()
     m.labelList = m.top.findNode("landingLabelList")
-    ' identify the title label
     m.landingTitle = m.top.findNode("landingTitle")
-    ' ### node observers ###
-    ' observe screen visibility
-    m.top.observeField("visible", "screenVisible")
-    ' observe button presses on the label list
     m.labelList.observeField("itemSelected", "onItemSelected")
 end sub
-sub screenVisible(obj)
-    visible = obj.getData()
-    if (visible)
-        ' set text and theme of landing title
-        setLandingTitle()
-        ' populate the label list with content
-        populateLabelList()
-        ' set location and theme of label list
-        setLabelList()
-        ' set key focus to the label list
-        setFocus(m.labelList)
-        ' send signal beacon per Roku certification requirements
-        appLoaded()
-    end if
+sub onScreenVisible()
+    setLandingTitle()
+    populateLabelList()
+    setLabelList()
+    setFocus(m.labelList)
+    ' Roku certification requires this beacon to indicate app finished loading
+    appLoaded()
 end sub
 sub setLandingTitle()
     ' set the text string for the title label - tr() is optional for translating the string to another language
