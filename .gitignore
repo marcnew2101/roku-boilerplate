@@ -1,6 +1,7 @@
 .*
 roku-deploy.zip
 roku-boilerplate.code-workspace
+docs/refactor/
 !/.gitignore
 !/.vscode
 !/.env-sample
