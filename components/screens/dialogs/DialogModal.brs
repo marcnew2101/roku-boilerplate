@@ -20,27 +20,11 @@ sub createDialogNode(title = "" as string, message = "" as string, help = [] as 
 end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
-    if m.dialogInfo = invalid or m.dialogInfo.count() = 0 then return
-    if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0
-        title = m.dialogInfo.title
-    else
-        title = ""
-    end if
-    if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0
-        message = m.dialogInfo.message
-    else
-        message = ""
-    end if
-    if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0
-        help = m.dialogInfo.help
-    else
-        help = []
-    end if
-    if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0
-        buttons = m.dialogInfo.buttons
-    else
-        buttons = []
-    end if
+    if not hasValue(m.dialogInfo) then return
+    title = valueOr(m.dialogInfo.title, "")
+    message = valueOr(m.dialogInfo.message, "")
+    help = valueOr(m.dialogInfo.help, [])
+    buttons = valueOr(m.dialogInfo.buttons, [])
     createDialogNode(title, message, help, buttons)
 end sub
 sub onButtonSelected(obj)
@@ -48,7 +32,7 @@ sub onButtonSelected(obj)
     buttonSelected = m.dialogNode.buttons[buttonIndex]
     button = Const().button
     if buttonSelected = button.okay or buttonSelected = button.yes
-        if m.dialogInfo.exitApp <> invalid and m.dialogInfo.exitApp
+        if m.dialogInfo.exitApp = true
             m.top.getScene().exitApp = true
         else
             removeBaseDialog()

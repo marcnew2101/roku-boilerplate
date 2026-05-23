@@ -1,5 +1,5 @@
 function getScreen(screenId as string, showScreen = false as boolean)
-    if screenId = invalid or len(screenId) = 0
+    if not hasValue(screenId)
         logError("invalid screenId passed to getScreen", "Screens.brs")
         return invalid
     end if
@@ -12,14 +12,14 @@ function getScreen(screenId as string, showScreen = false as boolean)
     return node
 end function
 function screenExists(screenId as string) as boolean
-    if screenId = invalid or len(screenId) = 0
+    if not hasValue(screenId)
         logError("invalid screenId passed to screenExists", "Screens.brs")
         return false
     end if
     return getScreen(screenId) <> invalid
 end function
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
-    if screenId = invalid or screenId.len() = 0
+    if not hasValue(screenId)
         screenId = screenName
         logInfo("no screen id assigned for " + screenName + " node; using " + screenName + " as id", "Screens.brs")
     end if
