@@ -6,13 +6,17 @@ sub init()
     m.top.observeField("visible", "baseScreenOnVisibleChange")
     onScreenInit()
 end sub
+
 sub baseScreenOnVisibleChange(obj)
     if obj.getData() then onScreenVisible() else onScreenHidden()
 end sub
+
 ' default no-op hooks; subclasses override by redeclaring
 sub onScreenInit()
 end sub
+
 sub onScreenVisible()
 end sub
+
 sub onScreenHidden()
 end sub

@@ -11,6 +11,7 @@ function getScreen(screenId as string, showScreen = false as boolean)
     if not node.visible and showScreen then node.visible = true
     return node
 end function
+
 function screenExists(screenId as string) as boolean
     if not hasValue(screenId)
         logError("invalid screenId passed to screenExists", "Screens.brs")
@@ -20,6 +21,7 @@ function screenExists(screenId as string) as boolean
     ' callers using screenExists are intentionally probing for an unknown screen
     return m.scene.findNode(screenId) <> invalid
 end function
+
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
     if not hasValue(screenId)
         screenId = screenName
@@ -31,6 +33,7 @@ function addScreen(screenName as string, screenId = invalid as string, showScree
     end if
     return m.scene.callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
 end function
+
 sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
     if screen = invalid then return
     node = invalid
@@ -42,6 +45,7 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
     if node = invalid then return
     m.scene.callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
 end sub
+
 function getAllScreens() as dynamic
     ' create a variable to store all of the child nodes from HomeScene
     screenArray = m.scene.getChildren(-1, 0)
@@ -53,6 +57,7 @@ function getAllScreens() as dynamic
         return invalid
     end if
 end function
+
 sub showAllScreens()
     screenArray = getAllScreens()
     if screenArray = invalid or screenArray.count() = 0
@@ -64,6 +69,7 @@ sub showAllScreens()
         logDebug(" -> " + screen.subType() + " (id=" + screen.id + ")", "Screens.brs")
     end for
 end sub
+
 sub setFocus(node as dynamic, saveFocus = true as boolean)
     if node = invalid then return
     focusedNode = invalid

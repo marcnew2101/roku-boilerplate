@@ -3,6 +3,7 @@ sub onScreenInit()
     m.landingTitle = m.top.findNode("landingTitle")
     m.labelList.observeField("itemSelected", "onItemSelected")
 end sub
+
 sub onScreenVisible()
     setLandingTitle()
     populateLabelList()
@@ -11,12 +12,14 @@ sub onScreenVisible()
     ' Roku certification requires this beacon to indicate app finished loading
     appLoaded()
 end sub
+
 sub setLandingTitle()
     ' tr() is optional — pass plain strings if you don't need translations
     m.landingTitle.text = tr("Welcome To The Landing Screen")
     m.landingTitle.font.size = 62
     m.landingTitle.color = m.scene.palette.colors.primaryTextColor
 end sub
+
 sub populateLabelList()
     ' tr() is optional — pass plain strings if you don't need translations
     listItems = [
@@ -32,6 +35,7 @@ sub populateLabelList()
     end for
     m.labelList.content = parentNode
 end sub
+
 sub setLabelList()
     ' center the label list within the UI viewport
     labelListX = (m.global.ui.width - m.labelList.boundingRect().width) / 2
@@ -45,11 +49,13 @@ sub setLabelList()
     m.labelList.color = m.scene.palette.colors.primaryTextColor
     m.labelList.focusedColor = m.scene.palette.colors.primaryTextColor
 end sub
+
 sub onItemSelected(obj)
     itemIndex = obj.getData()
     itemSelected = m.labelList.content.getChild(itemIndex)
     if itemSelected.title = tr("Exit") then m.scene.message = "exit"
 end sub
+
 ' capture key events from remote control
 function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false

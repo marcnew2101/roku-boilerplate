@@ -7,11 +7,13 @@ sub init()
     requirements = setRequirements(false)
     if requirements then startApp()
 end sub
+
 sub startApp()
     initScreenStack()
     ' see README for addScreen() arguments
     addScreen("LandingScreen", "landingScreen")
 end sub
+
 function addNode(params as object) as object
     if not hasValue(params) then return invalid
     if not hasValue(params.screenName) then return invalid
@@ -25,11 +27,13 @@ function addNode(params as object) as object
     end if
     return node
 end function
+
 sub removeNode(params as object)
     if not removeHistory(params.node, params.showPrevScreen, params.removeFromStack)
         logError("error removing node from HomeScene", "HomeScene.brs")
     end if
 end sub
+
 sub onMessage(obj)
     message = obj.getData()
     if not hasValue(message) then return

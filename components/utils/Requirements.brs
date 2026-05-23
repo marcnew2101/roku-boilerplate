@@ -5,6 +5,7 @@ function setRequirements(params as boolean) as boolean
     end if
     return true
 end function
+
 function createRequirements() as object
     requirementsFile = ReadAsciiFile(Const().path.requirements)
     if requirementsFile = invalid then return invalid
@@ -12,6 +13,7 @@ function createRequirements() as object
     if json = invalid then return invalid
     return json
 end function
+
 function checkRequirements(requirements as object) as boolean
     ' default to ready so empty or all-optional requirement sets pass the type contract
     deviceReady = true
@@ -27,12 +29,14 @@ function checkRequirements(requirements as object) as boolean
     end for
     return deviceReady
 end function
+
 function getRequirement(requirement as object) as boolean
     v = m.global[requirement.key]
     if v = invalid then return false
     if type(v) = "roBoolean" then return v
     return setAsBool(requirement, v)
 end function
+
 function setAsBool(requirement as object, v as dynamic) as boolean
     if requirement.key = "os" then return getMinOS(requirement, v)
     if requirement.key = "model" then return getModel(requirement, v)
@@ -40,9 +44,11 @@ function setAsBool(requirement as object, v as dynamic) as boolean
     logWarn("unknown non-boolean requirement key: " + requirement.key, "Requirements.brs")
     return false
 end function
+
 function getMinOS(requirement as object, os as float) as boolean
     return os >= requirement.value["minVersion"]
 end function
+
 function getModel(requirement as object, model as string) as boolean
     for each legacyModel in requirement.value["legacyModels"]
         if (model = legacyModel)

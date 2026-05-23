@@ -19,12 +19,14 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
         m.scene.selectorUri = themeColors.selectorUri
     end if
 end sub
+
 function getThemeFromRegistry() as object
     theme = invalid
     reg = createObject("roRegistrySection", Const().registry.theme)
     if reg.exists("type") and reg.exists("color") then theme = reg.readMulti(["type", "color"])
     return theme
 end function
+
 function getTheme(theme as object) as dynamic
     themefile = ReadAsciiFile(Const().path.themes)
     if themefile = invalid then return invalid

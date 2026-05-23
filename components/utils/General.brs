@@ -8,6 +8,7 @@ function hasValue(x as dynamic) as boolean
     if valueType = "roArray" or valueType = "roAssociativeArray" then return x.count() > 0
     return true
 end function
+
 function valueOr(x as dynamic, defaultValue as dynamic) as dynamic
     if hasValue(x) then return x
     return defaultValue
@@ -18,10 +19,12 @@ sub dialogInit(node = m.scene)
     ' Roku certification requires this to indicate a modal requires the users attention
     if not node.appLoaded then node.signalBeacon(Const().beacon.dialogInitiate)
 end sub
+
 sub dialogComplete(node = m.scene)
     ' Roku certification requires this to indicate the modal is closed
     if not node.appLoaded then node.signalBeacon(Const().beacon.dialogComplete)
 end sub
+
 sub appLoaded(node = m.scene)
     if not node.appLoaded
         node.appLoaded = true

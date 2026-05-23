@@ -2,6 +2,7 @@ sub initScreenStack()
     ' create the initial empty screen stack array
     m.screenStack = []
 end sub
+
 function addHistory(node as object, showScreen as boolean, hidePrevScreen as boolean, addToStack as boolean) as boolean
     if node = invalid then return false
     if hidePrevScreen = true and hasValue(m.screenStack)
@@ -14,6 +15,7 @@ function addHistory(node as object, showScreen as boolean, hidePrevScreen as boo
     end if
     return m.top.appendChild(node)
 end function
+
 function removeHistory(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean
     if node = invalid then return false
     if hasValue(m.screenStack)
@@ -31,6 +33,7 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
     if node.visible then node.visible = false
     return m.top.removeChild(node)
 end function
+
 sub getHistory()
     if not hasValue(m.screenStack)
         logDebug("screen stack is empty", "History.brs")

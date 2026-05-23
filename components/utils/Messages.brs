@@ -18,9 +18,11 @@ sub createDialog(params = {} as object)
     end if
     if screen <> invalid then showDialog(params, screen)
 end sub
+
 sub showDialog(params as object, screen as object)
     screen.dialogInfo = params
 end sub
+
 function getMessage(messageString = "" as string)
     ' parse messages.json once per component instance; the file ships in the package and never changes at runtime
     if m.messageCache = invalid

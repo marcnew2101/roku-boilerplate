@@ -18,6 +18,7 @@ sub createDialogNode(title = "" as string, message = "" as string, help = [] as 
     ' send signal beacon per Roku certification requirements
     dialogInit()
 end sub
+
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
     if not hasValue(m.dialogInfo) then return
@@ -27,6 +28,7 @@ sub populateDialogBox(obj)
     buttons = valueOr(m.dialogInfo.buttons, [])
     createDialogNode(title, message, help, buttons)
 end sub
+
 sub onButtonSelected(obj)
     buttonIndex = obj.getData()
     buttonSelected = m.dialogNode.buttons[buttonIndex]
@@ -41,6 +43,7 @@ sub onButtonSelected(obj)
         removeBaseDialog()
     end if
 end sub
+
 sub removeBaseDialog()
     ' check parent for child nodes greater than 1
     if m.top.getChildCount() > 1

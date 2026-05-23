@@ -56,6 +56,7 @@ sub main(args)
     end while
     '########################################################################
 end sub
+
 function setDeviceInfo()
     deviceInfo = createObject("roDeviceInfo")
     hdmiInfo = createObject("roHdmiStatus")
@@ -97,6 +98,7 @@ function setDeviceInfo()
     }
     return device
 end function
+
 function setAppInfo()
     appInfo = createObject("roAppInfo")
 
@@ -109,6 +111,7 @@ function setAppInfo()
     }
     return app
 end function
+
 sub getDeviceInfo(deviceInfo)
     ? "- - - - - - - - - - - - - - - - - - -"
     ? "Model:            "; deviceInfo.model
@@ -128,6 +131,7 @@ sub getDeviceInfo(deviceInfo)
     ? "- - - - - - - - - - - - - - - - - - -"
     ? " "
 end sub
+
 sub getAppInfo(appInfo)
     ? "- - - - - - - - - - - - - - - - - - -"
     ? "App ID:           "; appInfo.id
@@ -138,6 +142,7 @@ sub getAppInfo(appInfo)
     ? "- - - - - - - - - - - - - - - - - - -"
     ? " "
 end sub
+
 sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs, devLogging = true as boolean)
     m.global = screen.getGlobalNode()
     m.global.addFields({
@@ -153,6 +158,7 @@ sub setGlobals(screen, deviceInfo, appInfo, deepLinkArgs, devLogging = true as b
         "devLogging": devLogging
     })
 end sub
+
 function getDeepLinks(args) as object
     deeplink = invalid
     if args.contentId <> invalid and args.mediaType <> invalid

@@ -7,6 +7,7 @@ sub init()
     m.bulletArea = m.top.findNode("bulletArea")
     m.buttonArea = m.top.findNode("buttonArea")
 end sub
+
 sub onTitleChange(obj)
     title = obj.getData()
     if m.titleArea <> invalid and hasValue(m.titleArea.primaryTitle)
@@ -14,6 +15,7 @@ sub onTitleChange(obj)
     end if
     if hasValue(title) then m.titleArea.primaryTitle = title
 end sub
+
 sub onMessageChange(obj)
     message = obj.getData()
     if m.messageText <> invalid and hasValue(m.messageText.text) then m.messageText.text = ""
@@ -22,6 +24,7 @@ sub onMessageChange(obj)
     m.messageText.namedTextStyle = "bold"
     m.messageText.getChild(0).font.size = 32
 end sub
+
 sub onBulletTextChange(obj)
     bullets = obj.getData()
     if m.bulletArea <> invalid and m.bulletArea.bulletText.count() > 0
@@ -35,6 +38,7 @@ sub onBulletTextChange(obj)
         node.font.size = 29
     end for
 end sub
+
 sub onButtonChange(obj)
     buttons = obj.getData()
     if m.buttonArea <> invalid and m.buttonArea.getChildCount() > 0
@@ -47,6 +51,7 @@ sub onButtonChange(obj)
         m.buttonArea.appendChild(buttonNode)
     end for
 end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     if key <> Const().key.back then return false
