@@ -1,7 +1,6 @@
 sub init()
     if m.top.id = invalid or len(m.top.id) = 0 then m.top.id = "baseDialog"
     m.titlearea = m.top.findNode("titleArea")
-    m.contentarea = m.top.findNode("contentArea")
     m.messagetext = m.top.findNode("messageText")
     m.bulletarea = m.top.findNode("bulletArea")
     m.buttonarea = m.top.findNode("buttonArea")

@@ -35,6 +35,3 @@ function getMessage(messageString = "" as string)
     end for
     return invalid
 end function
-sub setMessage(message as string)
-    m.top.getScene().message = message
-end sub
