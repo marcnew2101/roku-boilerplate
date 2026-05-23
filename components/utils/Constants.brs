@@ -1,13 +1,7 @@
 ' Single source of truth for magic strings used across the channel.
-' Grouped by purpose; reference with e.g. Const().button.okay
+' Grouped by purpose; reference with e.g. Const().key.back
 function Const() as object
     return {
-        button: {
-            okay: "OKAY"
-            yes: "YES"
-            cancel: "CANCEL"
-            no: "NO"
-        }
         key: {
             back: "back"
             up: "up"

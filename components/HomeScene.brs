@@ -33,8 +33,3 @@ sub removeNode(params as object)
         logError("error removing node from HomeScene", "HomeScene.brs")
     end if
 end sub
-
-sub onMessage(obj)
-    message = obj.getData()
-    if hasValue(message) then showMessage(message)
-end sub
