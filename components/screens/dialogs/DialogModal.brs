@@ -33,7 +33,7 @@ sub onButtonSelected(obj)
     button = Const().button
     if buttonSelected = button.okay or buttonSelected = button.yes
         if m.dialogInfo.exitApp = true
-            m.top.getScene().exitApp = true
+            m.scene.exitApp = true
         else
             removeBaseDialog()
         end if

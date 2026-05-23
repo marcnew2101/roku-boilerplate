@@ -20,7 +20,7 @@ function checkRequirements(requirements as object) as boolean
             deviceReady = getRequirement(requirement)
             if (deviceReady <> invalid)
                 if (not deviceReady and requirement.value["showError"] <> invalid and requirement.value["showError"])
-                    m.top.getScene().message = requirement.key
+                    m.scene.message = requirement.key
                     exit for
                 end if
             else

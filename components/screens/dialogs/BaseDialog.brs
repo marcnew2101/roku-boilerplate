@@ -1,4 +1,6 @@
 sub init()
+    ' cache the root Scene; util scripts use m.scene instead of m.top.getScene()
+    m.scene = m.top.getScene()
     if not hasValue(m.top.id) then m.top.id = "baseDialog"
     m.titleArea = m.top.findNode("titleArea")
     m.messageText = m.top.findNode("messageText")
@@ -27,8 +29,9 @@ sub onBulletTextChange(obj)
     end if
     if not hasValue(bullets) then return
     m.bulletArea.bulletText = bullets
+    bulletColor = m.scene.palette.colors.dialogBulletTextColor
     for each node in m.bulletArea.getChild(0).getChildren(-1, 0)
-        node.update({ "color": m.top.getScene().palette.colors.dialogBulletTextColor }, true)
+        node.update({ "color": bulletColor }, true)
         node.font.size = 29
     end for
 end sub

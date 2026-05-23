@@ -14,15 +14,15 @@ function valueOr(x as dynamic, defaultValue as dynamic) as dynamic
 end function
 
 ' ---- Roku certification beacons ----
-sub dialogInit(node = m.top.getScene())
+sub dialogInit(node = m.scene)
     ' Roku certification requires this to indicate a modal requires the users attention
     if not node.appLoaded then node.signalBeacon(Const().beacon.dialogInitiate)
 end sub
-sub dialogComplete(node = m.top.getScene())
+sub dialogComplete(node = m.scene)
     ' Roku certification requires this to indicate the modal is closed
     if not node.appLoaded then node.signalBeacon(Const().beacon.dialogComplete)
 end sub
-sub appLoaded(node = m.top.getScene())
+sub appLoaded(node = m.scene)
     if not node.appLoaded
         node.appLoaded = true
         ' Roku certification requires this to indicate the app is finished loading
