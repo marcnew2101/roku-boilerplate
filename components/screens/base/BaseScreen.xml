@@ -12,6 +12,4 @@
 	<interface>
 		<field id="focusedNode" type="node" />
 	</interface>
-	<children>
-	</children>
 </component>

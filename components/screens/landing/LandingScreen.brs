@@ -1,10 +1,14 @@
 sub onScreenInit()
-    m.labelList = m.top.findNode("landingLabelList")
-    m.landingTitle = m.top.findNode("landingTitle")
-    m.labelList.observeField("itemSelected", "onItemSelected")
+    ' children declared in <children> aren't accessible until the node is attached to the scene tree,
+    ' so node lookups + observers move to onScreenVisible (which fires after appendChild)
 end sub
 
 sub onScreenVisible()
+    if m.labelList = invalid
+        m.labelList = m.top.findNode("landingLabelList")
+        m.landingTitle = m.top.findNode("landingTitle")
+        m.labelList.observeField("itemSelected", "onItemSelected")
+    end if
     setLandingTitle()
     populateLabelList()
     setLabelList()
