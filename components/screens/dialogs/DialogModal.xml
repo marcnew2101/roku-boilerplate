@@ -3,6 +3,7 @@
 	<script type="text/brightscript" uri="DialogModal.brs" />
 	<interface>
 		<field id="dialogInfo" type="assocarray" onChange="populateDialogBox" alwaysNotify="true"/>
+		<function name="dismissTop"/>
 	</interface>
 	<children>
 	</children>

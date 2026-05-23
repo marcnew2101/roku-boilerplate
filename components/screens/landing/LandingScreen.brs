@@ -7,6 +7,10 @@ sub onScreenVisible()
     if m.labelList = invalid
         m.labelList = m.top.findNode("landingLabelList")
         m.landingTitle = m.top.findNode("landingTitle")
+        if m.labelList = invalid or m.landingTitle = invalid
+            logError("landing screen nodes not found in XML", "LandingScreen.brs")
+            return
+        end if
         m.labelList.observeField("itemSelected", "onItemSelected")
     end if
     setLandingTitle()

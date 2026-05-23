@@ -39,11 +39,11 @@ sub onButtonSelected(obj)
     if btn.exitApp = true
         m.scene.exitApp = true
     else
-        removeBaseDialog()
+        dismissTop()
     end if
 end sub
 
-sub removeBaseDialog()
+sub dismissTop()
     if m.top.getChildCount() > 1
         m.top.removeChildIndex(m.top.getChildCount() - 1)
         setFocus(m.top.getChild(m.top.getChildCount() - 1), false)

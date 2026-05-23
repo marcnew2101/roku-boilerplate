@@ -62,6 +62,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
         logWarn("back key in BaseDialog with no dialogModal/dialogInfo", "BaseDialog.brs")
         return false
     end if
-    if dialogModal.dialogInfo.allowBack = true then removeScreen(dialogModal)
+    ' route through DialogModal.dismissTop so stacked dialogs pop one-at-a-time
+    ' (symmetric with button-press teardown). removeScreen would nuke the whole stack.
+    if dialogModal.dialogInfo.allowBack = true then dialogModal.callFunc("dismissTop")
     return true
 end function
