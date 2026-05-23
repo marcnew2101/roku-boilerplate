@@ -71,20 +71,19 @@ sub onItemSelected(obj)
 end sub
 ' capture key events from remote control
 function onKeyEvent(key as string, press as boolean) as boolean
-    if (press)
-        if (key = "back")
-            ' send message to exit app
-            m.top.getScene().message = "exit"
-            return true
-        end if
-        if (key = "up")
-            ? "up key pressed"
-            return true
-        end if
-        if (key = "down")
-            ? "down key pressed"
-            return true
-        end if
+    if not press then return false
+    keys = Const().key
+    if key = keys.back
+        m.top.getScene().message = "exit"
+        return true
+    end if
+    if key = keys.up
+        ? "up key pressed"
+        return true
+    end if
+    if key = keys.down
+        ? "down key pressed"
+        return true
     end if
     return false
 end function

@@ -6,14 +6,11 @@ function setRequirements(params as boolean) as boolean
     return true
 end function
 function createRequirements() as object
-    requirementsFile = ReadAsciiFile("pkg:/components/data/requirements.json")
-    if (requirementsFile <> invalid)
-        json = ParseJson(requirementsFile)
-        if (json <> invalid)
-            return json
-        end if
-    end if
-    return invalid
+    requirementsFile = ReadAsciiFile(Const().path.requirements)
+    if requirementsFile = invalid then return invalid
+    json = ParseJson(requirementsFile)
+    if json = invalid then return invalid
+    return json
 end function
 function checkRequirements(requirements as object) as boolean
     ' default to ready so empty or all-optional requirement sets pass the type contract

@@ -28,21 +28,16 @@ sub populateDialogBox(obj)
     createDialogNode(title, message, help, buttons)
 end sub
 sub onButtonSelected(obj)
-    ' get button index
     buttonIndex = obj.getData()
-    ' get button title
     buttonSelected = m.dialogNode.buttons[buttonIndex]
-    ' check if button pressed is "OKAY" or "YES"
-    if (buttonSelected = "OKAY" or buttonSelected = "YES")
-        ' check that closeApp is not invalid and set to true
-        if (m.dialogInfo.exitApp <> invalid and m.dialogInfo.exitApp)
-            ' immediately close the app
+    button = Const().button
+    if buttonSelected = button.okay or buttonSelected = button.yes
+        if m.dialogInfo.exitApp <> invalid and m.dialogInfo.exitApp
             m.top.getScene().exitApp = true
         else
             removeBaseDialog()
         end if
-        ' check if button pressed is "CANCEL" or "NO"
-    else if (buttonSelected = "CANCEL" or buttonSelected = "NO")
+    else if buttonSelected = button.cancel or buttonSelected = button.no
         removeBaseDialog()
     end if
 end sub

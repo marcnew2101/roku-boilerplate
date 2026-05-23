@@ -23,11 +23,15 @@ sub showDialog(params as object, screen as object)
     screen.dialogInfo = params
 end sub
 function getMessage(messageString = "" as string)
-    messagefile = ReadAsciiFile("pkg:/components/data/messages.json")
-    if messagefile = invalid then return invalid
-    json = ParseJson(messagefile)
-    if json = invalid then return invalid
-    for each message in json.items()
+    ' parse messages.json once per component instance; the file ships in the package and never changes at runtime
+    if m.messageCache = invalid
+        messagefile = ReadAsciiFile(Const().path.messages)
+        if messagefile = invalid then return invalid
+        json = ParseJson(messagefile)
+        if json = invalid then return invalid
+        m.messageCache = json
+    end if
+    for each message in m.messageCache.items()
         if message.key = messageString and message.value <> invalid then return message.value
     end for
     return invalid
