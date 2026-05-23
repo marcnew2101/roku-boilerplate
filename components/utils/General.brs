@@ -11,6 +11,6 @@ sub appLoaded(node = m.top.getScene())
         ' indicate that the app is now loaded
         node.appLoaded = true
         ' Roku certification requires this to indicate the app is finished loading
-	    node.signalBeacon("AppLaunchComplete")
+        node.signalBeacon("AppLaunchComplete")
     end if
 end sub
