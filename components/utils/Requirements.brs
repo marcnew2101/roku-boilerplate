@@ -16,42 +16,32 @@ function checkRequirements(requirements as object) as boolean
     ' default to ready so empty or all-optional requirement sets pass the type contract
     deviceReady = true
     for each requirement in requirements.items()
-        if (requirement.value <> invalid and requirement.value["required"])
-            deviceReady = getRequirement(requirement)
-            if (deviceReady <> invalid)
-                if (not deviceReady and requirement.value["showError"] <> invalid and requirement.value["showError"])
-                    m.scene.message = requirement.key
-                    exit for
-                end if
-            else
-                deviceReady = true
-            end if
+        if requirement.value = invalid or requirement.value["required"] <> true then continue for
+        deviceReady = getRequirement(requirement)
+        if deviceReady = invalid
+            deviceReady = true
+        else if not deviceReady and requirement.value["showError"] = true
+            m.scene.message = requirement.key
+            exit for
         end if
     end for
     return deviceReady
 end function
 function getRequirement(requirement as object) as boolean
     v = m.global[requirement.key]
-    if (v = invalid)
-        return false
-    else if (type(v) = "roBoolean")
-        return v
-    else
-        return setAsBool(requirement, v)
-    end if
+    if v = invalid then return false
+    if type(v) = "roBoolean" then return v
+    return setAsBool(requirement, v)
 end function
-function setAsBool(requirement as object, v as dynamic)
-    if (requirement.key = "os")
-        return getMinOS(requirement, v)
-    else if (requirement.key = "model")
-        return getModel(requirement, v)
-    end if
+function setAsBool(requirement as object, v as dynamic) as boolean
+    if requirement.key = "os" then return getMinOS(requirement, v)
+    if requirement.key = "model" then return getModel(requirement, v)
+    ' fail closed on unknown keys so a misnamed requirement doesn't silently pass
+    logWarn("unknown non-boolean requirement key: " + requirement.key, "Requirements.brs")
+    return false
 end function
 function getMinOS(requirement as object, os as float) as boolean
-    if (os >= requirement.value["minVersion"])
-        return true
-    end if
-    return false
+    return os >= requirement.value["minVersion"]
 end function
 function getModel(requirement as object, model as string) as boolean
     for each legacyModel in requirement.value["legacyModels"]
