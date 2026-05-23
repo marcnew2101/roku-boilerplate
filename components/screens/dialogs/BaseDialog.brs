@@ -80,20 +80,10 @@ sub onButtonChange(obj)
     end if
 end sub
 function onKeyEvent(key as string, press as boolean) as boolean
-    if (press)
-        if (key = "back")
-            ' get the dialog modal screen
-            dialogModal = getScreen("dialogModal")
-            ' check that the dialog modal is valid and contains the dialog info object and they count is greater than zero
-            if (dialogModal <> invalid and dialogModal.dialogInfo <> invalid and dialogModal.dialogInfo.count() > 0)
-                ' check if the dialog info object contains a key for allowBack and that it is set to true
-                if (dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack)
-                    ' remove dialog modal screen
-                    removeScreen(dialogModal)
-                end if
-            end if
-            return true
-        end if
-    end if
-    return false
+    if not press then return false
+    if key <> Const().key.back then return false
+    dialogModal = getScreen("dialogModal")
+    if dialogModal = invalid or dialogModal.dialogInfo = invalid or dialogModal.dialogInfo.count() = 0 then return true
+    if dialogModal.dialogInfo.allowBack <> invalid and dialogModal.dialogInfo.allowBack then removeScreen(dialogModal)
+    return true
 end function

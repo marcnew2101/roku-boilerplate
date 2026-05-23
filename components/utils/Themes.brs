@@ -15,19 +15,13 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
     if themeColors.selectorUri <> invalid and len(themeColors.selectorUri) > 0 then homeScene.selectorUri = themeColors.selectorUri
 end sub
 function getThemeFromRegistry() as object
-    ' set theme to initial state
     theme = invalid
-    ' create registry section
-    reg = createObject("roRegistrySection", "theme")
-    ' check that keys exist in the registry
-    if (reg.exists("type") and reg.exists("color"))
-        ' set theme to object from registry
-        theme = reg.readMulti(["type", "color"])
-    end if
+    reg = createObject("roRegistrySection", Const().registry.theme)
+    if reg.exists("type") and reg.exists("color") then theme = reg.readMulti(["type", "color"])
     return theme
 end function
 function getTheme(theme as object) as dynamic
-    themefile = ReadAsciiFile("pkg:/components/data/themes.json")
+    themefile = ReadAsciiFile(Const().path.themes)
     if themefile = invalid then return invalid
     json = ParseJson(themefile)
     if json = invalid then return invalid
