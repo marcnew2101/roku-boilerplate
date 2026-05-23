@@ -1,10 +1,17 @@
-sub init()
-    ' cache the root Scene; subclasses and util scripts use m.scene instead of m.top.getScene()
+' Shared screen-lifecycle setup. Each component that extends BaseScreen MUST define
+' its own sub init() and call baseScreenInit() as the first line.
+' Example:
+'   sub init()
+'       baseScreenInit()
+'       m.myList = m.top.findNode("myList")
+'       ...
+'   end sub
+sub baseScreenInit()
+    ' cache the root Scene so subclasses and util scripts can use m.scene
     m.scene = m.top.getScene()
-    ' hide until shown; subclasses override the hooks below, not init()
+    ' hide until shown; the visible observer below dispatches the on*Screen hooks
     m.top.visible = false
     m.top.observeField("visible", "baseScreenOnVisibleChange")
-    onScreenInit()
 end sub
 
 sub baseScreenOnVisibleChange(obj)
@@ -12,9 +19,6 @@ sub baseScreenOnVisibleChange(obj)
 end sub
 
 ' default no-op hooks; subclasses override by redeclaring
-sub onScreenInit()
-end sub
-
 sub onScreenVisible()
 end sub
 

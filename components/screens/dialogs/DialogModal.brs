@@ -1,3 +1,7 @@
+sub init()
+    baseScreenInit()
+end sub
+
 sub createDialogNode(title = "" as string, message = "" as string, help = [] as object, buttons = [] as object)
     dialogNode = CreateObject("roSGNode", "BaseDialog")
     dialogNode.title = title
