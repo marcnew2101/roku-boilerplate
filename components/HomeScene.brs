@@ -36,12 +36,5 @@ end sub
 
 sub onMessage(obj)
     message = obj.getData()
-    if not hasValue(message) then return
-    ' guard against an unknown key so the dialog code isn't called with invalid
-    params = getMessage(message)
-    if params = invalid
-        logError("no message found for key: " + message, "HomeScene.brs")
-        return
-    end if
-    createDialog(params)
+    if hasValue(message) then showMessage(message)
 end sub

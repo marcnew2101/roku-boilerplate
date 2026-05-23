@@ -7,9 +7,8 @@
             "If the internet connection continues to fail, try restarting the Roku from Settings -> System -> System restart."
         ],
         "buttons": [
-            "OKAY"
+            { "label": "OKAY", "exitApp": true }
         ],
-        "exitApp": true,
         "allowBack": false
     },
     "os": {
@@ -20,9 +19,8 @@
             "If your Roku cannot be updated, please check your internet connection. Otherwise, you will need to obtain a newer Roku device."
         ],
         "buttons": [
-            "OKAY"
+            { "label": "OKAY", "exitApp": true }
         ],
-        "exitApp": true,
         "allowBack": false
     },
     "model": {
@@ -32,9 +30,8 @@
             "Please visit roku.com/products for a list of supported devices."
         ],
         "buttons": [
-            "OKAY"
+            { "label": "OKAY", "exitApp": true }
         ],
-        "exitApp": true,
         "allowBack": false
     },
     "hdcp": {
@@ -45,9 +42,8 @@
             "If you are using an HDMI splitter, please ensure that it is HDCP compliant."
         ],
         "buttons": [
-            "OKAY"
+            { "label": "OKAY", "exitApp": true }
         ],
-        "exitApp": true,
         "allowBack": false
     },
     "exit": {
@@ -55,10 +51,9 @@
         "message": "Would you like to exit the app?",
         "help": [],
         "buttons": [
-            "YES",
-            "NO"
+            { "label": "YES", "exitApp": true },
+            { "label": "NO" }
         ],
-        "exitApp": true,
         "allowBack": true
     }
 }

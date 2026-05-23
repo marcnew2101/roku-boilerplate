@@ -1,64 +1,54 @@
 sub createDialogNode(title = "" as string, message = "" as string, help = [] as object, buttons = [] as object)
-    ' create message dialog node
-    m.dialogNode = CreateObject("roSGNode", "BaseDialog")
-    ' set dialog title
-    m.dialogNode.title = title
-    ' set dialog message
-    m.dialogNode.message = message
-    ' set dialog help bullets
-    m.dialogNode.bulletText = help
-    ' set dialog buttons
-    m.dialogNode.buttons = buttons
-    ' observe button selection on the dialog node
-    m.dialogNode.observeField("buttonSelected", "onButtonSelected")
-    ' add the dialog node to the top parent node
-    m.top.appendChild(m.dialogNode)
-    ' set focus to the dialog node
-    setFocus(m.dialogNode, false)
-    ' send signal beacon per Roku certification requirements
+    dialogNode = CreateObject("roSGNode", "BaseDialog")
+    dialogNode.title = title
+    dialogNode.message = message
+    dialogNode.bulletText = help
+    dialogNode.buttons = buttons
+    dialogNode.observeField("buttonSelected", "onButtonSelected")
+    m.top.appendChild(dialogNode)
+    setFocus(dialogNode, false)
+    ' Roku certification requires this beacon when a modal appears before launchComplete
     dialogInit()
 end sub
 
 sub populateDialogBox(obj)
-    m.dialogInfo = obj.getData()
-    if not hasValue(m.dialogInfo) then return
-    title = valueOr(m.dialogInfo.title, "")
-    message = valueOr(m.dialogInfo.message, "")
-    help = valueOr(m.dialogInfo.help, [])
-    buttons = valueOr(m.dialogInfo.buttons, [])
+    config = obj.getData()
+    if not hasValue(config) then return
+    title = valueOr(config.title, "")
+    message = valueOr(config.message, "")
+    help = valueOr(config.help, [])
+    buttons = valueOr(config.buttons, [])
     createDialogNode(title, message, help, buttons)
 end sub
 
 sub onButtonSelected(obj)
     buttonIndex = obj.getData()
-    buttonSelected = m.dialogNode.buttons[buttonIndex]
-    button = Const().button
-    if buttonSelected = button.okay or buttonSelected = button.yes
-        if m.dialogInfo.exitApp = true
-            m.scene.exitApp = true
-        else
-            removeBaseDialog()
-        end if
-    else if buttonSelected = button.cancel or buttonSelected = button.no
-        removeBaseDialog()
+    firingNode = m.top.findNode(obj.getNode())
+    if firingNode = invalid
+        logWarn("onButtonSelected: firing node not found (id=" + obj.getNode() + ")", "DialogModal.brs")
+        return
+    end if
+    if buttonIndex < 0 or buttonIndex >= firingNode.buttons.count()
+        logWarn("onButtonSelected: index " + buttonIndex.toStr() + " out of range", "DialogModal.brs")
+        return
+    end if
+    btn = firingNode.buttons[buttonIndex]
+    if hasValue(btn.onPress) and btn.onPress.node <> invalid and hasValue(btn.onPress.func)
+        btn.onPress.node.callFunc(btn.onPress.func, { label: btn.label, index: buttonIndex })
+    end if
+    if btn.exitApp = true
+        m.scene.exitApp = true
     else
-        ' unknown label means the messages.json entry doesn't match Const().button —
-        ' dialog stays open so the dev sees this warning without losing user state
-        logWarn("unrecognized button '" + valueOr(buttonSelected, "<invalid>") + "' — must match Const().button", "DialogModal.brs")
+        removeBaseDialog()
     end if
 end sub
 
 sub removeBaseDialog()
-    ' check parent for child nodes greater than 1
     if m.top.getChildCount() > 1
-        ' remove the parent's last child node
         m.top.removeChildIndex(m.top.getChildCount() - 1)
-        ' set focus to next child node
         setFocus(m.top.getChild(m.top.getChildCount() - 1), false)
     else
-        ' remove dialog modal screen
         removeScreen(m.top)
-        ' send signal beacon per Roku certification requirements
         dialogComplete()
     end if
 end sub

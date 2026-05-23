@@ -48,7 +48,7 @@ sub onButtonChange(obj)
     if not hasValue(buttons) then return
     for each button in buttons
         buttonNode = createObject("roSGNode", "StdDlgButton")
-        buttonNode.text = button
+        buttonNode.text = valueOr(button.label, "")
         m.buttonArea.appendChild(buttonNode)
     end for
 end sub
