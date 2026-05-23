@@ -16,7 +16,9 @@ function screenExists(screenId as string) as boolean
         logError("invalid screenId passed to screenExists", "Screens.brs")
         return false
     end if
-    return getScreen(screenId) <> invalid
+    ' direct findNode avoids the "not found" warn that getScreen emits on miss;
+    ' callers using screenExists are intentionally probing for an unknown screen
+    return m.top.getScene().findNode(screenId) <> invalid
 end function
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
     if not hasValue(screenId)
