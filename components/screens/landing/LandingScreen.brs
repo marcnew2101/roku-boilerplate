@@ -57,7 +57,7 @@ end sub
 sub onItemSelected(obj)
     itemIndex = obj.getData()
     itemSelected = m.labelList.content.getChild(itemIndex)
-    if itemSelected.title = tr("Exit") then m.scene.message = "exit"
+    if itemSelected.title = tr("Exit") then showMessage("exit")
 end sub
 
 ' capture key events from remote control
@@ -65,7 +65,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     keys = Const().key
     if key = keys.back
-        m.scene.message = "exit"
+        showMessage("exit")
         return true
     end if
     if key = keys.up
