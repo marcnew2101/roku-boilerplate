@@ -9,7 +9,9 @@ function addHistory(node as object, showScreen as boolean, hidePrevScreen as boo
         if prevNode <> invalid then prevNode.visible = false
     end if
     if showScreen <> invalid then node.visible = showScreen
-    if addToStack <> invalid and addToStack and m.screenStack <> invalid then m.screenStack.push(node)
+    if addToStack <> invalid and addToStack and m.screenStack <> invalid
+        m.screenStack.push(node)
+    end if
     return m.top.appendChild(node)
 end function
 function removeHistory(node as object, showPrevScreen as boolean, removeFromStack as boolean) as boolean

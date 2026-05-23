@@ -21,10 +21,26 @@ end sub
 sub populateDialogBox(obj)
     m.dialogInfo = obj.getData()
     if m.dialogInfo = invalid or m.dialogInfo.count() = 0 then return
-    if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0 then title = m.dialogInfo.title else title = ""
-    if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0 then message = m.dialogInfo.message else message = ""
-    if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0 then help = m.dialogInfo.help else help = []
-    if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0 then buttons = m.dialogInfo.buttons else buttons = []
+    if m.dialogInfo.title <> invalid and len(m.dialogInfo.title) > 0
+        title = m.dialogInfo.title
+    else
+        title = ""
+    end if
+    if m.dialogInfo.message <> invalid and len(m.dialogInfo.message) > 0
+        message = m.dialogInfo.message
+    else
+        message = ""
+    end if
+    if m.dialogInfo.help <> invalid and m.dialogInfo.help.count() > 0
+        help = m.dialogInfo.help
+    else
+        help = []
+    end if
+    if m.dialogInfo.buttons <> invalid and m.dialogInfo.buttons.count() > 0
+        buttons = m.dialogInfo.buttons
+    else
+        buttons = []
+    end if
     createDialogNode(title, message, help, buttons)
 end sub
 sub onButtonSelected(obj)
