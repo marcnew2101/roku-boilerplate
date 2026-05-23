@@ -4,3 +4,4 @@ roku-boilerplate.code-workspace
 !/.gitignore
 !/.vscode
 !/.env-sample
+!/.github
