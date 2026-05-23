@@ -5,7 +5,7 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
     themeColors = getTheme(theme)
     if themeColors = invalid then return
     homeScene = m.top.getScene()
-    if themeColors.palette <> invalid and themeColors.palette.count() > 0
+    if hasValue(themeColors.palette)
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         paletteNode.colors = themeColors.palette
         homeScene.palette = paletteNode
@@ -16,7 +16,7 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
     if themeColors.backgroundColor <> invalid
         homeScene.backgroundColor = themeColors.backgroundColor
     end if
-    if themeColors.selectorUri <> invalid and len(themeColors.selectorUri) > 0
+    if hasValue(themeColors.selectorUri)
         homeScene.selectorUri = themeColors.selectorUri
     end if
 end sub
@@ -32,7 +32,7 @@ function getTheme(theme as object) as dynamic
     json = ParseJson(themefile)
     if json = invalid then return invalid
     themeType = json[theme.type]
-    if themeType = invalid or themeType.count() = 0 then return invalid
+    if not hasValue(themeType) then return invalid
     for each color in themeType
         if color[theme.color] <> invalid then return color[theme.color]
     end for

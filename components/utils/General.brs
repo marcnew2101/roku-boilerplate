@@ -1,3 +1,19 @@
+' ---- value helpers ----
+' true when x is non-invalid and (for strings / arrays / AAs) non-empty.
+' Numbers, booleans, and nodes only get the non-invalid check.
+function hasValue(x as dynamic) as boolean
+    if x = invalid then return false
+    valueType = type(x)
+    if valueType = "String" or valueType = "roString" then return len(x) > 0
+    if valueType = "roArray" or valueType = "roAssociativeArray" then return x.count() > 0
+    return true
+end function
+function valueOr(x as dynamic, defaultValue as dynamic) as dynamic
+    if hasValue(x) then return x
+    return defaultValue
+end function
+
+' ---- Roku certification beacons ----
 sub dialogInit(node = m.top.getScene())
     ' Roku certification requires this to indicate a modal requires the users attention
     if not node.appLoaded then node.signalBeacon(Const().beacon.dialogInitiate)

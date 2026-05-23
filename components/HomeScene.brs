@@ -11,17 +11,11 @@ sub startApp()
     addScreen("LandingScreen", "landingScreen")
 end sub
 function addNode(params as object) as object
-    if params = invalid or params.count() = 0 then return invalid
-    if params.screenName = invalid or len(params.screenName) = 0 then return invalid
+    if not hasValue(params) then return invalid
+    if not hasValue(params.screenName) then return invalid
     node = createObject("roSGNode", params.screenName)
     if node = invalid then return invalid
-    if node.id = invalid or len(node.id) = 0
-        if params.screenId <> invalid and len(params.screenId) > 0
-            node.id = params.screenId
-        else
-            node.id = params.screenName
-        end if
-    end if
+    if not hasValue(node.id) then node.id = valueOr(params.screenId, params.screenName)
     if addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack)
         node.setFocus(true)
     else
@@ -36,7 +30,7 @@ sub removeNode(params as object)
 end sub
 sub onMessage(obj)
     message = obj.getData()
-    if message = invalid or len(message) = 0 then return
+    if not hasValue(message) then return
     ' guard against an unknown key so the dialog code isn't called with invalid
     params = getMessage(message)
     if params = invalid

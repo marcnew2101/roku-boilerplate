@@ -7,7 +7,7 @@ sub createDialog(params = {} as object)
         logError("message is empty", "Messages.brs")
         return
     end if
-    if params.title = invalid or len(params.title) = 0
+    if not hasValue(params.title)
         logError("message title is required; contents: " + FormatJson(params), "Messages.brs")
         return
     end if
