@@ -36,7 +36,6 @@ function getMessage(messageString = "" as string)
 			for each message in json.items()
 				if (message.key = messageString and message.value <> invalid)
 					return message.value
-					exit for
 				end if
 			end for
 		end if

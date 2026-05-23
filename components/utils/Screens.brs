@@ -45,8 +45,8 @@ function addScreen(screenName as string, screenId = invalid as string, showScree
     if screenExists(screenId)
         ? " "
         ? "The id '" + screenId + "' is already assigned to another screen node. Please create a new id for this node."
-        ' assign an empty string to the screenId
-        screenId = ""
+        ' refuse to add a duplicate; callers already null-check the return
+        return invalid
     end if
     return m.top.getScene().callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
 end function

@@ -16,6 +16,8 @@ function createRequirements() as object
 	return invalid
 end function
 function checkRequirements(requirements as object) as boolean
+	' default to ready so empty or all-optional requirement sets pass the type contract
+	deviceReady = true
 	for each requirement in requirements.items()
 		if (requirement.value <> invalid and requirement.value["required"])
 			deviceReady = getRequirement(requirement)
@@ -58,7 +60,6 @@ function getModel(requirement as object, model as string) as boolean
 	for each legacyModel in requirement.value["legacyModels"]
 		if (model = legacyModel)
 			return false
-			exit for
 		end if
 	end for
 	return true

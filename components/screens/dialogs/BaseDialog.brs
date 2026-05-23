@@ -65,8 +65,6 @@ sub onButtonChange(obj)
         childNodes = m.buttonarea.getChildren(-1, 0)
         ' remove all child nodes from inside the button area node
         m.buttonarea.removeChildren(childNodes)
-        ' reset the button node array
-        m.bulletarea.bulletText = []
     end if
     ' check that the new button array is not invalid and is not an empty array
     if (buttons <> invalid and buttons.count() > 0)

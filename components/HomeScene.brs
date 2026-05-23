@@ -62,6 +62,13 @@ end sub
 sub onMessage(obj)
 	' get the message string
 	message = obj.getData()
-	' check that the message string is not invalid and not empty then create message dialog
-	if message <> invalid and len(message) > 0 then createDialog(getMessage(message))
+	if (message <> invalid and len(message) > 0)
+		' guard against an unknown key so the dialog code isn't called with invalid
+		params = getMessage(message)
+		if (params <> invalid)
+			createDialog(params)
+		else
+			? "no message found for key: " + message + " - HomeScene.brs"
+		end if
+	end if
 end sub
