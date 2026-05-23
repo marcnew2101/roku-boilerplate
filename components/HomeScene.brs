@@ -1,20 +1,13 @@
 sub init()
-    ' change to true for testing themes set in /components/data/themes.json
-    ' the setTheme() has a 2nd argument for defining the theme ex. setTheme(true, { "type": "light", "color": "red" })
-    ' ensure that both the "type" and "color" inside the object match the key/values in themes.json
+    ' setTheme(true) applies default; pass {"type":"light","color":"red"} matching /components/data/themes.json to override
     setTheme(true)
-    ' set to true for forcing requirements in /components/data/requirements.json
-    ' set to false to immediately return true and bypass requirements
-    ' optional: test the error message for requirements by changing the minVersion in the requirements.json file from to 20.0
+    ' setRequirements(true) enforces /components/data/requirements.json; bump minVersion there to test the OS-update error path
     requirements = setRequirements(false)
-    ' start the app if all requirements are met
     if requirements then startApp()
 end sub
 sub startApp()
-    ' create the initial screen stack array in History.brs
     initScreenStack()
-    ' create the landing screen node (name) and assign an id
-    ' see REAMDME for additional arguments
+    ' see README for addScreen() arguments
     addScreen("LandingScreen", "landingScreen")
 end sub
 function addNode(params as object) as object
@@ -38,22 +31,19 @@ function addNode(params as object) as object
     return node
 end function
 sub removeNode(params as object)
-    if (not removeHistory(params.node, params.showPrevScreen, params.removeFromStack))
-        ' show a console message stating that the node could not be added to HomeScene
+    if not removeHistory(params.node, params.showPrevScreen, params.removeFromStack)
         ? " "
         ? "there was an error removing the node from HomeScene"
     end if
 end sub
 sub onMessage(obj)
-    ' get the message string
     message = obj.getData()
-    if (message <> invalid and len(message) > 0)
-        ' guard against an unknown key so the dialog code isn't called with invalid
-        params = getMessage(message)
-        if (params <> invalid)
-            createDialog(params)
-        else
-            ? "no message found for key: " + message + " - HomeScene.brs"
-        end if
+    if message = invalid or len(message) = 0 then return
+    ' guard against an unknown key so the dialog code isn't called with invalid
+    params = getMessage(message)
+    if params = invalid
+        ? "no message found for key: " + message + " - HomeScene.brs"
+        return
     end if
+    createDialog(params)
 end sub
