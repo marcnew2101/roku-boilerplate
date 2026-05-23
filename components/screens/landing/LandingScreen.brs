@@ -15,7 +15,7 @@ sub setLandingTitle()
     ' tr() is optional — pass plain strings if you don't need translations
     m.landingTitle.text = tr("Welcome To The Landing Screen")
     m.landingTitle.font.size = 62
-    m.landingTitle.color = m.top.getScene().palette.colors.primaryTextColor
+    m.landingTitle.color = m.scene.palette.colors.primaryTextColor
 end sub
 sub populateLabelList()
     ' tr() is optional — pass plain strings if you don't need translations
@@ -39,24 +39,23 @@ sub setLabelList()
     m.labelList.translation = [labelListX, labelListY]
 
     ' theme the label list using the HomeScene palette
-    scene = m.top.getScene()
-    if scene.selectorUri <> invalid
-        m.labelList.focusBitmapUri = scene.selectorUri
+    if m.scene.selectorUri <> invalid
+        m.labelList.focusBitmapUri = m.scene.selectorUri
     end if
-    m.labelList.color = scene.palette.colors.primaryTextColor
-    m.labelList.focusedColor = scene.palette.colors.primaryTextColor
+    m.labelList.color = m.scene.palette.colors.primaryTextColor
+    m.labelList.focusedColor = m.scene.palette.colors.primaryTextColor
 end sub
 sub onItemSelected(obj)
     itemIndex = obj.getData()
     itemSelected = m.labelList.content.getChild(itemIndex)
-    if itemSelected.title = tr("Exit") then m.top.getScene().message = "exit"
+    if itemSelected.title = tr("Exit") then m.scene.message = "exit"
 end sub
 ' capture key events from remote control
 function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     keys = Const().key
     if key = keys.back
-        m.top.getScene().message = "exit"
+        m.scene.message = "exit"
         return true
     end if
     if key = keys.up

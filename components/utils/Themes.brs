@@ -4,20 +4,19 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
     if prevTheme <> invalid then theme = prevTheme
     themeColors = getTheme(theme)
     if themeColors = invalid then return
-    homeScene = m.top.getScene()
     if hasValue(themeColors.palette)
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         paletteNode.colors = themeColors.palette
-        homeScene.palette = paletteNode
+        m.scene.palette = paletteNode
     end if
     if themeColors.backgroundUri <> invalid
-        homeScene.backgroundUri = themeColors.backgroundUri
+        m.scene.backgroundUri = themeColors.backgroundUri
     end if
     if themeColors.backgroundColor <> invalid
-        homeScene.backgroundColor = themeColors.backgroundColor
+        m.scene.backgroundColor = themeColors.backgroundColor
     end if
     if hasValue(themeColors.selectorUri)
-        homeScene.selectorUri = themeColors.selectorUri
+        m.scene.selectorUri = themeColors.selectorUri
     end if
 end sub
 function getThemeFromRegistry() as object

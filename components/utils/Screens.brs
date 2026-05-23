@@ -3,7 +3,7 @@ function getScreen(screenId as string, showScreen = false as boolean)
         logError("invalid screenId passed to getScreen", "Screens.brs")
         return invalid
     end if
-    node = m.top.getScene().findNode(screenId)
+    node = m.scene.findNode(screenId)
     if node = invalid
         logWarn(screenId + " was not found", "Screens.brs")
         return invalid
@@ -18,7 +18,7 @@ function screenExists(screenId as string) as boolean
     end if
     ' direct findNode avoids the "not found" warn that getScreen emits on miss;
     ' callers using screenExists are intentionally probing for an unknown screen
-    return m.top.getScene().findNode(screenId) <> invalid
+    return m.scene.findNode(screenId) <> invalid
 end function
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
     if not hasValue(screenId)
@@ -29,7 +29,7 @@ function addScreen(screenName as string, screenId = invalid as string, showScree
         logError("id '" + screenId + "' already assigned to another screen node", "Screens.brs")
         return invalid
     end if
-    return m.top.getScene().callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+    return m.scene.callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
 end function
 sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
     if screen = invalid then return
@@ -40,11 +40,11 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
         node = getScreen(screen)
     end if
     if node = invalid then return
-    m.top.getScene().callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
+    m.scene.callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
 end sub
 function getAllScreens() as dynamic
     ' create a variable to store all of the child nodes from HomeScene
-    screenArray = m.top.getScene().getChildren(-1, 0)
+    screenArray = m.scene.getChildren(-1, 0)
     ' check that the screen array is valid and has an item count of greater than zero
     if (screenArray <> invalid and screenArray.count() > 0)
         ' return the screen array
