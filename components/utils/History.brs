@@ -30,13 +30,12 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
     return m.top.removeChild(node)
 end function
 sub getHistory()
-    ' check that the screen stack array is valid and contains items
-    if (m.screenStack <> invalid and m.screenStack.count() > 0)
-        ' show a console message containing the array items
-        ? m.screenStack
-    else
-        ' show a console message stating the history is empty
-        ? " "
-        ? "there are no history items"
+    if m.screenStack = invalid or m.screenStack.count() = 0
+        logDebug("screen stack is empty", "History.brs")
+        return
     end if
+    logDebug("screen stack contents:", "History.brs")
+    for each node in m.screenStack
+        logDebug(" -> " + node.subType() + " (id=" + node.id + ")", "History.brs")
+    end for
 end sub

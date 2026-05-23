@@ -25,15 +25,13 @@ function addNode(params as object) as object
     if addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack)
         node.setFocus(true)
     else
-        ? " "
-        ? "there was an error adding " + node.id + " to HomeScene"
+        logError("error adding " + node.id + " to HomeScene", "HomeScene.brs")
     end if
     return node
 end function
 sub removeNode(params as object)
     if not removeHistory(params.node, params.showPrevScreen, params.removeFromStack)
-        ? " "
-        ? "there was an error removing the node from HomeScene"
+        logError("error removing node from HomeScene", "HomeScene.brs")
     end if
 end sub
 sub onMessage(obj)
@@ -42,7 +40,7 @@ sub onMessage(obj)
     ' guard against an unknown key so the dialog code isn't called with invalid
     params = getMessage(message)
     if params = invalid
-        ? "no message found for key: " + message + " - HomeScene.brs"
+        logError("no message found for key: " + message, "HomeScene.brs")
         return
     end if
     createDialog(params)

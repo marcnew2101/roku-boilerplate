@@ -1,13 +1,11 @@
 function getScreen(screenId as string, showScreen = false as boolean)
     if screenId = invalid or len(screenId) = 0
-        ? " "
-        ? "you must set a valid id (string) for screenId"
+        logError("invalid screenId passed to getScreen", "Screens.brs")
         return invalid
     end if
     node = m.top.getScene().findNode(screenId)
     if node = invalid
-        ? " "
-        ? screenId + " was not found"
+        logWarn(screenId + " was not found", "Screens.brs")
         return invalid
     end if
     if not node.visible and showScreen then node.visible = true
@@ -15,25 +13,18 @@ function getScreen(screenId as string, showScreen = false as boolean)
 end function
 function screenExists(screenId as string) as boolean
     if screenId = invalid or len(screenId) = 0
-        ? " "
-        ? "screen not found"
+        logError("invalid screenId passed to screenExists", "Screens.brs")
         return false
     end if
     return getScreen(screenId) <> invalid
 end function
 function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
-    ' check if screenId is invalid or empty
     if screenId = invalid or screenId.len() = 0
-        ' assign the screenName to the screenId
         screenId = screenName
-        ? " "
-        ? "No screen ID assigned for " + screenName + " node. Using " + screenName + " as ID"
+        logInfo("no screen id assigned for " + screenName + " node; using " + screenName + " as id", "Screens.brs")
     end if
-    ' check if the screenId is already been given to an existing screen node
     if screenExists(screenId)
-        ? " "
-        ? "The id '" + screenId + "' is already assigned to another screen node. Please create a new id for this node."
-        ' refuse to add a duplicate; callers already null-check the return
+        logError("id '" + screenId + "' already assigned to another screen node", "Screens.brs")
         return invalid
     end if
     return m.top.getScene().callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
@@ -61,21 +52,15 @@ function getAllScreens() as dynamic
     end if
 end function
 sub showAllScreens()
-    ' get the full array of child nodes from HomeScene
     screenArray = getAllScreens()
-    ' check that the screen array is valid and has an item count of greater than zero
-    if (screenArray <> invalid and screenArray.count() > 0)
-        ? "valid screens/nodes from HomeScene.xml:"
-        ' loop over each screen in the array and print to console
-        for each screen in screenArray
-            ? " -> " + screen
-        end for
-        ? " "
-    else
-        ' show a console message stating that there are no child nodes in HomeScene
-        ? "there are no valid screens/nodes in HomeScene.xml:"
-        ? " "
+    if screenArray = invalid or screenArray.count() = 0
+        logDebug("no valid screens/nodes in HomeScene", "Screens.brs")
+        return
     end if
+    logDebug("valid screens/nodes in HomeScene:", "Screens.brs")
+    for each screen in screenArray
+        logDebug(" -> " + screen.subType() + " (id=" + screen.id + ")", "Screens.brs")
+    end for
 end sub
 sub setFocus(node as dynamic, saveFocus = true as boolean)
     if node = invalid then return
