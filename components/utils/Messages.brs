@@ -1,15 +1,4 @@
-' Show a dialog with the given config. Config shape:
-'   {
-'     title?: string,
-'     message?: string,
-'     help?: string[],
-'     allowBack?: boolean,
-'     buttons: [{ label: string, onPress?: { node, func }, exitApp?: boolean }]   ' required, non-empty
-'   }
-' When a button is pressed:
-'   1. If onPress.node and onPress.func are present, callFunc fires with { label, index }.
-'   2. If the button's exitApp = true, scene().exitApp is set.
-'   3. Otherwise the dialog dismisses.
+' Show a dialog with the given config. See README for config shape and button-press behavior.
 sub showDialog(config as object)
     if not hasValue(config)
         logError("showDialog called with invalid config", "Messages.brs")

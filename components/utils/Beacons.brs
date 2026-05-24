@@ -1,6 +1,5 @@
-' Roku certification beacons. Each beacon signals a lifecycle event the platform
-' watches for during certification — dialogs that appear before AppLaunchComplete
-' must be paired with dialogInit/dialogComplete; the launch itself signals appLoaded.
+' Roku certification beacons. Dialogs before AppLaunchComplete must pair
+' dialogInit/dialogComplete; the launch itself signals appLoaded.
 
 sub dialogInit(node = scene())
     ' Roku certification requires this to indicate a modal requires the users attention

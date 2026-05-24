@@ -1,6 +1,5 @@
-' Centralized logging. Errors and warnings are always printed; info and debug
-' are suppressed unless m.global.devLogging is true.
-' Source is optional but useful for grep.
+' Centralized logging. Errors/warnings always print; info/debug gated on m.global.devLogging.
+' Source arg is optional but useful for grep — see README for the level table.
 sub logError(msg as string, source = "" as string)
     ? " "
     ? "[ERROR] " + msg + sourceTag(source)

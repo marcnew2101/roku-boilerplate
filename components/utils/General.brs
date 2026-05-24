@@ -1,15 +1,11 @@
-' ---- scene accessor ----
-' Returns the root Scene node from any component. Lets util scripts call scene().X
-' instead of requiring each component's init() to cache m.scene = m.top.getScene().
+' Returns the root Scene node from any component, so util scripts can call
+' scene().X without each component caching m.scene in init().
 function scene() as object
     return m.top.getScene()
 end function
 
-' ---- value helpers ----
-' true when x is non-invalid and (for strings / arrays / AAs) non-empty.
-' Numbers, booleans, and nodes only get the non-invalid check, so hasValue(false)
-' and hasValue(0) both return true. Don't use valueOr() to default booleans:
-' false is "present" and the default never fires.
+' hasValue: non-invalid + non-empty for strings/arrays/AAs; always-true for booleans/numbers/nodes.
+' Don't use valueOr() to default booleans — see README for the caveat.
 function hasValue(x as dynamic) as boolean
     if x = invalid then return false
     valueType = type(x)

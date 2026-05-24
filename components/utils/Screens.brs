@@ -1,8 +1,5 @@
-' Caller-facing API for screen lifecycle. Screens are identified by their component subType().
-' addScreen/removeScreen reach the screen-stack data (which lives on HomeScene's m) via
-' callFunc("addToStack" / "removeFromStack") — those targets are implemented in History.brs
-' and exposed on HomeScene.xml's <interface>. The callFunc hop is required because util scripts
-' run in any component's scope, but m.screenStack only exists on HomeScene.
+' Caller-facing API for screen lifecycle. Screens are identified by component subType();
+' add/remove call into History.brs via callFunc on HomeScene — see README for the layering.
 
 function getScreen(screenName as string, showScreen = false as boolean)
     if not hasValue(screenName)
