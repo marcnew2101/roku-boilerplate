@@ -16,8 +16,8 @@
 		<field id="selectorUri" type="uri"/>
 		<field id="contentId" type="string"/>
 		<field id="mediaType" type="string"/>
-		<function name="addNode"/>
-		<function name="removeNode"/>
+		<function name="addToStack"/>
+		<function name="removeFromStack"/>
 	</interface>
 	<children>
 	</children>

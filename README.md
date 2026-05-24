@@ -162,7 +162,7 @@ addScreen(
    screenName     ' the name of the node/XML file (also the subtype)
    showScreen     ' sets the node visibility (true by default)
    hidePrevScreen ' hides the previous/current screen (true by default)
-   addToStack     ' adds the node to the history stack (true by default)
+   trackInHistory ' adds the node to the history stack (true by default)
 )
 ```
 
@@ -191,7 +191,7 @@ Additional arguments can be used as follows:
 removeScreen(
    screen           ' the child node itself or the component name of the screen
    showPrevScreen   ' shows the previous screen (true by default)
-   removeFromStack  ' removes the node from the history stack (true by default)
+   untrackHistory   ' removes the node from the history stack (true by default)
 )
 ```
 
@@ -207,7 +207,7 @@ setFocus(
    saveFocus   ' writes the focused node to m.top's focusedNode field (true by default)
 )
 ```
-> `focusedNode` is declared on the `BaseScreen` interface. When a BaseScreen-derived screen becomes visible again after being hidden, `removeHistory` reads this field and re-focuses the saved node.
+> `focusedNode` is declared on the `BaseScreen` interface. When a BaseScreen-derived screen becomes visible again after being hidden, `removeFromStack` reads this field and re-focuses the saved node.
 
 
 #### Note

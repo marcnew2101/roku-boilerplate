@@ -14,22 +14,3 @@ sub startApp()
     addScreen("LandingScreen")
 end sub
 
-function addNode(params as object) as object
-    if not hasValue(params) then return invalid
-    if not hasValue(params.screenName) then return invalid
-    node = createObject("roSGNode", params.screenName)
-    if node = invalid then return invalid
-
-    if not addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack)
-        logError("error adding " + params.screenName + " to HomeScene", "HomeScene.brs")
-        return invalid
-    end if
-    node.setFocus(true)
-    return node
-end function
-
-sub removeNode(params as object)
-    if not removeHistory(params.node, params.showPrevScreen, params.removeFromStack)
-        logError("error removing node from HomeScene", "HomeScene.brs")
-    end if
-end sub

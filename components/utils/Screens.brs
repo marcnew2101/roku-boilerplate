@@ -23,12 +23,12 @@ function screenExists(screenName as string) as boolean
     return findScreenBySubtype(screenName) <> invalid
 end function
 
-function addScreen(screenName as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
+function addScreen(screenName as string, showScreen = true as boolean, hidePrevScreen = true as boolean, trackInHistory = true as boolean) as object
     if screenExists(screenName)
         logError("a screen of type '" + screenName + "' already exists", "Screens.brs")
         return invalid
     end if
-    return m.scene.callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+    return m.scene.callFunc("addToStack", {"screenName": screenName, "showScreen": showScreen, "hidePrevScreen": hidePrevScreen, "trackInHistory": trackInHistory})
 end function
 
 function findScreenBySubtype(screenName as string) as object
@@ -38,7 +38,7 @@ function findScreenBySubtype(screenName as string) as object
     return invalid
 end function
 
-sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
+sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, untrackHistory = true as boolean)
     if screen = invalid then return
     node = invalid
     if type(screen) = "roSGNode"
@@ -48,7 +48,7 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
     end if
 
     if node = invalid then return
-    m.scene.callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
+    m.scene.callFunc("removeFromStack", {"node": node, "showPrevScreen": showPrevScreen, "untrackHistory": untrackHistory})
 end sub
 
 sub setFocus(node as dynamic, saveFocus = true as boolean)
