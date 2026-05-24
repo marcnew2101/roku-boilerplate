@@ -3,6 +3,7 @@ function getScreen(screenId as string, showScreen = false as boolean)
         logError("invalid screenId passed to getScreen", "Screens.brs")
         return invalid
     end if
+
     node = m.scene.findNode(screenId)
     if node = invalid
         logWarn(screenId + " was not found", "Screens.brs")
@@ -42,6 +43,7 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
     else if type(screen) = "String" and len(screen) > 0
         node = getScreen(screen)
     end if
+
     if node = invalid then return
     m.scene.callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
 end sub
@@ -64,6 +66,7 @@ sub showAllScreens()
         logDebug("no valid screens/nodes in HomeScene", "Screens.brs")
         return
     end if
+
     logDebug("valid screens/nodes in HomeScene:", "Screens.brs")
     for each screen in screenArray
         logDebug(" -> " + screen.subType() + " (id=" + screen.id + ")", "Screens.brs")
@@ -78,6 +81,7 @@ sub setFocus(node as dynamic, saveFocus = true as boolean)
     else if type(node) = "String" and len(node) > 0
         focusedNode = getScreen(node)
     end if
+
     if focusedNode = invalid then return
     focusedNode.setFocus(true)
     ' createFields=true keeps non-BaseScreen callers (e.g. HomeScene) working

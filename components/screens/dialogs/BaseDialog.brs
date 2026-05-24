@@ -17,6 +17,7 @@ sub onMessageChange(obj)
     message = obj.getData()
     if m.messageText = invalid then return
     if not hasValue(message) then return
+
     m.messageText.text = message
     m.messageText.namedTextStyle = Const().dialog.messageTextStyle
     firstChild = m.messageText.getChild(0)
@@ -29,6 +30,7 @@ sub onHelpTextChange(obj)
     items = obj.getData()
     if m.helpArea = invalid then return
     if not hasValue(items) then return
+
     m.helpArea.bulletText = items
     helpColor = theme().colors.dialogHelpTextColor
     container = m.helpArea.getChild(0)
@@ -43,6 +45,7 @@ sub onButtonChange(obj)
     buttons = obj.getData()
     if m.buttonArea = invalid then return
     if not hasValue(buttons) then return
+
     for each button in buttons
         buttonNode = createObject("roSGNode", "StdDlgButton")
         buttonNode.text = valueOr(button.label, "")
@@ -59,6 +62,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         logWarn("back key in BaseDialog with no dialogModal/dialogInfo", "BaseDialog.brs")
         return false
     end if
+
     ' route through DialogModal.dismissTop so stacked dialogs pop one-at-a-time
     ' (symmetric with button-press teardown). removeScreen would nuke the whole stack.
     if dialogModal.dialogInfo.allowBack = true

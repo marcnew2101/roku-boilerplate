@@ -73,6 +73,7 @@ function setDeviceInfo()
     else
         internet = deviceInfo.getLinkStatus()
     end if
+
     device = {
         "id": deviceInfo.GetChannelClientId(),
         "model": deviceInfo.getModel(),

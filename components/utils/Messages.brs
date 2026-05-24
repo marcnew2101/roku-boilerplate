@@ -19,6 +19,7 @@ sub showDialog(config as object)
         logError("showDialog: at least one button required", "Messages.brs")
         return
     end if
+
     i = 0
     for each btn in config.buttons
         if not hasValue(btn.label)
@@ -26,6 +27,7 @@ sub showDialog(config as object)
         end if
         i = i + 1
     end for
+
     if screenExists("dialogModal")
         screen = getScreen("dialogModal")
     else
@@ -53,6 +55,7 @@ function getMessage(messageString = "" as string)
         if json = invalid then return invalid
         m.messageCache = json
     end if
+
     for each message in m.messageCache.items()
         if message.key = messageString and message.value <> invalid then return message.value
     end for

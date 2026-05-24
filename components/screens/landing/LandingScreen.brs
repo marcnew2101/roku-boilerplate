@@ -1,11 +1,9 @@
 sub init()
     baseScreenInit()
-    m.labelList = m.top.findNode("landingLabelList")
+    
     m.landingTitle = m.top.findNode("landingTitle")
-    if m.labelList = invalid or m.landingTitle = invalid
-        logError("landing screen nodes not found in XML", "LandingScreen.brs")
-        return
-    end if
+	m.labelList = m.top.findNode("landingLabelList")
+
     m.labelList.observeField("itemSelected", "onItemSelected")
 end sub
 
@@ -32,6 +30,7 @@ sub populateLabelList()
         tr("Register"),
         tr("Exit")
     ]
+
     parentNode = createObject("roSGNode", "ContentNode")
     for each item in listItems
         childNode = createObject("roSGNode", "ContentNode")
@@ -67,6 +66,7 @@ end sub
 function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     keys = Const().key
+
     if key = keys.back
         showMessage("exit")
         return true

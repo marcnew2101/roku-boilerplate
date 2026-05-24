@@ -4,6 +4,7 @@ sub setTheme(args as boolean, themeChoice = { "type": "dark", "color": "red" } a
     if prevTheme <> invalid then themeChoice = prevTheme
     themeColors = getTheme(themeChoice)
     if themeColors = invalid then return
+
     if hasValue(themeColors.palette)
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         paletteNode.colors = themeColors.palette
@@ -44,6 +45,7 @@ function getTheme(themeChoice as object) as dynamic
     if themefile = invalid then return invalid
     json = ParseJson(themefile)
     if json = invalid then return invalid
+
     themeType = json[themeChoice.type]
     if not hasValue(themeType) then return invalid
     for each color in themeType
