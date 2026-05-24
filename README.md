@@ -218,7 +218,7 @@ The string passed to setMessage is assigned using data from [/components/data/me
       "title": "title at top of dialog window",
       "message": "text inside body of dialog window",
       "help": [
-         "bullet points that appear as helper text below the message body",
+         "items shown below the message body",
          "help is optional and can be an empty array if not needed"
       ],
       "buttons": [

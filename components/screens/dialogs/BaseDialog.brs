@@ -4,47 +4,43 @@ sub init()
     if not hasValue(m.top.id) then m.top.id = "baseDialog"
     m.titleArea = m.top.findNode("titleArea")
     m.messageText = m.top.findNode("messageText")
-    m.bulletArea = m.top.findNode("bulletArea")
+    m.helpArea = m.top.findNode("helpArea")
     m.buttonArea = m.top.findNode("buttonArea")
 end sub
 
 sub onTitleChange(obj)
     title = obj.getData()
     if m.titleArea = invalid then return
-    if hasValue(m.titleArea.primaryTitle) then m.titleArea.primaryTitle = ""
     if hasValue(title) then m.titleArea.primaryTitle = title
 end sub
 
 sub onMessageChange(obj)
     message = obj.getData()
     if m.messageText = invalid then return
-    if hasValue(m.messageText.text) then m.messageText.text = ""
     if not hasValue(message) then return
     m.messageText.text = message
-    m.messageText.namedTextStyle = "bold"
+    m.messageText.namedTextStyle = Const().dialog.messageTextStyle
     firstChild = m.messageText.getChild(0)
-    if firstChild <> invalid then firstChild.font.size = 32
+    if firstChild <> invalid then firstChild.font.size = Const().dialog.messageFontSize
 end sub
 
-sub onBulletTextChange(obj)
-    bullets = obj.getData()
-    if m.bulletArea = invalid then return
-    if m.bulletArea.bulletText.count() > 0 then m.bulletArea.bulletText = []
-    if not hasValue(bullets) then return
-    m.bulletArea.bulletText = bullets
-    bulletColor = m.scene.palette.colors.dialogBulletTextColor
-    container = m.bulletArea.getChild(0)
+sub onHelpTextChange(obj)
+    items = obj.getData()
+    if m.helpArea = invalid then return
+    if not hasValue(items) then return
+    m.helpArea.bulletText = items
+    helpColor = m.scene.palette.colors.dialogHelpTextColor
+    container = m.helpArea.getChild(0)
     if container = invalid then return
     for each node in container.getChildren(-1, 0)
-        node.update({ "color": bulletColor }, true)
-        node.font.size = 29
+        node.update({ "color": helpColor }, true)
+        node.font.size = Const().dialog.helpFontSize
     end for
 end sub
 
 sub onButtonChange(obj)
     buttons = obj.getData()
     if m.buttonArea = invalid then return
-    if m.buttonArea.getChildCount() > 0 then m.buttonArea.removeChildren(m.buttonArea.getChildren(-1, 0))
     if not hasValue(buttons) then return
     for each button in buttons
         buttonNode = createObject("roSGNode", "StdDlgButton")

@@ -8,7 +8,7 @@
     <interface>
         <field id="title" type="string" onChange="onTitleChange"/>
         <field id="message" type="string" onChange="onMessageChange"/>
-        <field id="bulletText" type="array" onChange="onBulletTextChange"/>
+        <field id="helpText" type="array" onChange="onHelpTextChange"/>
         <field id="buttons" type="array" onChange="onButtonChange"/>
     </interface>
     <children>
@@ -17,7 +17,7 @@
             <StdDlgTextItem 
                 id="messageText" 
                 namedTextStyle="secondary"/>
-            <StdDlgBulletTextItem id="bulletArea"/>
+            <StdDlgBulletTextItem id="helpArea"/>
         </StdDlgContentArea>
         <StdDlgButtonArea id="buttonArea"/>
     </children>

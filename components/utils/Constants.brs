@@ -20,5 +20,10 @@ function Const() as object
             dialogComplete: "AppDialogComplete"
             launchComplete: "AppLaunchComplete"
         }
+        dialog: {
+            messageTextStyle: "bold"
+            messageFontSize: 32
+            helpFontSize: 29
+        }
     }
 end function

@@ -6,7 +6,7 @@ sub createDialogNode(title = "" as string, message = "" as string, help = [] as 
     dialogNode = CreateObject("roSGNode", "BaseDialog")
     dialogNode.title = title
     dialogNode.message = message
-    dialogNode.bulletText = help
+    dialogNode.helpText = help
     dialogNode.buttons = buttons
     dialogNode.observeField("buttonSelected", "onButtonSelected")
     m.top.appendChild(dialogNode)
