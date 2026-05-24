@@ -1,8 +1,8 @@
-sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as object)
+sub setTheme(args as boolean, themeChoice = { "type": "dark", "color": "red" } as object)
     if not args then return
     prevTheme = getThemeFromRegistry()
-    if prevTheme <> invalid then theme = prevTheme
-    themeColors = getTheme(theme)
+    if prevTheme <> invalid then themeChoice = prevTheme
+    themeColors = getTheme(themeChoice)
     if themeColors = invalid then return
     if hasValue(themeColors.palette)
         paletteNode = CreateObject("roSGNode", "RSGPalette")
@@ -21,24 +21,33 @@ sub setTheme(args as boolean, theme = { "type": "dark", "color": "red" } as obje
     end if
 end sub
 
-function getThemeFromRegistry() as object
-    theme = invalid
-    reg = createObject("roRegistrySection", Const().registry.theme)
-    if reg.exists("type") and reg.exists("color")
-        theme = reg.readMulti(["type", "color"])
-    end if
-    return theme
+function theme() as object
+    return {
+        colors: m.scene.palette.colors,
+        backgroundColor: m.scene.backgroundColor,
+        backgroundUri: m.scene.backgroundUri,
+        selectorUri: m.scene.selectorUri
+    }
 end function
 
-function getTheme(theme as object) as dynamic
+function getThemeFromRegistry() as object
+    themeChoice = invalid
+    reg = createObject("roRegistrySection", Const().registry.theme)
+    if reg.exists("type") and reg.exists("color")
+        themeChoice = reg.readMulti(["type", "color"])
+    end if
+    return themeChoice
+end function
+
+function getTheme(themeChoice as object) as dynamic
     themefile = ReadAsciiFile(Const().path.themes)
     if themefile = invalid then return invalid
     json = ParseJson(themefile)
     if json = invalid then return invalid
-    themeType = json[theme.type]
+    themeType = json[themeChoice.type]
     if not hasValue(themeType) then return invalid
     for each color in themeType
-        if color[theme.color] <> invalid then return color[theme.color]
+        if color[themeChoice.color] <> invalid then return color[themeChoice.color]
     end for
     return invalid
 end function

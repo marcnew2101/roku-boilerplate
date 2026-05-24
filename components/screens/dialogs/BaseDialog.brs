@@ -30,7 +30,7 @@ sub onHelpTextChange(obj)
     if m.helpArea = invalid then return
     if not hasValue(items) then return
     m.helpArea.bulletText = items
-    helpColor = m.scene.palette.colors.dialogHelpTextColor
+    helpColor = theme().colors.dialogHelpTextColor
     container = m.helpArea.getChild(0)
     if container = invalid then return
     for each node in container.getChildren(-1, 0)

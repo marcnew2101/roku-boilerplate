@@ -4,6 +4,7 @@
     <script type="text/brightscript" uri="pkg:/components/utils/Screens.brs" />
     <script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
     <script type="text/brightscript" uri="pkg:/components/utils/Constants.brs" />
+    <script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
     <script type="text/brightscript" uri="pkg:/components/utils/Logger.brs" />
     <interface>
         <field id="title" type="string" onChange="onTitleChange"/>

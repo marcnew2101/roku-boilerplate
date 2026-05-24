@@ -22,7 +22,7 @@ sub setLandingTitle()
     ' tr() is optional — pass plain strings if you don't need translations
     m.landingTitle.text = tr("Welcome To The Landing Screen")
     m.landingTitle.font.size = 62
-    m.landingTitle.color = m.scene.palette.colors.primaryTextColor
+    m.landingTitle.color = theme().colors.primaryTextColor
 end sub
 
 sub populateLabelList()
@@ -48,11 +48,11 @@ sub setLabelList()
     m.labelList.translation = [labelListX, labelListY]
 
     ' theme the label list using the HomeScene palette
-    if m.scene.selectorUri <> invalid
-        m.labelList.focusBitmapUri = m.scene.selectorUri
+    if theme().selectorUri <> invalid
+        m.labelList.focusBitmapUri = theme().selectorUri
     end if
-    m.labelList.color = m.scene.palette.colors.primaryTextColor
-    m.labelList.focusedColor = m.scene.palette.colors.primaryTextColor
+    m.labelList.color = theme().colors.primaryTextColor
+    m.labelList.focusedColor = theme().colors.primaryTextColor
 end sub
 
 sub onItemSelected(obj)
