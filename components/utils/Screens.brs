@@ -48,31 +48,6 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
     m.scene.callFunc("removeNode", {"node": node, "showPrevScreen": showPrevScreen, "removeFromStack": removeFromStack})
 end sub
 
-function getAllScreens() as dynamic
-    ' create a variable to store all of the child nodes from HomeScene
-    screenArray = m.scene.getChildren(-1, 0)
-    ' check that the screen array is valid and has an item count of greater than zero
-    if (screenArray <> invalid and screenArray.count() > 0)
-        ' return the screen array
-        return screenArray
-    else
-        return invalid
-    end if
-end function
-
-sub showAllScreens()
-    screenArray = getAllScreens()
-    if screenArray = invalid or screenArray.count() = 0
-        logDebug("no valid screens/nodes in HomeScene", "Screens.brs")
-        return
-    end if
-
-    logDebug("valid screens/nodes in HomeScene:", "Screens.brs")
-    for each screen in screenArray
-        logDebug(" -> " + screen.subType() + " (id=" + screen.id + ")", "Screens.brs")
-    end for
-end sub
-
 sub setFocus(node as dynamic, saveFocus = true as boolean)
     if node = invalid then return
     focusedNode = invalid

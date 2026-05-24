@@ -46,14 +46,3 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
     if node.visible then node.visible = false
     return m.top.removeChild(node)
 end function
-
-sub getHistory()
-    if not hasValue(m.screenStack)
-        logDebug("screen stack is empty", "History.brs")
-        return
-    end if
-    logDebug("screen stack contents:", "History.brs")
-    for each node in m.screenStack
-        logDebug(" -> " + node.subType() + " (id=" + node.id + ")", "History.brs")
-    end for
-end sub

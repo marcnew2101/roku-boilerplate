@@ -15,7 +15,8 @@ sub baseScreenInit()
 end sub
 
 sub baseScreenOnVisibleChange(obj)
-    if obj.getData()
+	visible = obj.getData()
+    if visible
         onScreenVisible()
     else
         onScreenHidden()

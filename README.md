@@ -204,7 +204,7 @@ setFocus(
 
 
 #### Note
-Screens extending `BaseScreen` automatically inherit every utility script (`Screens.brs`, `History.brs`, `Themes.brs`, `Messages.brs`, `Requirements.brs`, `General.brs`, `Constants.brs`, `Logger.brs`) via the parent component's `<script>` tags — you don't need to re-include them. The only place to register new utilities is in [/components/screens/base/BaseScreen.xml](/components/screens/base/BaseScreen.xml) (and [/components/HomeScene.xml](/components/HomeScene.xml) if HomeScene also needs the utility).
+Screens extending `BaseScreen` automatically inherit every utility script (`Screens.brs`, `History.brs`, `Themes.brs`, `Messages.brs`, `Requirements.brs`, `General.brs`, `Constants.brs`, `Logger.brs`, `Debug.brs`) via the parent component's `<script>` tags — you don't need to re-include them. The only place to register new utilities is in [/components/screens/base/BaseScreen.xml](/components/screens/base/BaseScreen.xml) (and [/components/HomeScene.xml](/components/HomeScene.xml) if HomeScene also needs the utility).
 
 > See [/components/screens/landing/LandingScreen.xml](/components/screens/landing/LandingScreen.xml) for a working example.
 
