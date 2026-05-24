@@ -81,5 +81,7 @@ sub setFocus(node as dynamic, saveFocus = true as boolean)
     if focusedNode = invalid then return
     focusedNode.setFocus(true)
     ' createFields=true keeps non-BaseScreen callers (e.g. HomeScene) working
-    if saveFocus then m.top.update({"focusedNode": focusedNode}, true)
+    if saveFocus
+        m.top.update({"focusedNode": focusedNode}, true)
+    end if
 end sub

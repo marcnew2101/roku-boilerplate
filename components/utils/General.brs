@@ -19,12 +19,16 @@ end function
 ' ---- Roku certification beacons ----
 sub dialogInit(node = m.scene)
     ' Roku certification requires this to indicate a modal requires the users attention
-    if not node.appLoaded then node.signalBeacon(Const().beacon.dialogInitiate)
+    if not node.appLoaded
+        node.signalBeacon(Const().beacon.dialogInitiate)
+    end if
 end sub
 
 sub dialogComplete(node = m.scene)
     ' Roku certification requires this to indicate the modal is closed
-    if not node.appLoaded then node.signalBeacon(Const().beacon.dialogComplete)
+    if not node.appLoaded
+        node.signalBeacon(Const().beacon.dialogComplete)
+    end if
 end sub
 
 sub appLoaded(node = m.scene)

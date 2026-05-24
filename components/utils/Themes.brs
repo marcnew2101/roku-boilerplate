@@ -24,7 +24,9 @@ end sub
 function getThemeFromRegistry() as object
     theme = invalid
     reg = createObject("roRegistrySection", Const().registry.theme)
-    if reg.exists("type") and reg.exists("color") then theme = reg.readMulti(["type", "color"])
+    if reg.exists("type") and reg.exists("color")
+        theme = reg.readMulti(["type", "color"])
+    end if
     return theme
 end function
 

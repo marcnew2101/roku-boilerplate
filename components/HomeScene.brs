@@ -19,7 +19,9 @@ function addNode(params as object) as object
     if not hasValue(params.screenName) then return invalid
     node = createObject("roSGNode", params.screenName)
     if node = invalid then return invalid
-    if not hasValue(node.id) then node.id = valueOr(params.screenId, params.screenName)
+    if not hasValue(node.id)
+        node.id = valueOr(params.screenId, params.screenName)
+    end if
     if not addHistory(node, params.showScreen, params.hidePrevScreen, params.addToStack)
         logError("error adding " + node.id + " to HomeScene", "HomeScene.brs")
         return invalid

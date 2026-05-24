@@ -15,7 +15,11 @@ sub baseScreenInit()
 end sub
 
 sub baseScreenOnVisibleChange(obj)
-    if obj.getData() then onScreenVisible() else onScreenHidden()
+    if obj.getData()
+        onScreenVisible()
+    else
+        onScreenHidden()
+    end if
 end sub
 
 ' default no-op hooks; subclasses override by redeclaring

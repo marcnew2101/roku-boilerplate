@@ -35,7 +35,9 @@ function removeHistory(node as object, showPrevScreen as boolean, removeFromStac
             prevNode = m.screenStack.peek()
             if prevNode <> invalid
                 if not prevNode.visible then prevNode.visible = true
-                if prevNode.focusedNode <> invalid then prevNode.focusedNode.setFocus(true)
+                if prevNode.focusedNode <> invalid
+                    prevNode.focusedNode.setFocus(true)
+                end if
             end if
         end if
     end if

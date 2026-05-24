@@ -10,8 +10,12 @@ sub main(args)
     '########################### DEVICE/APP INFO ############################
     deviceInfo = setDeviceInfo()
     appInfo = setAppInfo()
-    if showDeviceInfo then getDeviceInfo(deviceInfo)
-    if showAppInfo then getAppInfo(appInfo)
+    if showDeviceInfo
+        getDeviceInfo(deviceInfo)
+    end if
+    if showAppInfo
+        getAppInfo(appInfo)
+    end if
     '########################################################################
 
     '########################## SCENEGRAPH SETUP ############################

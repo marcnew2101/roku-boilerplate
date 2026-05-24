@@ -58,7 +58,9 @@ end sub
 sub onItemSelected(obj)
     itemIndex = obj.getData()
     itemSelected = m.labelList.content.getChild(itemIndex)
-    if itemSelected.title = tr("Exit") then showMessage("exit")
+    if itemSelected.title = tr("Exit")
+        showMessage("exit")
+    end if
 end sub
 
 ' capture key events from remote control

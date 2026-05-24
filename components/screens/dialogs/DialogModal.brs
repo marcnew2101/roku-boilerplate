@@ -27,9 +27,10 @@ end sub
 
 sub onButtonSelected(obj)
     buttonIndex = obj.getData()
-    firingNode = m.top.findNode(obj.getNode())
+    ' button presses always belong to the topmost dialog (the one with focus)
+    firingNode = m.top.getChild(m.top.getChildCount() - 1)
     if firingNode = invalid
-        logWarn("onButtonSelected: firing node not found (id=" + obj.getNode() + ")", "DialogModal.brs")
+        logWarn("onButtonSelected: no dialog child to receive event", "DialogModal.brs")
         return
     end if
     if buttonIndex < 0 or buttonIndex >= firingNode.buttons.count()

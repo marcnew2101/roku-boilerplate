@@ -1,7 +1,6 @@
 sub init()
     ' cache the root Scene; util scripts use m.scene instead of m.top.getScene()
     m.scene = m.top.getScene()
-    if not hasValue(m.top.id) then m.top.id = "baseDialog"
     m.titleArea = m.top.findNode("titleArea")
     m.messageText = m.top.findNode("messageText")
     m.helpArea = m.top.findNode("helpArea")
@@ -21,7 +20,9 @@ sub onMessageChange(obj)
     m.messageText.text = message
     m.messageText.namedTextStyle = Const().dialog.messageTextStyle
     firstChild = m.messageText.getChild(0)
-    if firstChild <> invalid then firstChild.font.size = Const().dialog.messageFontSize
+    if firstChild <> invalid
+        firstChild.font.size = Const().dialog.messageFontSize
+    end if
 end sub
 
 sub onHelpTextChange(obj)
@@ -60,6 +61,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
     end if
     ' route through DialogModal.dismissTop so stacked dialogs pop one-at-a-time
     ' (symmetric with button-press teardown). removeScreen would nuke the whole stack.
-    if dialogModal.dialogInfo.allowBack = true then dialogModal.callFunc("dismissTop")
+    if dialogModal.dialogInfo.allowBack = true
+        dialogModal.callFunc("dismissTop")
+    end if
     return true
 end function
