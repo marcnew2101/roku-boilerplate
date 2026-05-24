@@ -118,6 +118,14 @@ fontSize = Const().dialog.messageFontSize       ' 32
 Add new groups to `Const()` rather than introducing new literals in call sites. See [/components/utils/Constants.brs](/components/utils/Constants.brs) for the full table.
 
 <br/><br/>
+### Debug Helpers
+Dev-time logging via `logDebug` (suppressed unless `m.global.devLogging` is true) — call from any screen handler:
+- `showAllScreens()` — every direct child of HomeScene with its id
+- `getHistory()` — current screen-stack contents (only populated on HomeScene)
+- `showFocus()` — root-to-leaf focus chain
+- `showTheme()` — palette colors + scene-level theme fields
+
+<br/><br/>
 ### Node Management
 #### Screen Lifecycle Hooks
 Any screen that extends `BaseScreen` must define its own `init()` and call `baseScreenInit()` as the first line — that caches `m.scene`, hides the screen until shown, and wires the visibility observer. After that, set up node refs and field observers as usual:

@@ -31,3 +31,48 @@ sub getHistory()
         logDebug(" -> " + node.subType() + " (id=" + node.id + ")", "Debug.brs")
     end for
 end sub
+
+sub showFocus()
+    if m.scene = invalid
+        logDebug("no scene available", "Debug.brs")
+        return
+    end if
+
+    leaf = m.scene.focusedChild
+    if leaf = invalid
+        logDebug("no node has focus", "Debug.brs")
+        return
+    end if
+
+    ' walk parent links up from the focused leaf, then print in root-to-leaf order
+    chain = []
+    node = leaf
+    while node <> invalid
+        chain.push(node)
+        node = node.getParent()
+    end while
+
+    logDebug("focus chain (root to leaf):", "Debug.brs")
+    for i = chain.count() - 1 to 0 step -1
+        n = chain[i]
+        logDebug(" -> " + n.subType() + " (id=" + n.id + ")", "Debug.brs")
+    end for
+end sub
+
+sub showTheme()
+    t = theme()
+    if t.colors = invalid
+        logDebug("no palette colors set", "Debug.brs")
+        return
+    end if
+
+    logDebug("theme.colors:", "Debug.brs")
+    for each key in t.colors.keys()
+        logDebug("  " + key + " = " + t.colors[key], "Debug.brs")
+    end for
+
+    logDebug("scene-level theme fields:", "Debug.brs")
+    logDebug("  backgroundColor = " + valueOr(t.backgroundColor, "(unset)"), "Debug.brs")
+    logDebug("  backgroundUri = " + valueOr(t.backgroundUri, "(unset)"), "Debug.brs")
+    logDebug("  selectorUri = " + valueOr(t.selectorUri, "(unset)"), "Debug.brs")
+end sub
