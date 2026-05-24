@@ -2,25 +2,24 @@
 <component name="LandingScreen" extends="BaseScreen">
     <script type="text/brightscript" uri="LandingScreen.brs" />
     <children>
-        <!-- title at top of screen -->
-        <Label 
-            id="landingTitle" 
-            translation="[0, 70]" 
-            width="1800"
-            wrap="true"
-            horizAlign="center" 
-            vertAlign="center" 
-            font="font:LargeBoldSystemFont"/>
-
-        <!-- list options at middle of screen -->
-        <LabelList 
-            id="landingLabelList" 
-            translation="[0, 0]" 
-            itemSize="[260, 70]" 
-            itemSpacing="[0, 10]" 
-            textHorizAlign="center" 
-            font="font:MediumSystemFont" 
-            focusedFont="font:MediumBoldSystemFont" 
-            vertFocusAnimationStyle="floatingFocus"/>
+        <LayoutGroup
+            id="landingContent"
+            layoutDirection="vert"
+            horizAlignment="center"
+            itemSpacings="[60]">
+            <Label
+                id="landingTitle"
+                horizAlign="center"
+                vertAlign="center"
+                font="font:LargeBoldSystemFont"/>
+            <LabelList
+                id="landingLabelList"
+                itemSize="[260, 70]"
+                itemSpacing="[0, 10]"
+                textHorizAlign="center"
+                font="font:MediumSystemFont"
+                focusedFont="font:MediumBoldSystemFont"
+                vertFocusAnimationStyle="floatingFocus"/>
+        </LayoutGroup>
     </children>
 </component>

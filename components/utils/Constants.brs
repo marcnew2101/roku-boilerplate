@@ -6,6 +6,18 @@ function Const() as object
             back: "back"
             up: "up"
             down: "down"
+            left: "left"
+            right: "right"
+            ok: "OK"
+            replay: "replay"
+            play: "play"
+            playOnly: "playonly"
+            rewind: "rewind"
+            fastForward: "fastforward"
+            options: "options"
+            pause: "pause"
+            channelUp: "channelup"
+            channelDown: "channeldown"
         }
         path: {
             messages: "pkg:/components/data/messages.json"

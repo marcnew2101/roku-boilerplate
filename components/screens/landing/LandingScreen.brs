@@ -1,29 +1,30 @@
 sub init()
     baseScreenInit()
-    
+
     m.landingTitle = m.top.findNode("landingTitle")
-	m.labelList = m.top.findNode("landingLabelList")
+    m.labelList = m.top.findNode("landingLabelList")
+    m.contentGroup = m.top.findNode("landingContent")
 
     m.labelList.observeField("itemSelected", "onItemSelected")
+
+    setupLandingTitle()
+    setupLabelList()
 end sub
 
 sub onScreenVisible()
-    setLandingTitle()
-    populateLabelList()
-    setLabelList()
+    updateLayout()
     setFocus(m.labelList)
-    ' Roku certification requires this beacon to indicate app finished loading
     appLoaded()
 end sub
 
-sub setLandingTitle()
+sub setupLandingTitle()
     ' tr() is optional — pass plain strings if you don't need translations
     m.landingTitle.text = tr("Welcome To The Landing Screen")
     m.landingTitle.font.size = 62
     m.landingTitle.color = theme().colors.primaryTextColor
 end sub
 
-sub populateLabelList()
+sub setupLabelList()
     ' tr() is optional — pass plain strings if you don't need translations
     listItems = [
         tr("Sign In"),
@@ -38,20 +39,27 @@ sub populateLabelList()
         parentNode.appendChild(childNode)
     end for
     m.labelList.content = parentNode
-end sub
 
-sub setLabelList()
-    ' center the label list within the UI viewport
-    labelListX = (m.global.ui.width - m.labelList.boundingRect().width) / 2
-    labelListY = (m.global.ui.height - m.labelList.boundingRect().height) / 2
-    m.labelList.translation = [labelListX, labelListY]
-
-    ' theme the label list using the HomeScene palette
     if theme().selectorUri <> invalid
         m.labelList.focusBitmapUri = theme().selectorUri
     end if
     m.labelList.color = theme().colors.primaryTextColor
     m.labelList.focusedColor = theme().colors.primaryTextColor
+end sub
+
+sub updateLayout()
+    ' boundingRect returns bounds in parent coords with the node's current translation baked in,
+    ' so we shift by the delta needed to move the rendered center onto the scene's design center
+    rect = m.contentGroup.boundingRect()
+    if rect.width = 0 or rect.height = 0 then return
+
+    res = m.scene.currentDesignResolution
+    deltaX = (res.width / 2) - (rect.x + rect.width / 2)
+    deltaY = (res.height / 2) - (rect.y + rect.height / 2)
+    if abs(deltaX) < 1 and abs(deltaY) < 1 then return
+
+    current = m.contentGroup.translation
+    m.contentGroup.translation = [current[0] + deltaX, current[1] + deltaY]
 end sub
 
 sub onItemSelected(obj)

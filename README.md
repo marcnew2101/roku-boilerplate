@@ -7,7 +7,7 @@ _A starting point for new Roku applications._
 - [X] Preset globals
 - [X] Theme customization
 - [X] Node management + history + focus
-- [X] BaseScreen with lifecycle hooks (`onScreenInit` / `onScreenVisible` / `onScreenHidden`)
+- [X] BaseScreen with lifecycle hooks (`onScreenVisible` / `onScreenHidden`)
 - [X] Centralized constants via `Const()`
 - [X] Leveled logging via `logError` / `logWarn` / `logInfo` / `logDebug`
 - [X] Translations
@@ -77,9 +77,9 @@ Roku uses "m.global" to reference an object as seen in [/source/Main.brs](/sourc
 
 <br/><br/>
 ### Themes
-The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette field for customizing colors in child nodes.
+Roku's Scene node exposes a `palette` field for theming colors in child nodes; this template applies the selected theme onto `m.scene` at startup.
  * Themes are set from the top of [/components/HomeScene.brs](/components/HomeScene.brs)
- > "dark" and "red" is the default theme here if no 2nd arugument is provided.
+ > "dark" and "red" is the default theme here if no 2nd argument is provided.
  ```
  setTheme(true, { "type": "dark", "color": "red" })
  ```
@@ -99,26 +99,37 @@ The root SceneGraph node in Roku (/components/HomeScene.xml) contains a palette 
     ]
 }
  ```
+ * Read theme values via the `theme()` accessor (from [/components/utils/Themes.brs](/components/utils/Themes.brs)):
+ ```
+ m.label.color = theme().colors.primaryTextColor   ' palette color
+ m.list.focusBitmapUri = theme().selectorUri       ' scene-level theme field
+ ```
+ > Palette colors live under `theme().colors`; scene-level theme fields (`backgroundColor`, `backgroundUri`, `selectorUri`) are at the top level.
 
 <br/><br/>
 ### Constants
-Magic strings (button labels, key codes, file paths, registry section, beacon names) live in [/components/utils/Constants.brs](/components/utils/Constants.brs) as an AA returned by `Const()`:
+Magic strings and numbers (key codes, file paths, registry section, beacon names, dialog typography) live in [/components/utils/Constants.brs](/components/utils/Constants.brs) as an AA returned by `Const()`:
 ```
-buttonSelected = Const().button.okay   ' "OKAY"
-key = Const().key.back                  ' "back"
-ReadAsciiFile(Const().path.messages)    ' "pkg:/components/data/messages.json"
+key = Const().key.back                          ' "back"
+ReadAsciiFile(Const().path.messages)            ' "pkg:/components/data/messages.json"
 node.signalBeacon(Const().beacon.launchComplete)
+fontSize = Const().dialog.messageFontSize       ' 32
 ```
 Add new groups to `Const()` rather than introducing new literals in call sites. See [/components/utils/Constants.brs](/components/utils/Constants.brs) for the full table.
 
 <br/><br/>
 ### Node Management
 #### Screen Lifecycle Hooks
-Any screen that extends `BaseScreen` inherits a default `init()` that hides the screen, observes its `visible` field, and dispatches to three optional hooks. Override these in your screen's `.brs` file instead of redefining `init()` directly:
+Any screen that extends `BaseScreen` must define its own `init()` and call `baseScreenInit()` as the first line — that caches `m.scene`, hides the screen until shown, and wires the visibility observer. After that, set up node refs and field observers as usual:
 ```
-sub onScreenInit()
-    ' run once when the node is created — set up node references and field observers
+sub init()
+    baseScreenInit()
+    m.myList = m.top.findNode("myList")
+    m.myList.observeField("itemSelected", "onItemSelected")
 end sub
+```
+Two optional hooks fire when the screen's `visible` field changes — override either by redeclaring it in the screen's `.brs`:
+```
 sub onScreenVisible()
     ' run every time the screen becomes visible — fetch data, set focus, etc.
 end sub
@@ -206,12 +217,13 @@ Screens extending `BaseScreen` automatically inherit every utility script (`Scre
 
 <br/><br/>
 ### Dialogs & Messages
-A pop-up message or notification can be generated as follows:
+Show a dialog from a [/components/data/messages.json](/components/data/messages.json) entry by key:
 ```
-setMessage("message")
+showMessage("message")
 ```
-The string passed to setMessage is assigned using data from [/components/data/messages.json](/components/data/messages.json):
-> Buttons are limited to the four listed below. To change per-button behavior, edit `onButtonSelected()` in [/components/screens/dialogs/DialogModal.brs](/components/screens/dialogs/DialogModal.brs) — the comparison strings come from `Const().button` (see [/components/utils/Constants.brs](/components/utils/Constants.brs)).
+Or pass a dialog config object directly to `showDialog(config)` (see [/components/utils/Messages.brs](/components/utils/Messages.brs)) when the dialog isn't backed by a JSON entry.
+
+Entries in `messages.json` follow this schema:
 ```
 {
    "message": {
@@ -222,16 +234,18 @@ The string passed to setMessage is assigned using data from [/components/data/me
          "help is optional and can be an empty array if not needed"
       ],
       "buttons": [
-         "OKAY",
-         "CANCEL",
-         "YES",
-         "NO"
+         { "label": "OKAY", "exitApp": true },
+         { "label": "CANCEL" }
       ],
-      "exitApp": set to true if the message requires the app to exit (such as failing to pass a requirement),
       "allowBack": set to true to allow pressing the back button on the remote to exit the dialog window
    }
 }
 ```
+Each button is an object with a required `label` and two optional fields:
+- `exitApp: true` — sets `m.scene.exitApp` when pressed, breaking the main loop in [/source/Main.brs](/source/Main.brs)
+- `onPress: { "node": nodeRef, "func": "funcName" }` — invokes `nodeRef.callFunc(funcName, { label, index })` when pressed
+
+Buttons without `exitApp` dismiss the dialog after firing their `onPress` (if any). See `onButtonSelected` in [/components/screens/dialogs/DialogModal.brs](/components/screens/dialogs/DialogModal.brs).
 <br/><br/>
 ## Resources
 * Examples and other Roku libraries
