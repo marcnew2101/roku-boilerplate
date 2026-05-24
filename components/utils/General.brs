@@ -1,3 +1,10 @@
+' ---- scene accessor ----
+' Returns the root Scene node from any component. Lets util scripts call scene().X
+' instead of requiring each component's init() to cache m.scene = m.top.getScene().
+function scene() as object
+    return m.top.getScene()
+end function
+
 ' ---- value helpers ----
 ' true when x is non-invalid and (for strings / arrays / AAs) non-empty.
 ' Numbers, booleans, and nodes only get the non-invalid check, so hasValue(false)
@@ -15,26 +22,3 @@ function valueOr(x as dynamic, defaultValue as dynamic) as dynamic
     if hasValue(x) then return x
     return defaultValue
 end function
-
-' ---- Roku certification beacons ----
-sub dialogInit(node = m.scene)
-    ' Roku certification requires this to indicate a modal requires the users attention
-    if not node.appLoaded
-        node.signalBeacon(Const().beacon.dialogInitiate)
-    end if
-end sub
-
-sub dialogComplete(node = m.scene)
-    ' Roku certification requires this to indicate the modal is closed
-    if not node.appLoaded
-        node.signalBeacon(Const().beacon.dialogComplete)
-    end if
-end sub
-
-sub appLoaded(node = m.scene)
-    if not node.appLoaded
-        node.appLoaded = true
-        ' Roku certification requires this to indicate the app is finished loading
-        node.signalBeacon(Const().beacon.launchComplete)
-    end if
-end sub

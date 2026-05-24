@@ -1,3 +1,9 @@
+' Caller-facing API for screen lifecycle. Screens are identified by their component subType().
+' addScreen/removeScreen reach the screen-stack data (which lives on HomeScene's m) via
+' callFunc("addToStack" / "removeFromStack") — those targets are implemented in History.brs
+' and exposed on HomeScene.xml's <interface>. The callFunc hop is required because util scripts
+' run in any component's scope, but m.screenStack only exists on HomeScene.
+
 function getScreen(screenName as string, showScreen = false as boolean)
     if not hasValue(screenName)
         logError("invalid screenName passed to getScreen", "Screens.brs")
@@ -9,7 +15,9 @@ function getScreen(screenName as string, showScreen = false as boolean)
         logWarn(screenName + " was not found", "Screens.brs")
         return invalid
     end if
-    if not node.visible and showScreen then node.visible = true
+    if not node.visible and showScreen
+        node.visible = true
+    end if
     return node
 end function
 
@@ -24,15 +32,19 @@ function screenExists(screenName as string) as boolean
 end function
 
 function addScreen(screenName as string, showScreen = true as boolean, hidePrevScreen = true as boolean, trackInHistory = true as boolean) as object
+    if not hasValue(screenName)
+        logError("invalid screenName passed to addScreen", "Screens.brs")
+        return invalid
+    end if
     if screenExists(screenName)
         logError("a screen of type '" + screenName + "' already exists", "Screens.brs")
         return invalid
     end if
-    return m.scene.callFunc("addToStack", {"screenName": screenName, "showScreen": showScreen, "hidePrevScreen": hidePrevScreen, "trackInHistory": trackInHistory})
+    return scene().callFunc("addToStack", {"screenName": screenName, "showScreen": showScreen, "hidePrevScreen": hidePrevScreen, "trackInHistory": trackInHistory})
 end function
 
 function findScreenBySubtype(screenName as string) as object
-    for each child in m.scene.getChildren(-1, 0)
+    for each child in scene().getChildren(-1, 0)
         if child.subType() = screenName then return child
     end for
     return invalid
@@ -48,7 +60,7 @@ sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, 
     end if
 
     if node = invalid then return
-    m.scene.callFunc("removeFromStack", {"node": node, "showPrevScreen": showPrevScreen, "untrackHistory": untrackHistory})
+    scene().callFunc("removeFromStack", {"node": node, "showPrevScreen": showPrevScreen, "untrackHistory": untrackHistory})
 end sub
 
 sub setFocus(node as dynamic, saveFocus = true as boolean)

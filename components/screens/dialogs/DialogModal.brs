@@ -40,7 +40,9 @@ sub onButtonSelected(obj)
     btn = dialog.buttons[buttonIndex]
     invokeOnPress(btn, buttonIndex)
     if btn.exitApp = true
-        m.scene.exitApp = true
+        ' fire the dialog-complete beacon before exiting; dismissTop's beacon never runs in this path
+        dialogComplete()
+        scene().exitApp = true
     else
         dismissTop()
     end if

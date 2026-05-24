@@ -7,6 +7,7 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Beacons.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Constants.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Logger.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Debug.brs" />
@@ -14,8 +15,6 @@
 		<field id="exitApp" type="boolean" value="false"/>
 		<field id="appLoaded" type="boolean" value="false"/>
 		<field id="selectorUri" type="uri"/>
-		<field id="contentId" type="string"/>
-		<field id="mediaType" type="string"/>
 		<function name="addToStack"/>
 		<function name="removeFromStack"/>
 	</interface>

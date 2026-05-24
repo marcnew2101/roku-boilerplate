@@ -1,14 +1,5 @@
-function getAllScreens() as dynamic
-    screenArray = m.scene.getChildren(-1, 0)
-    if (screenArray <> invalid and screenArray.count() > 0)
-        return screenArray
-    else
-        return invalid
-    end if
-end function
-
 sub showAllScreens()
-    screenArray = getAllScreens()
+    screenArray = scene().getChildren(-1, 0)
     if screenArray = invalid or screenArray.count() = 0
         logDebug("no valid screens/nodes in HomeScene", "Debug.brs")
         return
@@ -33,12 +24,12 @@ sub getHistory()
 end sub
 
 sub showFocus()
-    if m.scene = invalid
+    if scene() = invalid
         logDebug("no scene available", "Debug.brs")
         return
     end if
 
-    leaf = m.scene.focusedChild
+    leaf = scene().focusedChild
     if leaf = invalid
         logDebug("no node has focus", "Debug.brs")
         return

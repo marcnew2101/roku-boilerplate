@@ -1,6 +1,4 @@
 sub init()
-    ' cache the root Scene; util scripts use m.scene instead of m.top.getScene()
-    m.scene = m.top.getScene()
     m.titleArea = m.top.findNode("titleArea")
     m.messageText = m.top.findNode("messageText")
     m.helpArea = m.top.findNode("helpArea")

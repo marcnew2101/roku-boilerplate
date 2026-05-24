@@ -8,7 +8,7 @@
 '   }
 ' When a button is pressed:
 '   1. If onPress.node and onPress.func are present, callFunc fires with { label, index }.
-'   2. If the button's exitApp = true, m.scene.exitApp is set.
+'   2. If the button's exitApp = true, scene().exitApp is set.
 '   3. Otherwise the dialog dismisses.
 sub showDialog(config as object)
     if not hasValue(config)

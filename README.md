@@ -77,7 +77,7 @@ Roku uses "m.global" to reference an object as seen in [/source/Main.brs](/sourc
 
 <br/><br/>
 ### Themes
-Roku's Scene node exposes a `palette` field for theming colors in child nodes; this template applies the selected theme onto `m.scene` at startup.
+Roku's Scene node exposes a `palette` field for theming colors in child nodes; this template applies the selected theme onto the scene at startup.
  * Themes are set from the top of [/components/HomeScene.brs](/components/HomeScene.brs)
  > "dark" and "red" is the default theme here if no 2nd argument is provided.
  ```
@@ -128,7 +128,7 @@ Dev-time logging via `logDebug` (suppressed unless `m.global.devLogging` is true
 <br/><br/>
 ### Node Management
 #### Screen Lifecycle Hooks
-Any screen that extends `BaseScreen` must define its own `init()` and call `baseScreenInit()` as the first line — that caches `m.scene`, hides the screen until shown, and wires the visibility observer. After that, set up node refs and field observers as usual:
+Any screen that extends `BaseScreen` must define its own `init()` and call `baseScreenInit()` as the first line — that hides the screen until shown and wires the visibility observer. After that, set up node refs and field observers as usual:
 ```
 sub init()
     baseScreenInit()
@@ -211,7 +211,7 @@ setFocus(
 
 
 #### Note
-Screens extending `BaseScreen` automatically inherit every utility script (`Screens.brs`, `History.brs`, `Themes.brs`, `Messages.brs`, `Requirements.brs`, `General.brs`, `Constants.brs`, `Logger.brs`, `Debug.brs`) via the parent component's `<script>` tags — you don't need to re-include them. The only place to register new utilities is in [/components/screens/base/BaseScreen.xml](/components/screens/base/BaseScreen.xml) (and [/components/HomeScene.xml](/components/HomeScene.xml) if HomeScene also needs the utility).
+Screens extending `BaseScreen` automatically inherit every utility script (`Screens.brs`, `History.brs`, `Themes.brs`, `Messages.brs`, `Requirements.brs`, `General.brs`, `Beacons.brs`, `Constants.brs`, `Logger.brs`, `Debug.brs`) via the parent component's `<script>` tags — you don't need to re-include them. The only place to register new utilities is in [/components/screens/base/BaseScreen.xml](/components/screens/base/BaseScreen.xml) (and [/components/HomeScene.xml](/components/HomeScene.xml) if HomeScene also needs the utility).
 
 > See [/components/screens/landing/LandingScreen.xml](/components/screens/landing/LandingScreen.xml) for a working example.
 
@@ -221,6 +221,7 @@ Screens extending `BaseScreen` automatically inherit every utility script (`Scre
 * Each folder is named according to the locale ID (see [Roku localization docs](https://developer.roku.com/docs/references/brightscript/interfaces/ifdeviceinfo.md#getcurrentlocale-as-string) for list of ID's)
 * The files in each folder use the XLIFF format
 * additional folders and translations can be added by following the format above
+* `tr("string")` is a Roku built-in that resolves the string against the active locale's XLIFF entries; it returns the original string when no translation exists, so it's safe to use everywhere. Plain string literals work too if you don't need translation.
 
 <br/><br/>
 ### Dialogs & Messages
@@ -249,7 +250,7 @@ Entries in `messages.json` follow this schema:
 }
 ```
 Each button is an object with a required `label` and two optional fields:
-- `exitApp: true` — sets `m.scene.exitApp` when pressed, breaking the main loop in [/source/Main.brs](/source/Main.brs)
+- `exitApp: true` — sets `scene().exitApp` when pressed, breaking the main loop in [/source/Main.brs](/source/Main.brs)
 - `onPress: { "node": nodeRef, "func": "funcName" }` — invokes `nodeRef.callFunc(funcName, { label, index })` when pressed
 
 Buttons without `exitApp` dismiss the dialog after firing their `onPress` (if any). See `onButtonSelected` in [/components/screens/dialogs/DialogModal.brs](/components/screens/dialogs/DialogModal.brs).

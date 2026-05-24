@@ -1,6 +1,6 @@
-function setRequirements(params as boolean) as boolean
+function setRequirements(enabled as boolean) as boolean
     requirements = createRequirements()
-    if (params and requirements <> invalid)
+    if (enabled and requirements <> invalid)
         return checkRequirements(requirements)
     end if
     return true

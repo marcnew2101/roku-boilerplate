@@ -1,5 +1,5 @@
-sub setTheme(args as boolean, themeChoice = { "type": "dark", "color": "red" } as object)
-    if not args then return
+sub setTheme(enabled as boolean, themeChoice = { "type": "dark", "color": "red" } as object)
+    if not enabled then return
     prevTheme = getThemeFromRegistry()
     if prevTheme <> invalid then themeChoice = prevTheme
     themeColors = getTheme(themeChoice)
@@ -8,26 +8,26 @@ sub setTheme(args as boolean, themeChoice = { "type": "dark", "color": "red" } a
     if hasValue(themeColors.palette)
         paletteNode = CreateObject("roSGNode", "RSGPalette")
         paletteNode.colors = themeColors.palette
-        m.scene.palette = paletteNode
+        scene().palette = paletteNode
     end if
     ' hasValue treats empty strings as absent, so "" in themes.json means "leave the default"
     if hasValue(themeColors.backgroundUri)
-        m.scene.backgroundUri = themeColors.backgroundUri
+        scene().backgroundUri = themeColors.backgroundUri
     end if
     if hasValue(themeColors.backgroundColor)
-        m.scene.backgroundColor = themeColors.backgroundColor
+        scene().backgroundColor = themeColors.backgroundColor
     end if
     if hasValue(themeColors.selectorUri)
-        m.scene.selectorUri = themeColors.selectorUri
+        scene().selectorUri = themeColors.selectorUri
     end if
 end sub
 
 function theme() as object
     return {
-        colors: m.scene.palette.colors,
-        backgroundColor: m.scene.backgroundColor,
-        backgroundUri: m.scene.backgroundUri,
-        selectorUri: m.scene.selectorUri
+        colors: scene().palette.colors,
+        backgroundColor: scene().backgroundColor,
+        backgroundUri: scene().backgroundUri,
+        selectorUri: scene().selectorUri
     }
 end function
 

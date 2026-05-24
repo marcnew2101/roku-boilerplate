@@ -7,15 +7,15 @@
 '       ...
 '   end sub
 sub baseScreenInit()
-    ' cache the root Scene so subclasses and util scripts can use m.scene
-    m.scene = m.top.getScene()
-    ' hide until shown; the visible observer below dispatches the on*Screen hooks
+    ' Setting visible=false is load-bearing: Roku's Group defaults to visible=true,
+    ' so without this the observer below would never fire on first show (no false→true
+    ' transition). It also prevents a one-frame flash of default content. Don't remove.
     m.top.visible = false
     m.top.observeField("visible", "baseScreenOnVisibleChange")
 end sub
 
 sub baseScreenOnVisibleChange(obj)
-	visible = obj.getData()
+    visible = obj.getData()
     if visible
         onScreenVisible()
     else

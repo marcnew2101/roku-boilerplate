@@ -7,6 +7,7 @@
 	<script type="text/brightscript" uri="pkg:/components/utils/History.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Themes.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/General.brs" />
+	<script type="text/brightscript" uri="pkg:/components/utils/Beacons.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Constants.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Logger.brs" />
 	<script type="text/brightscript" uri="pkg:/components/utils/Debug.brs" />

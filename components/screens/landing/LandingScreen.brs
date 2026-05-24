@@ -53,7 +53,7 @@ sub updateLayout()
     rect = m.contentGroup.boundingRect()
     if rect.width = 0 or rect.height = 0 then return
 
-    res = m.scene.currentDesignResolution
+    res = scene().currentDesignResolution
     deltaX = (res.width / 2) - (rect.x + rect.width / 2)
     deltaY = (res.height / 2) - (rect.y + rect.height / 2)
     if abs(deltaX) < 1 and abs(deltaY) < 1 then return
