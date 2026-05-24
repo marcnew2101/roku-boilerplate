@@ -151,60 +151,59 @@ end sub
 `BaseScreen` also declares a `focusedNode` field on its interface, used by `setFocus(node, saveFocus)` to remember which child node was last focused — see Setting screen focus below.
 
 #### Adding a new node to the root scene node:
-> If "screenId" is not set, the "screenName" will be used as the node ID. If the ID is already being used, a console warning will appear.
+> Screens are identified by their component name (the XML `name` attribute, also returned by `subType()`). Adding a screen whose subtype already exists logs a console error and skips the add — only one instance of a given screen type lives in the scene at a time.
 ```
-addScreen("screenName", "screenId")
+addScreen("screenName")
 ```
 
 Additional arguments can be used as follows:
 ```
 addScreen(
-   screenName     ' the name of the node/XML file
-   screenId       ' the id to assign the node
+   screenName     ' the name of the node/XML file (also the subtype)
    showScreen     ' sets the node visibility (true by default)
-   hidePrevScreen ' hides the previous/current screen (true by default), 
+   hidePrevScreen ' hides the previous/current screen (true by default)
    addToStack     ' adds the node to the history stack (true by default)
 )
 ```
 
 #### Finding an existing node:
-> If multiple child nodes share the same ID, this will return the one that was created first.
+> Looked up by component subtype, walking the immediate children of the scene. Returns invalid (and logs a warning) if not found.
 ```
-getScreen("screenId")
+getScreen("screenName")
 ```
 
 Additional arguments can be used as follows:
 ```
 getScreen(
-   screenId    ' the id of the existing node
+   screenName  ' the component name of the existing screen
    showScreen  ' set the node visibility to true (false by default)
 )
 ```
 
 #### Removing a node from the root scene:
-> Pass the child node, such as "m.top", or use the ID of the node you want to remove
+> Pass the child node directly, or pass the component name of the screen to look up and remove.
 ```
-removeScreen(node or "screenId")
+removeScreen(node or "screenName")
 ```
 
 Additional arguments can be used as follows:
 ```
 removeScreen(
-   screen           ' the child node itself or the ID of the child node
+   screen           ' the child node itself or the component name of the screen
    showPrevScreen   ' shows the previous screen (true by default)
    removeFromStack  ' removes the node from the history stack (true by default)
 )
 ```
 
 #### Setting screen focus
-> Pass the node to assign focus or the node ID of the node to assign focus to
+> Pass the node directly, or pass the component name of the screen to focus.
 ```
-setFocus(node or node ID)
+setFocus(node or "screenName")
 ```
 Additional arguments can be used as follows:
 ```
 setFocus(
-   node        ' the node or the node ID
+   node        ' the node itself or the component name of the screen
    saveFocus   ' writes the focused node to m.top's focusedNode field (true by default)
 )
 ```

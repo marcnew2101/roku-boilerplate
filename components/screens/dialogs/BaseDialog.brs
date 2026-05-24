@@ -56,7 +56,7 @@ end sub
 function onKeyEvent(key as string, press as boolean) as boolean
     if not press then return false
     if key <> Const().key.back then return false
-    dialogModal = getScreen("dialogModal")
+    dialogModal = getScreen("DialogModal")
     if dialogModal = invalid or not hasValue(dialogModal.dialogInfo)
         ' BaseDialog shouldn't have focus without a dialogModal — bubble so something else can handle it
         logWarn("back key in BaseDialog with no dialogModal/dialogInfo", "BaseDialog.brs")

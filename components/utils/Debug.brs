@@ -16,7 +16,7 @@ sub showAllScreens()
 
     logDebug("valid screens/nodes in HomeScene:", "Debug.brs")
     for each screen in screenArray
-        logDebug(" -> " + screen.subType() + " (id=" + screen.id + ")", "Debug.brs")
+        logDebug(" -> " + screen.subType(), "Debug.brs")
     end for
 end sub
 
@@ -28,7 +28,7 @@ sub getHistory()
 
     logDebug("screen stack contents:", "Debug.brs")
     for each node in m.screenStack
-        logDebug(" -> " + node.subType() + " (id=" + node.id + ")", "Debug.brs")
+        logDebug(" -> " + node.subType(), "Debug.brs")
     end for
 end sub
 
@@ -54,8 +54,7 @@ sub showFocus()
 
     logDebug("focus chain (root to leaf):", "Debug.brs")
     for i = chain.count() - 1 to 0 step -1
-        n = chain[i]
-        logDebug(" -> " + n.subType() + " (id=" + n.id + ")", "Debug.brs")
+        logDebug(" -> " + chain[i].subType(), "Debug.brs")
     end for
 end sub
 

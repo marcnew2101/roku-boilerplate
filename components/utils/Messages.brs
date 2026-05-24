@@ -28,10 +28,10 @@ sub showDialog(config as object)
         i = i + 1
     end for
 
-    if screenExists("dialogModal")
-        screen = getScreen("dialogModal")
+    if screenExists("DialogModal")
+        screen = getScreen("DialogModal")
     else
-        screen = addScreen("DialogModal", "dialogModal", true, false)
+        screen = addScreen("DialogModal", true, false)
     end if
     if screen <> invalid then screen.dialogInfo = config
 end sub

@@ -1,38 +1,41 @@
-function getScreen(screenId as string, showScreen = false as boolean)
-    if not hasValue(screenId)
-        logError("invalid screenId passed to getScreen", "Screens.brs")
+function getScreen(screenName as string, showScreen = false as boolean)
+    if not hasValue(screenName)
+        logError("invalid screenName passed to getScreen", "Screens.brs")
         return invalid
     end if
 
-    node = m.scene.findNode(screenId)
+    node = findScreenBySubtype(screenName)
     if node = invalid
-        logWarn(screenId + " was not found", "Screens.brs")
+        logWarn(screenName + " was not found", "Screens.brs")
         return invalid
     end if
     if not node.visible and showScreen then node.visible = true
     return node
 end function
 
-function screenExists(screenId as string) as boolean
-    if not hasValue(screenId)
-        logError("invalid screenId passed to screenExists", "Screens.brs")
+function screenExists(screenName as string) as boolean
+    if not hasValue(screenName)
+        logError("invalid screenName passed to screenExists", "Screens.brs")
         return false
     end if
-    ' direct findNode avoids the "not found" warn that getScreen emits on miss;
+    ' direct subtype walk avoids the "not found" warn that getScreen emits on miss;
     ' callers using screenExists are intentionally probing for an unknown screen
-    return m.scene.findNode(screenId) <> invalid
+    return findScreenBySubtype(screenName) <> invalid
 end function
 
-function addScreen(screenName as string, screenId = invalid as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
-    if not hasValue(screenId)
-        screenId = screenName
-        logInfo("no screen id assigned for " + screenName + " node; using " + screenName + " as id", "Screens.brs")
-    end if
-    if screenExists(screenId)
-        logError("id '" + screenId + "' already assigned to another screen node", "Screens.brs")
+function addScreen(screenName as string, showScreen = true as boolean, hidePrevScreen = true as boolean, addToStack = true as boolean) as object
+    if screenExists(screenName)
+        logError("a screen of type '" + screenName + "' already exists", "Screens.brs")
         return invalid
     end if
-    return m.scene.callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "screenId": screenId, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+    return m.scene.callFunc("addNode", {"screenName": screenName, "showScreen": showScreen, "hidePrevScreen": hidePrevScreen, "addToStack": addToStack})
+end function
+
+function findScreenBySubtype(screenName as string) as object
+    for each child in m.scene.getChildren(-1, 0)
+        if child.subType() = screenName then return child
+    end for
+    return invalid
 end function
 
 sub removeScreen(screen = invalid as dynamic, showPrevScreen = true as boolean, removeFromStack = true as boolean)
